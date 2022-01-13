@@ -1,0 +1,207 @@
+﻿<Window x:Class="Thesis.Areas.UserArea.CreateAccountWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CreateAccountWindow" Height="650" Width="800" WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF104A82" />
+            <Setter Property="Foreground" Value="#4CFFFFFF" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="8" BorderBrush="#FF104A82" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" To="#FF0074E4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#FF23252A"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Bordder" BorderThickness="0" BorderBrush="Black" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Foreground.Color" To="White"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="a" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF202020" />
+            <Setter Property="Foreground" Value="#4CFFFFFF" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="2,20,2,2" BorderBrush="#FFD40754" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" To="#FFD40754"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="Transparent" MouseDown="Grid_MouseDown">
+        <Border BorderBrush="#33FFFFFF" BorderThickness="2" 
+                CornerRadius="30,30,30,30" Background="#FF202020">
+            <Grid x:Name="Pull">
+                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="17"
+                           Width="280" Height="50" Margin="0,20,0,0" Foreground="White" 
+                           Padding="90,15,0,0" Text="Регистрация" FontWeight="Bold" />
+                <Button Content="Регистрация" HorizontalAlignment="Center" Margin="0,0,0,110" 
+                        VerticalAlignment="Bottom" Width="159" Click="Create" Height="54"/>
+                <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Height="42" 
+                        Margin="0,-2,-1.4,0" Padding="1" />
+                <!--<Button Visibility="Hidden" Content="Убить" HorizontalAlignment="Left" 
+                        Margin="119,460,0,0" VerticalAlignment="Top" Width="186" 
+                        Click="Button_Click" Height="65"/>-->
+                <Button Style="{StaticResource Button}" Click="Login" 
+                        Content="Вернуться к окну входа" FontSize="13" Background="Transparent" 
+                        Foreground="#FFC8D0DC" FontFamily="Rockwell Extra" VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Center" Margin="0,0,0,55" Height="50" Width="150"/>
+
+                <PasswordBox x:Name="passward" materialDesign:HintAssist.Hint="Пароль" 
+                             BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
+                             BorderBrush="#4CFFFFFF" Margin="80,230,0,0" FontSize="17"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             Background="#00000000" Height="70" VerticalAlignment="Top" 
+                             HorizontalAlignment="Left" Width="280"/>
+                <PasswordBox x:Name="confirmPassward" materialDesign:HintAssist.Hint="Повторите пароль" 
+                             BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
+                             BorderBrush="#4CFFFFFF" Margin="80,310,0,0" FontSize="17"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             Background="#00000000" Height="70" VerticalAlignment="Top" 
+                             HorizontalAlignment="Left" Width="280"/>
+
+                <TextBox x:Name="fio" PreviewTextInput="TextOnly" materialDesign:HintAssist.Hint="ФИО" 
+                         Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="80,70,0,0" BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
+                         Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280">
+                    <TextBox.Text>
+                        <Binding Path="fio">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox x:Name="email" materialDesign:HintAssist.Hint="Email" Foreground="White" 
+                         BorderBrush="#4CFFFFFF" Padding="10,0,0,0" Margin="80,150,0,0"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70" 
+                         VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
+                <TextBox x:Name="telephone" PreviewTextInput="NumericOnly" 
+                         materialDesign:HintAssist.Hint="Номер телефона" 
+                         Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="80,390,0,0" BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
+                         Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
+                <TextBox x:Name="street" Margin="0,70,80,0"
+                         materialDesign:HintAssist.Hint="Улица" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="280"/>
+                <TextBox x:Name="buildingNumber" PreviewTextInput="NumericOnly" Margin="0,150,80,0"
+                         materialDesign:HintAssist.Hint="Номер помещения" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="280"/>
+                <TextBox x:Name="roomNumber" PreviewTextInput="NumericOnly" Margin="0,230,80,0"
+                         materialDesign:HintAssist.Hint="Номер комнаты" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="280"/>
+                <TextBox x:Name="townName" PreviewTextInput="TextOnly" Margin="0,310,80,0"
+                         materialDesign:HintAssist.Hint="Название города" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="280"/>
+                <TextBox x:Name="townIndex" Margin="0,390,80,0"
+                         materialDesign:HintAssist.Hint="Индекс города" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
+                         HorizontalAlignment="Right" Width="280"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

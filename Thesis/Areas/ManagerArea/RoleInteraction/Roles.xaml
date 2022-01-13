@@ -1,0 +1,70 @@
+﻿<Page x:Class="Thesis.Areas.ManagerArea.RoleInteraction.Roles"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Roles"
+      IsVisibleChanged ="UpdateData">
+
+    <Grid>
+        <ListView x:Name="_roles" Background="Transparent"
+              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+              SelectionChanged="RoleDescription">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ListBoxItem.Margin" Value="5"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
+                Background="White" Height="300" Width="220">
+                                    <Grid>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                 Storyboard.TargetName="TopMenuArea1"
+                                                 From="0.0" To="1.0" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                                     Storyboard.TargetName="TopMenuArea1" 
+                                                                     From="1.0" To="0" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
+                                        <Border CornerRadius="5" Background="Black" Margin="0,30,0,0"
+                                            HorizontalAlignment="Center" VerticalAlignment="Top">
+                                            <Label Content="{Binding RoleName}" Margin="10"
+                                               FontFamily="Calibri" VerticalAlignment="Center"
+                                               FontSize="15" FontWeight="Bold" Foreground="White"
+                                               HorizontalAlignment="Center">
+                                            </Label>
+                                        </Border>
+                                        <DockPanel Background="#4C000000" LastChildFill="True"
+                                                   Visibility="Visible" Opacity="0" Name="TopMenuArea1">
+                                        </DockPanel>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Margin="20"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+</Page>

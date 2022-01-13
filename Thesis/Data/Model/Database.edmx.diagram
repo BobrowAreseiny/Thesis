@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae35fc125c8d4aeea7b670ac2888e053" Name="Diagram1">
+        <EntityTypeShape EntityType="DiplomaModel.Address" Width="1.5" PointX="3" PointY="3.25" />
+        <EntityTypeShape EntityType="DiplomaModel.ApplicationUser" Width="1.5" PointX="7.5" PointY="2.375" />
+        <EntityTypeShape EntityType="DiplomaModel.Counterparty" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="DiplomaModel.OrderConstruction" Width="1.5" PointX="9.75" PointY="6.25" />
+        <EntityTypeShape EntityType="DiplomaModel.Product" Width="1.5" PointX="5.25" PointY="10.375" />
+        <EntityTypeShape EntityType="DiplomaModel.ProductSize" Width="1.5" PointX="7.5" PointY="10.625" />
+        <EntityTypeShape EntityType="DiplomaModel.Town" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DiplomaModel.UserOrder" Width="1.5" PointX="7.5" PointY="6.25" />
+        <EntityTypeShape EntityType="DiplomaModel.UserRole" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="DiplomaModel.FK__Address__TownId__38996AB5" />
+        <AssociationConnector Association="DiplomaModel.FK__Counterpa__Addre__3D5E1FD2" />
+        <AssociationConnector Association="DiplomaModel.FK__Applicati__Count__412EB0B6" />
+        <AssociationConnector Association="DiplomaModel.FK__Applicati__UserR__4222D4EF" />
+        <AssociationConnector Association="DiplomaModel.FK__UserOrder__Count__45F365D3" />
+        <AssociationConnector Association="DiplomaModel.FK__OrderCons__Produ__4F7CD00D" />
+        <AssociationConnector Association="DiplomaModel.FK__OrderCons__UserO__4E88ABD4" />
+        <AssociationConnector Association="DiplomaModel.FK__ProductSi__Produ__4BAC3F29" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
