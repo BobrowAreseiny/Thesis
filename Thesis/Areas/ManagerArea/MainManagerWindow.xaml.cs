@@ -5,7 +5,6 @@ using System.Windows;
 using Thesis.Areas.ManagerArea.CounterpartyInteraction;
 using Thesis.Areas.ManagerArea.ProductInteraction;
 using Thesis.Areas.ManagerArea.RoleInteraction;
-using Thesis.Areas.ManagerArea.Table;
 using Thesis.Areas.ManagerArea.TownInteraction;
 using Thesis.Areas.ManagerArea.UserOrderInteraction;
 using Thesis.Data.Model;

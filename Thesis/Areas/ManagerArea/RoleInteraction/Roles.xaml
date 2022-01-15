@@ -45,9 +45,9 @@
                                         <Border CornerRadius="5" Background="Black" Margin="0,30,0,0"
                                             HorizontalAlignment="Center" VerticalAlignment="Top">
                                             <Label Content="{Binding RoleName}" Margin="10"
-                                               FontFamily="Calibri" VerticalAlignment="Center"
-                                               FontSize="15" FontWeight="Bold" Foreground="White"
-                                               HorizontalAlignment="Center">
+                                                   FontFamily="Calibri" VerticalAlignment="Center"
+                                                   FontSize="15" FontWeight="Bold" Foreground="White"
+                                                   HorizontalAlignment="Center">
                                             </Label>
                                         </Border>
                                         <DockPanel Background="#4C000000" LastChildFill="True"

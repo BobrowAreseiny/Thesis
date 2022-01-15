@@ -6,7 +6,7 @@ using System.Windows.Media;
 using Thesis.Data.Model;
 using TicketBooking;
 
-namespace Thesis.Areas.UserArea
+namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 {
     /// <summary>
     /// Логика взаимодействия для LoginWindow.xaml

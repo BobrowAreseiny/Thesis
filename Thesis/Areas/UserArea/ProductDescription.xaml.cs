@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea
@@ -34,31 +37,14 @@ namespace Thesis.Areas.UserArea
         {
             if (_productSize.SelectedItem is ProductSize selectedSize)
             {
-                Basket basket = new Basket(selectedSize, 1);
-                if (_basket != null)
-                {
-                    Basket addToBasket = _basket.Where(x => x.Size.Id == basket.Size.Id).FirstOrDefault();
-                    if (addToBasket != null)
-                    {
-                        _basket.Remove(addToBasket);
-                        addToBasket.Count += basket.Count;
-                        _basket.Add(addToBasket);
-                    }
-                    else
-                    {
-                        _basket.Add(basket);
-                    }
-                }
-                else
-                {
-                    _basket.Add(basket);
-                }
+                new AddToBasket(selectedSize, _basket).Show();
             };
         }
 
         private void Basket(object sender, RoutedEventArgs e)
         {
-
+            new Creel(_account, _basket).Show();
+            Close();
         }
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
@@ -81,11 +67,8 @@ namespace Thesis.Areas.UserArea
             }
             if (product != null)
             {
+                DataContext = product;
                 Uri image = new Uri(_pathToFile + @"\Data\Image\" + product.ProductImage);
-                productName.Text = product.Name;
-                productDescription.Text = product.Description;
-                productCost.Text = product.Price.ToString() + " $";
-                productCode.Text = product.ProductCode;
                 if (image != null)
                 {
                     productImage.Source = BitmapFrame.Create(image);

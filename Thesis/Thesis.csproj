@@ -117,95 +117,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\CounterpartyDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\ProductDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\RoleDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\UserDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddAddress.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddCounterparty.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddOrder.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddOrderConstruction.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddProduct.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddProductSize.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddRole.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddTown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\TownDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableDescription\UserOrderDescription.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Areas\ManagerArea\MainManagerWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\TableEditor\AddUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\AddressTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\ProductTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\RoleChangerTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\RoleTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\TownTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\UserOrderTablePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Areas\ManagerArea\Table\UserTablePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,15 +145,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\UserArea\Basket\AddToBasket.xaml">
+    <Page Include="Areas\UserArea\UserBasket\AddToBasket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\UserArea\CreateAccountWindow.xaml">
+    <Page Include="Areas\UserArea\RegistrationAndAuthorization\CreateAccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\UserArea\LoginWindow.xaml">
+    <Page Include="Areas\UserArea\RegistrationAndAuthorization\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,74 +198,8 @@
     <Compile Include="Areas\ManagerArea\RoleInteraction\Roles.xaml.cs">
       <DependentUpon>Roles.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\CounterpartyDescription.xaml.cs">
-      <DependentUpon>CounterpartyDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\ProductDescription.xaml.cs">
-      <DependentUpon>ProductDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\RoleDescription.xaml.cs">
-      <DependentUpon>RoleDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\UserDescription.xaml.cs">
-      <DependentUpon>UserDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddAddress.xaml.cs">
-      <DependentUpon>AddAddress.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddCounterparty.xaml.cs">
-      <DependentUpon>AddCounterparty.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddOrder.xaml.cs">
-      <DependentUpon>AddOrder.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddOrderConstruction.xaml.cs">
-      <DependentUpon>AddOrderConstruction.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddProduct.xaml.cs">
-      <DependentUpon>AddProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddProductSize.xaml.cs">
-      <DependentUpon>AddProductSize.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddRole.xaml.cs">
-      <DependentUpon>AddRole.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddTown.xaml.cs">
-      <DependentUpon>AddTown.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\TownDescription.xaml.cs">
-      <DependentUpon>TownDescription.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableDescription\UserOrderDescription.xaml.cs">
-      <DependentUpon>UserOrderDescription.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Areas\ManagerArea\MainManagerWindow.xaml.cs">
       <DependentUpon>MainManagerWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\TableEditor\AddUser.xaml.cs">
-      <DependentUpon>AddUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\AddressTablePage.xaml.cs">
-      <DependentUpon>AddressTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\ProductTablePage.xaml.cs">
-      <DependentUpon>ProductTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\RoleChangerTablePage.xaml.cs">
-      <DependentUpon>RoleChangerTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\RoleTablePage.xaml.cs">
-      <DependentUpon>RoleTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\TownTablePage.xaml.cs">
-      <DependentUpon>TownTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\UserOrderTablePage.xaml.cs">
-      <DependentUpon>UserOrderTablePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ManagerArea\Table\UserTablePage.xaml.cs">
-      <DependentUpon>UserTablePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Areas\ManagerArea\TownInteraction\TownDescription.xaml.cs">
       <DependentUpon>TownDescription.xaml</DependentUpon>
@@ -373,13 +219,13 @@
     <Compile Include="Areas\ManagerArea\UserOrderInteraction\UserOrders.xaml.cs">
       <DependentUpon>UserOrders.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\UserArea\Basket\AddToBasket.xaml.cs">
+    <Compile Include="Areas\UserArea\UserBasket\AddToBasket.xaml.cs">
       <DependentUpon>AddToBasket.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\UserArea\CreateAccountWindow.xaml.cs">
+    <Compile Include="Areas\UserArea\RegistrationAndAuthorization\CreateAccountWindow.xaml.cs">
       <DependentUpon>CreateAccountWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\UserArea\LoginWindow.xaml.cs">
+    <Compile Include="Areas\UserArea\RegistrationAndAuthorization\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Areas\UserArea\MainWindow.xaml.cs">
@@ -390,10 +236,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Areas\UserArea\UserBasket\Creel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\UserArea\ProductDescription.xaml.cs">
       <DependentUpon>ProductDescription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\UserArea\UserBasket\Creel.xaml.cs">
+      <DependentUpon>Creel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Crypto.cs" />
     <Compile Include="Data\Model\Address.cs">
@@ -406,6 +259,7 @@
     <Compile Include="Data\Model\Counterparty.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Model\CreelData.cs" />
     <Compile Include="Data\Model\Database.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -421,6 +275,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Data\Model\DataProducts.cs" />
     <Compile Include="Data\Model\OrderConstruction.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -481,7 +336,6 @@
     <Resource Include="Data\ImageDefault\Background.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\UserArea\RegistrationAndAuthorization\" />
     <Folder Include="Data\Image\" />
   </ItemGroup>
   <ItemGroup>

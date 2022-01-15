@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" WindowStyle="None" Height="2000" Width="1920" 
-        WindowStartupLocation="CenterScreen" WindowState="Maximized" >
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="Button" x:Key="ButtView2">
             <Setter Property="Background" Value="#FFFBBB43" />
@@ -362,7 +362,7 @@
                         </TransformGroup>
                     </TextBlock.RenderTransform>
                 </TextBlock>
-                <ListView Margin="0,0,0,0" x:Name="_newProductsList"
+                <ListView x:Name="_newProductsList"
                    ScrollViewer.CanContentScroll="False">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
@@ -393,7 +393,7 @@
                                                     </EventTrigger>
                                                 </Grid.Triggers>
                                                 <Image Source ="{Binding ProductImage}" MouseDown="DataSelector"
-                                               VerticalAlignment="Center"/>
+                                                       VerticalAlignment="Center"/>
                                                 <Border CornerRadius="0,0,20,20" VerticalAlignment="Bottom" Height="130">
                                                     <Border.Background>
                                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -529,7 +529,8 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <Border CornerRadius="20" BorderBrush="White" BorderThickness="2" Width="260" Height="410">
+                                <Border CornerRadius="20" BorderBrush="White" 
+                                        BorderThickness="2" Width="260" Height="410">
                                     <Grid Margin="1">
                                         <Grid.Triggers>
                                             <EventTrigger RoutedEvent="DockPanel.MouseEnter">
@@ -631,6 +632,6 @@
                 Height="55" x:Name="adminstrationButton"/>
         <Button Content="Аптечка" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
                 Style="{StaticResource a}" HorizontalAlignment="Left" Margin="10,120,0,0" Grid.Row="1"
-                VerticalAlignment="Top" Width="250" Click="Help_Click" Height="55" x:Name="Help"/>
+                VerticalAlignment="Top" Width="250" Click="Help" Height="55"/>
     </Grid>
 </Window>

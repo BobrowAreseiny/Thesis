@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Thesis.Areas.ManagerArea;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea
@@ -32,31 +33,22 @@ namespace Thesis.Areas.UserArea
 
         public void Data()
         {
+            List<DataProduct> data = new List<DataProduct>();
             using (ApplicationDbContext _context = new ApplicationDbContext())
             {
                 List<Product> products = _context.Product.Take(20).ToList();
-                List<Product> newProducts = _context.Product.OrderBy(x => x.CountOnStorage).Take(3).ToList();
                 if (products != null)
                 {
                     foreach (Product item in products)
                     {
-                        if (item.ProductImage != string.Empty)
-                        {
-                            item.ProductImage = pathToFile + @"\Data\Image\" + item.ProductImage;
-                        }
+                        data.Add(new DataProduct(item));
                     }
-                    _productList.ItemsSource = products;
-                }
-                if (newProducts != null)
-                {
-                    foreach (Product item in newProducts)
+                    if (data != null)
                     {
-                        if (item.ProductImage != string.Empty)
-                        {
-                            item.ProductImage = pathToFile + @"\Data\Image\" + item.ProductImage;
-                        }
+                        _productList.ItemsSource = data;
+                        data.OrderByDescending(x => x.Id).Take(3).ToList();
+                        _newProductsList.ItemsSource = data;
                     }
-                    _newProductsList.ItemsSource = newProducts;
                 }
             }
         }
@@ -100,61 +92,7 @@ namespace Thesis.Areas.UserArea
             Close();
         }
 
-        private void ClickBackAndForward(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Back(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Next(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Back_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Next_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-     
-        private void AddToLove(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        public void LoveNew()
-        {
-
-        }
-
-        
-        private void DockPanel_MouseEnter(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-
-       
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void Help_Click(object sender, RoutedEventArgs e)
+        private void Help(object sender, RoutedEventArgs e)
         {
 
         }
