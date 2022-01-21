@@ -13,12 +13,9 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private readonly List<Basket> _basket;
-
-        public LoginWindow(List<Basket> basket)
+        public LoginWindow()
         {
             InitializeComponent();
-            _basket = basket;
         }
 
         private void Login(object sender, RoutedEventArgs e)
@@ -32,13 +29,14 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
                 if (user != null)
                 {
-                    new MainWindow(user, _basket).Show();
+                    new MainWindow(user).Show();
                     Close();
                 }
                 else
                 {
                     email.BorderBrush = Brushes.Red;
                     password.BorderBrush = Brushes.Red;
+                    password.Clear();
                 }
             }
         }
@@ -50,7 +48,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            new CreateAccountWindow(_basket).Show();
+            new CreateAccountWindow().Show();
             Close();
         }
 

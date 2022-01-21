@@ -6,18 +6,18 @@ namespace Thesis.Data.Model
 {
     public class CreelData
     {
-        public string Name;
+        public string Name { get; set; }
 
-        public string Size;
+        public string Size { get; set; }
 
-        public int SizeId;
+        public int SizeId { get; set; }
 
-        public BitmapFrame Image;
+        public BitmapFrame Image { get; set; }
 
-        public int Count;
+        public int Count { get; set; }
 
         public CreelData(Basket basket, Product product)
-        { 
+        {
             Uri uri = new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\Image\" + product.ProductImage);
             if (uri != null)
             {

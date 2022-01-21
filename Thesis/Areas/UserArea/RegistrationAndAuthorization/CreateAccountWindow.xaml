@@ -114,7 +114,7 @@
         </Style>
 
     </Window.Resources>
-    <Grid Background="Transparent" MouseDown="Grid_MouseDown">
+    <Grid Background="Transparent">
         <Border BorderBrush="#33FFFFFF" BorderThickness="2" 
                 CornerRadius="30,30,30,30" Background="#FF202020">
             <Grid x:Name="Pull">
@@ -126,9 +126,6 @@
                 <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
                         VerticalAlignment="Top" HorizontalAlignment="Right" Height="42" 
                         Margin="0,-2,-1.4,0" Padding="1" />
-                <!--<Button Visibility="Hidden" Content="Убить" HorizontalAlignment="Left" 
-                        Margin="119,460,0,0" VerticalAlignment="Top" Width="186" 
-                        Click="Button_Click" Height="65"/>-->
                 <Button Style="{StaticResource Button}" Click="Login" 
                         Content="Вернуться к окну входа" FontSize="13" Background="Transparent" 
                         Foreground="#FFC8D0DC" FontFamily="Rockwell Extra" VerticalAlignment="Bottom" 
@@ -155,7 +152,7 @@
                     <TextBox.Text>
                         <Binding Path="fio">
                             <Binding.ValidationRules>
-                                <DataErrorValidationRule />
+                                <DataErrorValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

@@ -28,9 +28,12 @@ namespace Thesis.Data.Model
         public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<Counterparty> Counterparty { get; set; }
+        public virtual DbSet<Material> Material { get; set; }
         public virtual DbSet<OrderConstruction> OrderConstruction { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductSize> ProductSize { get; set; }
+        public virtual DbSet<Season> Season { get; set; }
+        public virtual DbSet<Sex> Sex { get; set; }
         public virtual DbSet<Town> Town { get; set; }
         public virtual DbSet<UserOrder> UserOrder { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }

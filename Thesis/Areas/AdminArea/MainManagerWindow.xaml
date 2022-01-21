@@ -1,0 +1,243 @@
+﻿<Window x:Class="Thesis.Areas.ManagerArea.MainManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainManagerWindow" Width="1920" Height="1080"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        WindowState="Maximized">
+    <Window.Resources>
+        <Style x:Key="progressBar" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding  Source={x:Reference Name=MaskBorder}}"/>
+                            </Grid.OpacityMask>
+                            <Border x:Name="MaskBorder" 
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="5"/>
+                            <Rectangle x:Name="PART_Track"/>
+                            <Grid x:Name="PART_Indicator" 
+                                  ClipToBounds="true" 
+                                  HorizontalAlignment="Left">
+                                <Rectangle x:Name="Indicator" 
+                                           Fill="{TemplateBinding Foreground}" 
+                                           RadiusX="5" 
+                                           RadiusY="5"/>
+                                <Rectangle x:Name="Animation" 
+                                           Fill="{TemplateBinding Foreground}" 
+                                           RenderTransformOrigin="0.5,0.5" 
+                                           RadiusX="5" 
+                                           RadiusY="5"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FF3D475B "/>
+            <Setter Property="Foreground" Value="#FF24AFB2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="exitButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF060303" />
+            <Setter Property="Foreground" Value="#4CFFFFFF" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="2,2,2,2" BorderBrush="Transparent" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style  x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF000000" />
+            <Setter Property="Foreground" Value="#FFCBC2C2" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="15" BorderBrush="white" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" To="WhiteSmoke">
+                            </ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color">
+                            </ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="buttonDataGrid" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFDF0000" />
+            <Setter Property="Foreground" Value="#FFCBC2C2" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="10" BorderBrush="WhiteSmoke"
+                                BorderThickness="1" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" 
+                                              Content="{TemplateBinding Content}" HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="red"/>
+                                <Setter Property="BorderBrush" Value="red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2"
+                                            Storyboard.TargetProperty="Background.Color" To="WhiteSmoke">
+                            </ColorAnimation>
+                            <ColorAnimation Duration="0:0:0.2"
+                                            Storyboard.TargetProperty="BorderBrush.Color" To="Red">
+                            </ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color">
+                            </ColorAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="BorderBrush" Value="#FF731C1C"/>
+            <Setter Property="BorderThickness" Value="0,1,0,1"/>
+            <Setter Property="Background" Value="#992C0909"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#7FFF0000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridColumnHeadersPresenter}">
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0,1,0,1"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{x:Null}" />
+                    <Setter Property="BorderBrush" Value="{x:Null}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
+                <RadialGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </RadialGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF3C2220" Offset="0"/>
+                <GradientStop Color="#FF181335" Offset="1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <Grid>
+                <Button Style="{StaticResource exitButton}" Content="EXIT" Click="Exit" 
+                        VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Right" 
+                        Width="150" Height="65" FontSize="40" FontWeight="Bold" Margin="0,20,50,0"/>
+
+                <StackPanel Orientation="Vertical" Margin="10,40,40,40" Width="200" HorizontalAlignment="Left">
+                    <Button Style="{StaticResource buttonStyle}" Content="Заказы" HorizontalAlignment="Left"
+                            VerticalAlignment="Top" Width="200" Click="UserOrderTable" Margin="0,0,0,10" FontSize="20"
+                            Height="60"/>
+                    <Button Style="{StaticResource buttonStyle}" Content="Пользователи" HorizontalAlignment="Left"
+                            VerticalAlignment="Top" Width="200" Click="UserTable" Margin="0,0,0,0" FontSize="20"
+                            Height="60"/>
+                    <Button Style="{StaticResource buttonStyle}"  Content="Товары"
+                            HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="0,10,0,0" FontSize="20"
+                            Width="200" Height="60" Click="ProductTable"/>
+                    <Button Style="{StaticResource buttonStyle}" Content="Материал"  FontSize="20"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Margin="0,10,0,0"
+                        Click="MaterialTable" Height="60"/>
+                    <Button Style="{StaticResource buttonStyle}" Content="Город" HorizontalAlignment="Left"
+                         VerticalAlignment="Top" Width="200" Margin="0,10,0,10" FontSize="20"
+                        Click="TownTable" Height="60"/>
+
+                    <Button Style="{StaticResource buttonStyle}" Content="Роли" HorizontalAlignment="Left"
+                        VerticalAlignment="Top" Width="200" Click="RoleTable" Margin="0,0,0,10" FontSize="20"
+                        Height="60"/>
+                </StackPanel>
+
+                <!--<StackPanel Margin="0,0,0,10" VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Right" Width="190">
+                    <Button Style="{StaticResource buttonStyle}" Content="Фильмы" 
+                            HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" 
+                            Click="Button_Click_6" Margin="0,0,10,10" FontSize="20" Height="60"/>
+                    <Button Style="{StaticResource buttonStyle}" Content="Избранные фильмы"
+                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="180" 
+                            Click="Button_Click_7" Margin="0,0,10,0" FontSize="20" Height="60"/>
+                </StackPanel>-->
+
+                <Frame x:Name="dataView" Margin="250,50,200,100"
+                       NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
+

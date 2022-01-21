@@ -36,6 +36,13 @@
           <Property Name="ContactPerson" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="AddressId" Type="int" />
         </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaterialName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="OrderConstruction">
           <Key>
             <PropertyRef Name="Id" />
@@ -55,10 +62,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductCode" Type="nvarchar" MaxLength="6" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfCreation" Type="datetime" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="ProductImage" Type="nvarchar" MaxLength="50" />
           <Property Name="CountOnStorage" Type="int" />
+          <Property Name="MaterialId" Type="int" />
+          <Property Name="SeasonId" Type="int" />
+          <Property Name="SexId" Type="int" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -68,6 +79,20 @@
           <Property Name="Size" Type="varchar" MaxLength="20" />
           <Property Name="CountSize" Type="int" />
           <Property Name="ProductId" Type="int" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeasonName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SexName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Town">
           <Key>
@@ -151,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderCons__Produ__4F7CD00D">
+        <Association Name="FK__OrderCons__Produ__5812160E">
           <End Role="ProductSize" Type="Self.ProductSize" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -165,7 +190,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderCons__UserO__4E88ABD4">
+        <Association Name="FK__OrderCons__UserO__571DF1D5">
           <End Role="UserOrder" Type="Self.UserOrder" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -179,7 +204,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductSi__Produ__4BAC3F29">
+        <Association Name="FK__Product__Materia__4F7CD00D">
+          <End Role="Material" Type="Self.Material" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__SeasonI__5070F446">
+          <End Role="Season" Type="Self.Season" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__SexId__5165187F">
+          <End Role="Sex" Type="Self.Sex" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSi__Produ__5441852A">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -211,9 +278,12 @@
           <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationUser" EntityType="Self.ApplicationUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Counterparty" EntityType="Self.Counterparty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderConstruction" EntityType="Self.OrderConstruction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSize" EntityType="Self.ProductSize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Season" EntityType="Self.Season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sex" EntityType="Self.Sex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Town" EntityType="Self.Town" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserOrder" EntityType="Self.UserOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
@@ -233,15 +303,27 @@
             <End Role="Address" EntitySet="Address" />
             <End Role="Counterparty" EntitySet="Counterparty" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderCons__Produ__4F7CD00D" Association="Self.FK__OrderCons__Produ__4F7CD00D">
+          <AssociationSet Name="FK__OrderCons__Produ__5812160E" Association="Self.FK__OrderCons__Produ__5812160E">
             <End Role="ProductSize" EntitySet="ProductSize" />
             <End Role="OrderConstruction" EntitySet="OrderConstruction" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderCons__UserO__4E88ABD4" Association="Self.FK__OrderCons__UserO__4E88ABD4">
+          <AssociationSet Name="FK__OrderCons__UserO__571DF1D5" Association="Self.FK__OrderCons__UserO__571DF1D5">
             <End Role="UserOrder" EntitySet="UserOrder" />
             <End Role="OrderConstruction" EntitySet="OrderConstruction" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductSi__Produ__4BAC3F29" Association="Self.FK__ProductSi__Produ__4BAC3F29">
+          <AssociationSet Name="FK__Product__Materia__4F7CD00D" Association="Self.FK__Product__Materia__4F7CD00D">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__SeasonI__5070F446" Association="Self.FK__Product__SeasonI__5070F446">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__SexId__5165187F" Association="Self.FK__Product__SexId__5165187F">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSi__Produ__5441852A" Association="Self.FK__ProductSi__Produ__5441852A">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductSize" EntitySet="ProductSize" />
           </AssociationSet>
@@ -258,9 +340,12 @@
           <EntitySet Name="Address" EntityType="DiplomaModel.Address" />
           <EntitySet Name="ApplicationUser" EntityType="DiplomaModel.ApplicationUser" />
           <EntitySet Name="Counterparty" EntityType="DiplomaModel.Counterparty" />
+          <EntitySet Name="Material" EntityType="DiplomaModel.Material" />
           <EntitySet Name="OrderConstruction" EntityType="DiplomaModel.OrderConstruction" />
           <EntitySet Name="Product" EntityType="DiplomaModel.Product" />
           <EntitySet Name="ProductSize" EntityType="DiplomaModel.ProductSize" />
+          <EntitySet Name="Season" EntityType="DiplomaModel.Season" />
+          <EntitySet Name="Sex" EntityType="DiplomaModel.Sex" />
           <EntitySet Name="Town" EntityType="DiplomaModel.Town" />
           <EntitySet Name="UserOrder" EntityType="DiplomaModel.UserOrder" />
           <EntitySet Name="UserRole" EntityType="DiplomaModel.UserRole" />
@@ -284,15 +369,27 @@
             <End Role="Counterparty" EntitySet="Counterparty" />
             <End Role="UserOrder" EntitySet="UserOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderCons__Produ__4F7CD00D" Association="DiplomaModel.FK__OrderCons__Produ__4F7CD00D">
+          <AssociationSet Name="FK__Product__Materia__4F7CD00D" Association="DiplomaModel.FK__Product__Materia__4F7CD00D">
+            <End Role="Material" EntitySet="Material" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderCons__Produ__5812160E" Association="DiplomaModel.FK__OrderCons__Produ__5812160E">
             <End Role="ProductSize" EntitySet="ProductSize" />
             <End Role="OrderConstruction" EntitySet="OrderConstruction" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderCons__UserO__4E88ABD4" Association="DiplomaModel.FK__OrderCons__UserO__4E88ABD4">
+          <AssociationSet Name="FK__OrderCons__UserO__571DF1D5" Association="DiplomaModel.FK__OrderCons__UserO__571DF1D5">
             <End Role="UserOrder" EntitySet="UserOrder" />
             <End Role="OrderConstruction" EntitySet="OrderConstruction" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductSi__Produ__4BAC3F29" Association="DiplomaModel.FK__ProductSi__Produ__4BAC3F29">
+          <AssociationSet Name="FK__Product__SeasonI__5070F446" Association="DiplomaModel.FK__Product__SeasonI__5070F446">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__SexId__5165187F" Association="DiplomaModel.FK__Product__SexId__5165187F">
+            <End Role="Sex" EntitySet="Sex" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductSi__Produ__5441852A" Association="DiplomaModel.FK__ProductSi__Produ__5441852A">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductSize" EntitySet="ProductSize" />
           </AssociationSet>
@@ -335,6 +432,14 @@
           <NavigationProperty Name="ApplicationUser" Relationship="DiplomaModel.FK__Applicati__Count__412EB0B6" FromRole="Counterparty" ToRole="ApplicationUser" />
           <NavigationProperty Name="UserOrder" Relationship="DiplomaModel.FK__UserOrder__Count__45F365D3" FromRole="Counterparty" ToRole="UserOrder" />
         </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomaModel.FK__Product__Materia__4F7CD00D" FromRole="Material" ToRole="Product" />
+        </EntityType>
         <EntityType Name="OrderConstruction">
           <Key>
             <PropertyRef Name="Id" />
@@ -346,8 +451,8 @@
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="UserOrderId" Type="Int32" />
           <Property Name="ProductSizeId" Type="Int32" />
-          <NavigationProperty Name="ProductSize" Relationship="DiplomaModel.FK__OrderCons__Produ__4F7CD00D" FromRole="OrderConstruction" ToRole="ProductSize" />
-          <NavigationProperty Name="UserOrder" Relationship="DiplomaModel.FK__OrderCons__UserO__4E88ABD4" FromRole="OrderConstruction" ToRole="UserOrder" />
+          <NavigationProperty Name="ProductSize" Relationship="DiplomaModel.FK__OrderCons__Produ__5812160E" FromRole="OrderConstruction" ToRole="ProductSize" />
+          <NavigationProperty Name="UserOrder" Relationship="DiplomaModel.FK__OrderCons__UserO__571DF1D5" FromRole="OrderConstruction" ToRole="UserOrder" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -356,11 +461,18 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfCreation" Type="DateTime" Precision="3" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="ProductImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CountOnStorage" Type="Int32" />
-          <NavigationProperty Name="ProductSize" Relationship="DiplomaModel.FK__ProductSi__Produ__4BAC3F29" FromRole="Product" ToRole="ProductSize" />
+          <Property Name="MaterialId" Type="Int32" />
+          <Property Name="SeasonId" Type="Int32" />
+          <Property Name="SexId" Type="Int32" />
+          <NavigationProperty Name="Material" Relationship="DiplomaModel.FK__Product__Materia__4F7CD00D" FromRole="Product" ToRole="Material" />
+          <NavigationProperty Name="Season" Relationship="DiplomaModel.FK__Product__SeasonI__5070F446" FromRole="Product" ToRole="Season" />
+          <NavigationProperty Name="Sex" Relationship="DiplomaModel.FK__Product__SexId__5165187F" FromRole="Product" ToRole="Sex" />
+          <NavigationProperty Name="ProductSize" Relationship="DiplomaModel.FK__ProductSi__Produ__5441852A" FromRole="Product" ToRole="ProductSize" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -370,8 +482,24 @@
           <Property Name="Size" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CountSize" Type="Int32" />
           <Property Name="ProductId" Type="Int32" />
-          <NavigationProperty Name="OrderConstruction" Relationship="DiplomaModel.FK__OrderCons__Produ__4F7CD00D" FromRole="ProductSize" ToRole="OrderConstruction" />
-          <NavigationProperty Name="Product" Relationship="DiplomaModel.FK__ProductSi__Produ__4BAC3F29" FromRole="ProductSize" ToRole="Product" />
+          <NavigationProperty Name="OrderConstruction" Relationship="DiplomaModel.FK__OrderCons__Produ__5812160E" FromRole="ProductSize" ToRole="OrderConstruction" />
+          <NavigationProperty Name="Product" Relationship="DiplomaModel.FK__ProductSi__Produ__5441852A" FromRole="ProductSize" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomaModel.FK__Product__SeasonI__5070F446" FromRole="Season" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Sex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SexName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomaModel.FK__Product__SexId__5165187F" FromRole="Sex" ToRole="Product" />
         </EntityType>
         <EntityType Name="Town">
           <Key>
@@ -393,7 +521,7 @@
           <Property Name="DateOfShipment" Type="DateTime" Precision="3" />
           <Property Name="CounterpartyId" Type="Int32" />
           <NavigationProperty Name="Counterparty" Relationship="DiplomaModel.FK__UserOrder__Count__45F365D3" FromRole="UserOrder" ToRole="Counterparty" />
-          <NavigationProperty Name="OrderConstruction" Relationship="DiplomaModel.FK__OrderCons__UserO__4E88ABD4" FromRole="UserOrder" ToRole="OrderConstruction" />
+          <NavigationProperty Name="OrderConstruction" Relationship="DiplomaModel.FK__OrderCons__UserO__571DF1D5" FromRole="UserOrder" ToRole="OrderConstruction" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -473,7 +601,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderCons__Produ__4F7CD00D">
+        <Association Name="FK__Product__Materia__4F7CD00D">
+          <End Type="DiplomaModel.Material" Role="Material" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DiplomaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Material">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderCons__Produ__5812160E">
           <End Type="DiplomaModel.ProductSize" Role="ProductSize" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -487,7 +629,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderCons__UserO__4E88ABD4">
+        <Association Name="FK__OrderCons__UserO__571DF1D5">
           <End Type="DiplomaModel.UserOrder" Role="UserOrder" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -501,7 +643,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductSi__Produ__4BAC3F29">
+        <Association Name="FK__Product__SeasonI__5070F446">
+          <End Type="DiplomaModel.Season" Role="Season" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DiplomaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__SexId__5165187F">
+          <End Type="DiplomaModel.Sex" Role="Sex" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DiplomaModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SexId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductSi__Produ__5441852A">
           <End Type="DiplomaModel.Product" Role="Product" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -555,6 +725,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Material">
+            <EntityTypeMapping TypeName="DiplomaModel.Material">
+              <MappingFragment StoreEntitySet="Material">
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OrderConstruction">
             <EntityTypeMapping TypeName="DiplomaModel.OrderConstruction">
               <MappingFragment StoreEntitySet="OrderConstruction">
@@ -571,10 +749,14 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="DiplomaModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="SexId" ColumnName="SexId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="MaterialId" ColumnName="MaterialId" />
                 <ScalarProperty Name="CountOnStorage" ColumnName="CountOnStorage" />
                 <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -587,6 +769,22 @@
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="CountSize" ColumnName="CountSize" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Season">
+            <EntityTypeMapping TypeName="DiplomaModel.Season">
+              <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sex">
+            <EntityTypeMapping TypeName="DiplomaModel.Sex">
+              <MappingFragment StoreEntitySet="Sex">
+                <ScalarProperty Name="SexName" ColumnName="SexName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

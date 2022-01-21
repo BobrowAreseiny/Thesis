@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using Thesis.Areas.UserArea.ProductsWindows;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea.UserBasket
@@ -11,6 +13,7 @@ namespace Thesis.Areas.UserArea.UserBasket
     public partial class Creel : Window
     {
         private readonly List<Basket> _basket;
+        private readonly List<CreelData> creel = new List<CreelData>();
         private readonly ApplicationUser _account;
 
         public Creel(ApplicationUser user, List<Basket> basket)
@@ -28,41 +31,65 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
         {
-            new MainWindow(_account, _basket).Show();
+            new ProductsCatalog(_account, _basket).Show();
             Close();
         }
 
         private void Data()
         {
-            List<CreelData> creel = new List<CreelData>();
-            Product product = null;
+            creel.Clear();
+            if (_user.Items.Count != 0)
+            {
+                _user.Items.Clear();
+            }
             foreach (Basket item in _basket)
             {
                 using (ApplicationDbContext _context = new ApplicationDbContext())
                 {
-                    product = _context.Product
+                    Product product = _context.Product
                         .Where(x => x.Id == item.Size.ProductId)
                         .FirstOrDefault();
-                }
-                if (product != null)
-                {
-                    creel.Add(new CreelData(item, product));
+
+                    if (product != null)
+                    {
+                        creel.Add(new CreelData(item, product));
+                    }
                 }
             }
             if (creel != null)
             {
-                _creel.ItemsSource = creel;
+                _user.Items.Add(_account);
+                _creel.ItemsSource = null;
+                _creel.ItemsSource = creel.OrderBy(x => x.Name);
             }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-
+            int? productSizeId = (sender as Button).Content as int?;
+            if (productSizeId != null)
+            {
+                Basket selecteditem = _basket.Where(x => x.Size.Id == productSizeId).FirstOrDefault();
+                if (selecteditem != null)
+                {
+                    _basket.Remove(selecteditem);
+                    Data();
+                }
+            }
         }
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            
+            int? productSizeId = (sender as Button).Content as int?;
+            if (productSizeId != null)
+            {
+                Basket selecteditem = _basket.Where(x => x.Size.Id == productSizeId).FirstOrDefault();
+                if (selecteditem != null)
+                {
+                    new AddToBasket(selecteditem, _basket).ShowDialog();
+                    Data();
+                }
+            }
         }
     }
 }

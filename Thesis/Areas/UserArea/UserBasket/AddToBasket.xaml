@@ -76,9 +76,9 @@
                     FontWeight="Bold" HorizontalAlignment ="Center" Content="+"
                     VerticalAlignment="Center" Click="Add" Margin="150,300,0,0"
                     Width="100" Height="100"/>
-            <TextBlock Margin="0,300,0,0" Foreground="White"  Text="0"
-                       FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" x:Name="countOfProducts"/>
+            <TextBox Margin="0,300,0,0" Foreground="White" Text="0" MaxLength="5"
+                     FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" PreviewTextInput="NumericOnly" 
+                     VerticalAlignment="Center" x:Name="countOfProducts" TextChanged="SetCount"/>
             <Button Style="{StaticResource TransparantButton}"  Content="ВЫХОД" Click="Exit" Background="Transparent"
                             VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0"
                             Width="110" Height="45" FontSize="25" FontWeight="Bold" Margin="0,10,10,0" />

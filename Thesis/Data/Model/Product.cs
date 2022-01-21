@@ -23,11 +23,18 @@ namespace Thesis.Data.Model
         public int Id { get; set; }
         public string ProductCode { get; set; }
         public string Name { get; set; }
+        public Nullable<System.DateTime> DateOfCreation { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string ProductImage { get; set; }
         public Nullable<int> CountOnStorage { get; set; }
+        public Nullable<int> MaterialId { get; set; }
+        public Nullable<int> SeasonId { get; set; }
+        public Nullable<int> SexId { get; set; }
     
+        public virtual Material Material { get; set; }
+        public virtual Season Season { get; set; }
+        public virtual Sex Sex { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSize> ProductSize { get; set; }
     }

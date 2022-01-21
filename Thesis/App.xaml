@@ -1,7 +1,7 @@
 ﻿<Application x:Class="Thesis.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="Areas/UserArea/mainWindow.xaml">
+             StartupUri="Areas/UserArea/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <Style x:Key="ProductView" TargetType="{x:Type Button}">

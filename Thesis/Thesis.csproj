@@ -73,75 +73,99 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Areas\ManagerArea\CounterpartyInteraction\AccountEdit.xaml">
+    <Page Include="Areas\AdminArea\CounterpartyInteraction\AccountEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\CounterpartyInteraction\Counterparties.xaml">
+    <Page Include="Areas\AdminArea\CounterpartyInteraction\Counterparties.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\CounterpartyInteraction\CounterpartyDescription.xaml">
+    <Page Include="Areas\AdminArea\CounterpartyInteraction\CounterpartyDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\CounterpartyInteraction\CounterpartyEdit.xaml">
+    <Page Include="Areas\AdminArea\CounterpartyInteraction\CounterpartyEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\ProductInteraction\ProductDescription.xaml">
+    <Page Include="Areas\AdminArea\MaterialInteraction\MaterialEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\ProductInteraction\ProductEdit.xaml">
+    <Page Include="Areas\AdminArea\MaterialInteraction\Materials.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\ProductInteraction\Products.xaml">
+    <Page Include="Areas\AdminArea\ProductInteraction\ProductDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\ProductInteraction\ProductSizeEdit.xaml">
+    <Page Include="Areas\AdminArea\ProductInteraction\ProductEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\RoleInteraction\RoleDescription.xaml">
+    <Page Include="Areas\AdminArea\ProductInteraction\Products.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\RoleInteraction\RoleEdit.xaml">
+    <Page Include="Areas\AdminArea\ProductInteraction\ProductSizeEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\RoleInteraction\Roles.xaml">
+    <Page Include="Areas\AdminArea\RoleInteraction\RoleDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\MainManagerWindow.xaml">
+    <Page Include="Areas\AdminArea\RoleInteraction\RoleEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\TownInteraction\TownDescription.xaml">
+    <Page Include="Areas\AdminArea\RoleInteraction\Roles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\TownInteraction\TownEdit.xaml">
+    <Page Include="Areas\AdminArea\MainManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\TownInteraction\Towns.xaml">
+    <Page Include="Areas\AdminArea\TownInteraction\AddressEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\UserOrderInteraction\UserOrderDescription.xaml">
+    <Page Include="Areas\AdminArea\TownInteraction\TownDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\UserOrderInteraction\UserOrderEdit.xaml">
+    <Page Include="Areas\AdminArea\TownInteraction\TownEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Areas\ManagerArea\UserOrderInteraction\UserOrders.xaml">
+    <Page Include="Areas\AdminArea\TownInteraction\Towns.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\AdminArea\UserOrderInteraction\OrderConstructionEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\AdminArea\UserOrderInteraction\UserOrderDescription.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\AdminArea\UserOrderInteraction\UserOrderEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\AdminArea\UserOrderInteraction\UserOrders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\MarketingArea\MainMarketingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\UserArea\ProductsWindows\ProductsCatalog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,59 +189,77 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Areas\ManagerArea\CounterpartyInteraction\AccountEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\CounterpartyInteraction\AccountEdit.xaml.cs">
       <DependentUpon>AccountEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\CounterpartyInteraction\Counterparties.xaml.cs">
+    <Compile Include="Areas\AdminArea\CounterpartyInteraction\Counterparties.xaml.cs">
       <DependentUpon>Counterparties.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\CounterpartyInteraction\CounterpartyDescription.xaml.cs">
+    <Compile Include="Areas\AdminArea\CounterpartyInteraction\CounterpartyDescription.xaml.cs">
       <DependentUpon>CounterpartyDescription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\CounterpartyInteraction\CounterpartyEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\CounterpartyInteraction\CounterpartyEdit.xaml.cs">
       <DependentUpon>CounterpartyEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\ProductInteraction\ProductDescription.xaml.cs">
+    <Compile Include="Areas\AdminArea\MaterialInteraction\MaterialEdit.xaml.cs">
+      <DependentUpon>MaterialEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminArea\MaterialInteraction\Materials.xaml.cs">
+      <DependentUpon>Materials.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminArea\ProductInteraction\ProductDescription.xaml.cs">
       <DependentUpon>ProductDescription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\ProductInteraction\ProductEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\ProductInteraction\ProductEdit.xaml.cs">
       <DependentUpon>ProductEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\ProductInteraction\Products.xaml.cs">
+    <Compile Include="Areas\AdminArea\ProductInteraction\Products.xaml.cs">
       <DependentUpon>Products.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\ProductInteraction\ProductSizeEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\ProductInteraction\ProductSizeEdit.xaml.cs">
       <DependentUpon>ProductSizeEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\RoleInteraction\RoleDescription.xaml.cs">
+    <Compile Include="Areas\AdminArea\RoleInteraction\RoleDescription.xaml.cs">
       <DependentUpon>RoleDescription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\RoleInteraction\RoleEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\RoleInteraction\RoleEdit.xaml.cs">
       <DependentUpon>RoleEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\RoleInteraction\Roles.xaml.cs">
+    <Compile Include="Areas\AdminArea\RoleInteraction\Roles.xaml.cs">
       <DependentUpon>Roles.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\MainManagerWindow.xaml.cs">
+    <Compile Include="Areas\AdminArea\MainManagerWindow.xaml.cs">
       <DependentUpon>MainManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\TownInteraction\TownDescription.xaml.cs">
+    <Compile Include="Areas\AdminArea\TownInteraction\AddressEdit.xaml.cs">
+      <DependentUpon>AddressEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminArea\TownInteraction\TownDescription.xaml.cs">
       <DependentUpon>TownDescription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\TownInteraction\TownEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\TownInteraction\TownEdit.xaml.cs">
       <DependentUpon>TownEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\TownInteraction\Towns.xaml.cs">
+    <Compile Include="Areas\AdminArea\TownInteraction\Towns.xaml.cs">
       <DependentUpon>Towns.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\UserOrderInteraction\UserOrderDescription.xaml.cs">
+    <Compile Include="Areas\AdminArea\UserOrderInteraction\OrderConstructionEdit.xaml.cs">
+      <DependentUpon>OrderConstructionEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminArea\UserOrderInteraction\UserOrderDescription.xaml.cs">
       <DependentUpon>UserOrderDescription.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\UserOrderInteraction\UserOrderEdit.xaml.cs">
+    <Compile Include="Areas\AdminArea\UserOrderInteraction\UserOrderEdit.xaml.cs">
       <DependentUpon>UserOrderEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ManagerArea\UserOrderInteraction\UserOrders.xaml.cs">
+    <Compile Include="Areas\AdminArea\UserOrderInteraction\UserOrders.xaml.cs">
       <DependentUpon>UserOrders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\MarketingArea\MainMarketingWindow.xaml.cs">
+      <DependentUpon>MainMarketingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\UserArea\ProductsWindows\ProductsCatalog.xaml.cs">
+      <DependentUpon>ProductsCatalog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Areas\UserArea\UserBasket\AddToBasket.xaml.cs">
       <DependentUpon>AddToBasket.xaml</DependentUpon>
@@ -232,7 +274,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Areas\UserArea\ProductDescription.xaml">
+    <Page Include="Areas\UserArea\ProductsWindows\ProductDescription.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,7 +284,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Areas\UserArea\ProductDescription.xaml.cs">
+    <Compile Include="Areas\UserArea\ProductsWindows\ProductDescription.xaml.cs">
       <DependentUpon>ProductDescription.xaml</DependentUpon>
     </Compile>
     <Compile Include="Areas\UserArea\UserBasket\Creel.xaml.cs">
@@ -276,6 +318,9 @@
       <DependentUpon>Database.edmx</DependentUpon>
     </Compile>
     <Compile Include="Data\Model\DataProducts.cs" />
+    <Compile Include="Data\Model\Material.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Model\OrderConstruction.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -284,6 +329,12 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Model\ProductSize.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Model\Season.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Model\Sex.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Model\Town.cs">

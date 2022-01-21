@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,17 +17,14 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
     /// </summary>
     public partial class CreateAccountWindow : Window
     {
-        private readonly List<Basket> _basket;
-
-        public CreateAccountWindow(List<Basket> basket)
+        public CreateAccountWindow()
         {
             InitializeComponent();
-            _basket = basket;
         }
 
         private void Login(object sender, RoutedEventArgs e)
         {
-            new LoginWindow(_basket).Show();
+            new LoginWindow().Show();
             Close();
         }
 
@@ -37,53 +36,75 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private void Create(object sender, RoutedEventArgs e)
         {
             bool errors = false;
-            string fioRegex = "^[А - ЯЁ][а - яё] * [А - ЯЁ][а - яё] * [А - ЯЁ][а - яё] *$";
-            string emailRegex = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
-            string phoneRegex = @"^(\+375|80)(29|25|44|33)(\d{3})(\d{2})(\d{2})$";
-            string sityRegex = @"(^[\w\s]+,\s\w{2}$)";
-            string indexRegex = @"(^\d{5}$)";
-            int _townId = TownTable(townIndex.Text, townName.Text);
+            string phoneRegex = @"(8 0(25|29|33|34) ([0-9]{3}( [0-9]{2}){2}))";
+            string indexRegex = @"^\d{5}(?:[-\s]\d{4})?$";
             int _adressId = 0;
             int _counterpartyId = 0;
+            errors = EmailIsValid(email.Text);
+            errors = DataRegex(telephone, phoneRegex, errors);
+            errors = DataRegex(townIndex, indexRegex, errors);
+            errors = CountIsValid(street);
+            errors = CountIsValid(roomNumber);
+            errors = CountIsValid(townName);
+            errors = CountIsValid(buildingNumber);
 
-            //errors = DataRegex(fio, fioRegex, errors);
-            //errors = DataRegex(email, emailRegex, errors);
-            //errors = DataRegex(telephone, phoneRegex, errors);
-            //errors = DataRegex(street, emailRegex, errors); //
-            //errors = DataRegex(buildingNumber, emailRegex, errors); //
-            //errors = DataRegex(roomNumber, emailRegex, errors); //
-            //errors = DataRegex(townName, sityRegex, errors);
-            //errors = DataRegex(townIndex, indexRegex, errors);
-
-            //if (errors == false)
-            //{
-
-            if (_townId != 0)
+            if (errors == false)
             {
-                _adressId = AdressTable(street.Text, buildingNumber.Text, roomNumber.Text, _townId);
-            }
-            if (_adressId != 0)
-            {
+                //if (_townId != 0)
+                //{
+                //    _adressId = AdressTable(street.Text, buildingNumber.Text, roomNumber.Text, _townId);
+                //}
+                //if (_adressId != 0)
+                //{
+                    
+                //}
+                
                 _counterpartyId = CounterpartyTable(telephone.Text, fio.Text, "Вставить имя конторы", _adressId);
-            }
-            if (_adressId != 0)
-            {
-                ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), _counterpartyId);
-                if (user != null)
+                if (_adressId != 0)
                 {
-                    new MainWindow(user, _basket).Show();
-                    Close();
+                    ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), _counterpartyId);
+                    if (user != null)
+                    {
+                        new MainWindow(user).Show();
+                        Close();
+                    }
                 }
             }
-
-            //}
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private bool EmailIsValid(string emailaddress)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            try
             {
-                DragMove();
+                MailAddress m = new MailAddress(emailaddress);
+
+                return false;
+            }
+            catch (FormatException)
+            {
+                email.BorderBrush = Brushes.Red;
+                return true;
+            }
+        }
+
+        private bool CountIsValid(TextBox data)
+        {
+            try
+            {
+                if (data.Text.Length < 100)
+                {
+                    return false;
+                }
+                else
+                {
+                    data.Background = Brushes.Red;
+                }
+                return true;
+            }
+            catch (FormatException)
+            {
+                email.BorderBrush = Brushes.Red;
+                return true;
             }
         }
 
@@ -108,6 +129,12 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         {
             e.Handled = IsNumeric(e.Text);
         }
+        private static bool IsNumeric(string str)
+        {
+            Regex reg = new Regex("[^0-9]");
+            return reg.IsMatch(str);
+        }
+
         private void TextOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsText(e.Text);
@@ -115,11 +142,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private static bool IsText(string str)
         {
             Regex reg = new Regex("[^А-я]");
-            return reg.IsMatch(str);
-        }
-        private static bool IsNumeric(string str)
-        {
-            Regex reg = new Regex("[^0-9]");
             return reg.IsMatch(str);
         }
 

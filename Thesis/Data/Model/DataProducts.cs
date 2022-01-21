@@ -11,7 +11,9 @@ namespace Thesis.Data.Model
 
         public string ProductCode { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } 
+
+        public DateTime? DateOfCreation { get; set; }
 
         public string Description { get; set; }
 
@@ -21,15 +23,32 @@ namespace Thesis.Data.Model
 
         public BitmapFrame ProductImage { get; set; }
 
+        public int? SeasonId { get; set; }
+
+        public int? MaterialId { get; set; }
+
+        public int? SexId { get; set; }
+
         public DataProduct(Product product)
         {
+            try
+            {
+                ProductImage = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\Image\" + product.ProductImage));
+            }
+            catch
+            {
+                ProductImage = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\noimage.png"));
+            }          
             Id = product.Id;
             ProductCode = product.ProductCode;
+            DateOfCreation = product.DateOfCreation;
             Name = product.Name;
             Description = product.Description;
             Price = product.Price;
             CountOnStorage = product.CountOnStorage;
-            ProductImage = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\Image\" + product.ProductImage));
+            SeasonId = product.SeasonId;
+            MaterialId = product.MaterialId;
+            SexId = product.SexId;
         }
     }
 }
