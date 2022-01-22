@@ -21,7 +21,7 @@ namespace Thesis.Data.Model
         }
     
         public int Id { get; set; }
-        public string OrderNumber { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
         public Nullable<int> TotalAmount { get; set; }
         public Nullable<System.DateTime> DateOfPayment { get; set; }
         public string Status { get; set; }

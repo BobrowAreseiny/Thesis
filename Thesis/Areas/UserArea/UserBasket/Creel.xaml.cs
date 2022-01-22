@@ -26,7 +26,7 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Buy(object sender, RoutedEventArgs e)
         {
-
+            new Purchase(_account, _basket).Show();
         }
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
@@ -90,6 +90,6 @@ namespace Thesis.Areas.UserArea.UserBasket
                     Data();
                 }
             }
-        }
+        }      
     }
 }

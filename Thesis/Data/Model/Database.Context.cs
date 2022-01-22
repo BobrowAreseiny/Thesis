@@ -34,6 +34,7 @@ namespace Thesis.Data.Model
         public virtual DbSet<ProductSize> ProductSize { get; set; }
         public virtual DbSet<Season> Season { get; set; }
         public virtual DbSet<Sex> Sex { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Town> Town { get; set; }
         public virtual DbSet<UserOrder> UserOrder { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }

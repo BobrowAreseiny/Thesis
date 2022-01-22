@@ -1,0 +1,203 @@
+﻿<Window x:Class="Thesis.Areas.UserArea.UserBasket.Purchase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Purchase" Height="717.5" Width="800" WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF104A82" />
+            <Setter Property="Foreground" Value="#4CFFFFFF" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="8" BorderBrush="#FF104A82" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" To="#FF0074E4"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="Button" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Background" Value="#FF23252A"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Bordder" BorderThickness="0" BorderBrush="Black" 
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Foreground.Color" To="White"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Foreground.Color"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="a" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF202020" />
+            <Setter Property="Foreground" Value="#4CFFFFFF" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="2,20,2,2" BorderBrush="#FFD40754" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color" To="#FFD40754"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetProperty="Background.Color"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Border BorderBrush="#33FFFFFF" BorderThickness="2" 
+                CornerRadius="30,30,30,30" Background="#FF202020">
+        <Grid>
+            <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Height="42" 
+                        Margin="0,-2,-1.4,0" Padding="1"/>
+            <StackPanel HorizontalAlignment="Left" Margin="10" Width="350">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                           Width="280" Height="50" Margin="10" Foreground="White"/>
+                <TextBox x:Name="street" Margin="10"
+                         materialDesign:HintAssist.Hint="Улица" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <TextBox x:Name="buildingNumber" PreviewTextInput="NumericOnly"
+                         materialDesign:HintAssist.Hint="Номер помещения" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <TextBox x:Name="roomNumber" PreviewTextInput="NumericOnly" Margin="10"
+                         materialDesign:HintAssist.Hint="Номер комнаты" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <TextBox x:Name="townName" PreviewTextInput="TextOnly"
+                         materialDesign:HintAssist.Hint="Название города" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <TextBox x:Name="addressIndex" Margin="10"
+                         materialDesign:HintAssist.Hint="Индекс города" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <TextBox x:Name="dateOfShipment" PreviewTextInput="NumericOnly"
+                         materialDesign:HintAssist.Hint="Доствить через (дней)" BorderThickness="2"
+                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
+                         HorizontalAlignment="Center" Width="280"/>
+                <Button Content="Купить" HorizontalAlignment="Center" Margin="0,50,0,0" 
+                        VerticalAlignment="Bottom" Width="159" Click="Buy" Height="55"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Width="350" Margin="10,10,50,10">
+                <ListView x:Name="_products" Background="Transparent"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ListBoxItem.Margin" Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border CornerRadius="10" BorderThickness="3" 
+                                                BorderBrush="Black" Background="White" 
+                                                Height="100" Width="200">
+                                            <Grid>
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                                    <Label Content="{Binding ProductSize.Name}" Margin="5"
+                                                           FontFamily="Calibri" Foreground="Black" 
+                                                           FontSize="15" FontWeight="Bold"/>
+                                                    <Label Content="{Binding Count}" Margin="5"
+                                                           FontFamily="Calibri" Foreground="Black" 
+                                                           FontSize="15" FontWeight="Bold"/>
+                                                </StackPanel>
+                                             
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Margin="20"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -90,12 +90,17 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
         {
             _number.IsChecked = false;
             List<OrderData> data = _data
-                .Where(x => x.OrderNumber.ToLower().Contains(textSearch.Text.ToLower()))
+                .Where(x => x.OrderNumber.Value.ToString() == textSearch.Text)
                 .ToList();
             if (data != null)
             {
                 _usersOrders.ItemsSource = null;
                 _usersOrders.ItemsSource = data;
+            }
+            if (textSearch.Text == string.Empty)
+            {
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = _data;
             }
         }
 

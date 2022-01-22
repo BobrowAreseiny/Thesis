@@ -307,7 +307,8 @@
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="1">
-                <ListView x:Name="_user" Margin="50"
+                <StackPanel>
+                    <ListView x:Name="_user" Margin="50"
                           ScrollViewer.CanContentScroll="False">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
@@ -317,53 +318,18 @@
                                     <ControlTemplate>
                                         <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
                                                 Background="Transparent" Height="400" Width="200">
-                                            <Grid>
-                                                <Grid.Triggers>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                                     Storyboard.TargetName="Blure"
-                                                                                     From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                                     Storyboard.TargetName="Blure" 
-                                                                                     From="1.0" To="0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                </Grid.Triggers>
-                                                <Label Content="{Binding Email}" 
+                                                <Grid>
+                                                    <TextBlock Text="{Binding Email}"
                                                        FontFamily="Calibri" VerticalAlignment="Top"
                                                        FontSize="30" FontWeight="Bold" Foreground="White" 
                                                        HorizontalAlignment="Center" Margin="0,0,0,0">
-                                                </Label>
-                                                <Label Content="{Binding UserPassword}" FontWeight="Bold"
+                                                </TextBlock>
+                                                    <TextBlock Text="{Binding UserPassword}" FontWeight="Bold"
                                                        FontSize="25" Foreground="White" 
                                                        FontFamily="Calibri" VerticalAlignment="Center"
                                                        HorizontalAlignment="Center" Margin="0,0,0,0">
-                                                </Label>
-                                                <Border Background="#4C000000" CornerRadius="10" BorderThickness="3"
-                                                            Visibility="Visible" Opacity="0" Name="Blure">
-                                                    <Grid>
-                                                        <Border Background="Black" CornerRadius="10" BorderThickness="3" 
-                                                                    HorizontalAlignment="Right" VerticalAlignment="Top">
-                                                            <Button Height="50" Width="50" Click="Delete" BorderBrush="Transparent"
-                                                                        Margin="5" Background="Transparent" Content="{Binding Id}"/>
-                                                        </Border>
-                                                        <Border Background="Black" CornerRadius="10" BorderThickness="3"
-                                                                Height="50" Width="100">
-                                                            <Button BorderBrush="Transparent" Margin="5" 
-                                                                    Background="Transparent" Click="Edit" Content="{Binding Id}"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </Border>
-                                            </Grid>
+                                                    </TextBlock>
+                                                </Grid>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -376,6 +342,9 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
+                    <Button Margin="100" Height="70" Click="Buy"
+                            Width="200" Content="Купить"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

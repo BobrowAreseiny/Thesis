@@ -169,6 +169,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Areas\UserArea\RegistrationAndAuthorization\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Areas\UserArea\UserBasket\AddToBasket.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -261,6 +265,9 @@
     <Compile Include="Areas\UserArea\ProductsWindows\ProductsCatalog.xaml.cs">
       <DependentUpon>ProductsCatalog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Areas\UserArea\RegistrationAndAuthorization\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Areas\UserArea\UserBasket\AddToBasket.xaml.cs">
       <DependentUpon>AddToBasket.xaml</DependentUpon>
     </Compile>
@@ -282,6 +289,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Areas\UserArea\UserBasket\Purchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Areas\UserArea\ProductsWindows\ProductDescription.xaml.cs">
@@ -289,6 +300,9 @@
     </Compile>
     <Compile Include="Areas\UserArea\UserBasket\Creel.xaml.cs">
       <DependentUpon>Creel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\UserArea\UserBasket\Purchase.xaml.cs">
+      <DependentUpon>Purchase.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Crypto.cs" />
     <Compile Include="Data\Model\Address.cs">
@@ -335,6 +349,9 @@
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Model\Sex.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Model\sysdiagrams.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Model\Town.cs">

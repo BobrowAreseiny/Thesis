@@ -6,7 +6,7 @@ namespace Thesis.Data.Model
     {
         public int Id { get; set; }
 
-        public string OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
 
         public string Counterparty { get; set; }
 

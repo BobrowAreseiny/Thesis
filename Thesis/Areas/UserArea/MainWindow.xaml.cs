@@ -50,7 +50,7 @@ namespace Thesis.Areas.UserArea
                 {
                     loveProducts = _context.Product
                         .OrderByDescending(x => x.CountOnStorage)
-                        .Skip(productCount - 3).Take(3)                      
+                        .Skip(productCount - 3).Take(3)
                         .ToList();
                     if (loveProducts != null)
                     {
@@ -75,7 +75,7 @@ namespace Thesis.Areas.UserArea
         private void AdminArea(object sender, RoutedEventArgs e)
         {
             MainManagerWindow window = new MainManagerWindow();
-           // MainMarketingWindow window = new MainMarketingWindow();
+            // MainMarketingWindow window = new MainMarketingWindow();
             window.Show();
         }
 
@@ -91,14 +91,14 @@ namespace Thesis.Areas.UserArea
 
         private void ProductDescription(object sender, RoutedEventArgs e)
         {
-            //if (_account == null)
-            //{
-            //    new LoginWindow().Show();
-            //    Close();
-            //}
-            //else
-            //{
-                int? productId = (sender as Button).Content as int?;
+            int? productId = (sender as Button).Content as int?;
+            if (_account == null)
+            {
+                new LoginWindow().Show();
+                Close();
+            }
+            else
+            {
                 if (productId != null)
                 {
                     if (productId != null)
@@ -107,7 +107,7 @@ namespace Thesis.Areas.UserArea
                         Close();
                     }
                 }
-           // }
+            }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -116,13 +116,36 @@ namespace Thesis.Areas.UserArea
         }
         private void AccountShow(object sender, RoutedEventArgs e)
         {
-            new LoginWindow().Show();
-            Close();
+            if (_account == null)
+            {
+                new LoginWindow().Show();
+                Close();
+            }
+            else
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
         }
 
         private void Help(object sender, RoutedEventArgs e)
         {
-            new ProductsCatalog(_account, _basket).Show();
+
+            if (_account == null)
+            {
+                new LoginWindow().Show();
+                Close();
+            }
+            else
+            {
+                new ProductsCatalog(_account, _basket).Show();
+                Close();
+            }
+        }
+
+        private void Registration(object sender, RoutedEventArgs e)
+        {
+            new LoginWindow().Show();
             Close();
         }
     }

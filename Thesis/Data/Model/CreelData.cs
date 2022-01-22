@@ -18,11 +18,14 @@ namespace Thesis.Data.Model
 
         public CreelData(Basket basket, Product product)
         {
-            Uri uri = new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\Image\" + product.ProductImage);
-            if (uri != null)
+            try
             {
-                Image = BitmapFrame.Create(uri);
+                Image = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\Image\" + product.ProductImage));
             }
+            catch
+            {
+                Image = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\noimage.png"));
+            }           
             Name = product.Name;
             Size = basket.Size.Size;
             SizeId = basket.Size.Id;

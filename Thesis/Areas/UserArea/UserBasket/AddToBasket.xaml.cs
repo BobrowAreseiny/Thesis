@@ -50,16 +50,25 @@ namespace Thesis.Areas.UserArea.UserBasket
         {
             using (ApplicationDbContext _context = new ApplicationDbContext())
             {
+                BitmapFrame image = null;
                 Product dataProduct = _context.Product.Where(x => x.Id == productSize.ProductId).FirstOrDefault();
                 if (dataProduct != null)
                 {
-                    Uri image = new Uri(_pathToFile + @"\Data\Image\" + dataProduct.ProductImage);
+                    try
+                    {
+                        image = BitmapFrame.Create(new Uri(_pathToFile + @"\Data\Image\" + dataProduct.ProductImage));
+                    }
+                    catch
+                    {
+                        image = BitmapFrame.Create(new Uri(_pathToFile + @"\Data\ImageDefault\noimage.png"));
+                    }
                     SelectedProduct selectedProduct = new SelectedProduct()
                     {
                         Name = dataProduct.Name,
-                        ProductImage = BitmapFrame.Create(image),
+                        ProductImage = image,
                         Size = productSize.Size
                     };
+
                     DataContext = selectedProduct;
                     countOfProducts.Text = _count.ToString();
                 }

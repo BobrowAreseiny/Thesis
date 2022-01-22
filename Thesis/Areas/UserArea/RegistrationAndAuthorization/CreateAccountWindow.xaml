@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CreateAccountWindow" Height="650" Width="800" WindowStartupLocation="CenterScreen" 
+        Title="CreateAccountWindow" Height="719.401" Width="500" WindowStartupLocation="CenterScreen" 
         AllowsTransparency="True" Background="Transparent" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
@@ -118,86 +118,51 @@
         <Border BorderBrush="#33FFFFFF" BorderThickness="2" 
                 CornerRadius="30,30,30,30" Background="#FF202020">
             <Grid x:Name="Pull">
-                <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="17"
-                           Width="280" Height="50" Margin="0,20,0,0" Foreground="White" 
-                           Padding="90,15,0,0" Text="Регистрация" FontWeight="Bold" />
-                <Button Content="Регистрация" HorizontalAlignment="Center" Margin="0,0,0,110" 
-                        VerticalAlignment="Bottom" Width="159" Click="Create" Height="54"/>
                 <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
                         VerticalAlignment="Top" HorizontalAlignment="Right" Height="42" 
                         Margin="0,-2,-1.4,0" Padding="1" />
-                <Button Style="{StaticResource Button}" Click="Login" 
-                        Content="Вернуться к окну входа" FontSize="13" Background="Transparent" 
-                        Foreground="#FFC8D0DC" FontFamily="Rockwell Extra" VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Center" Margin="0,0,0,55" Height="50" Width="150"/>
-
-                <PasswordBox x:Name="passward" materialDesign:HintAssist.Hint="Пароль" 
-                             BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
-                             BorderBrush="#4CFFFFFF" Margin="80,230,0,0" FontSize="17"
-                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                             Background="#00000000" Height="70" VerticalAlignment="Top" 
-                             HorizontalAlignment="Left" Width="280"/>
-                <PasswordBox x:Name="confirmPassward" materialDesign:HintAssist.Hint="Повторите пароль" 
-                             BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
-                             BorderBrush="#4CFFFFFF" Margin="80,310,0,0" FontSize="17"
-                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                             Background="#00000000" Height="70" VerticalAlignment="Top" 
-                             HorizontalAlignment="Left" Width="280"/>
-
-                <TextBox x:Name="fio" PreviewTextInput="TextOnly" materialDesign:HintAssist.Hint="ФИО" 
-                         Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="80,70,0,0" BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
-                         Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280">
-                    <TextBox.Text>
-                        <Binding Path="fio">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-                <TextBox x:Name="email" materialDesign:HintAssist.Hint="Email" Foreground="White" 
-                         BorderBrush="#4CFFFFFF" Padding="10,0,0,0" Margin="80,150,0,0"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70" 
-                         VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
-                <TextBox x:Name="telephone" PreviewTextInput="NumericOnly" 
-                         materialDesign:HintAssist.Hint="Номер телефона" 
-                         Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Margin="80,390,0,0" BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
-                         Height="70" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
-                <TextBox x:Name="street" Margin="0,70,80,0"
-                         materialDesign:HintAssist.Hint="Улица" BorderThickness="2"
-                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
-                         HorizontalAlignment="Right" Width="280"/>
-                <TextBox x:Name="buildingNumber" PreviewTextInput="NumericOnly" Margin="0,150,80,0"
-                         materialDesign:HintAssist.Hint="Номер помещения" BorderThickness="2"
-                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
-                         HorizontalAlignment="Right" Width="280"/>
-                <TextBox x:Name="roomNumber" PreviewTextInput="NumericOnly" Margin="0,230,80,0"
-                         materialDesign:HintAssist.Hint="Номер комнаты" BorderThickness="2"
-                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
-                         HorizontalAlignment="Right" Width="280"/>
-                <TextBox x:Name="townName" PreviewTextInput="TextOnly" Margin="0,310,80,0"
-                         materialDesign:HintAssist.Hint="Название города" BorderThickness="2"
-                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
-                         HorizontalAlignment="Right" Width="280"/>
-                <TextBox x:Name="townIndex" Margin="0,390,80,0"
-                         materialDesign:HintAssist.Hint="Индекс города" BorderThickness="2"
-                         Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Top" 
-                         HorizontalAlignment="Right" Width="280"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock FontSize="17"
+                               Width="280" Height="50" Margin="10" Foreground="White" 
+                               Padding="90,15,0,0" Text="Регистрация" FontWeight="Bold"/>
+                    <TextBox x:Name="firm" PreviewTextInput="TextOnly" materialDesign:HintAssist.Hint="Название организации" 
+                             Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
+                             Height="70" Width="290" Margin="5"/>
+                    <TextBox x:Name="fio" PreviewTextInput="TextOnly" materialDesign:HintAssist.Hint="ФИО" 
+                             Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
+                             Height="70" Width="290" Margin="5"/>
+                    <TextBox x:Name="email" materialDesign:HintAssist.Hint="Email" Foreground="White" 
+                             BorderBrush="#4CFFFFFF" Padding="10,0,0,0" Margin="5"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                             BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70" 
+                             Width="290" PreviewTextInput="EngTextOnly"/>
+                    <TextBox x:Name="telephone" PreviewTextInput="NumericOnly" Margin="5"
+                             materialDesign:HintAssist.Hint="Номер телефона (8 029 000 00 00)" 
+                             Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="290"
+                             BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70"/>
+                    
+                    <PasswordBox x:Name="passward" materialDesign:HintAssist.Hint="Пароль" 
+                                 BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
+                                 BorderBrush="#4CFFFFFF" FontSize="17" Margin="5"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 Background="#00000000" Height="70" Width="290"/>
+                    <PasswordBox x:Name="confirmPassward" materialDesign:HintAssist.Hint="Повторите пароль" 
+                                 BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
+                                 BorderBrush="#4CFFFFFF" FontSize="17" Margin="5"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 Background="#00000000" Height="70" Width="290"/>
+                    <Button Content="Регистрация" Width="159" Click="Create"
+                           Margin="0,30,0,0" Height="54"/>
+                    <Button Style="{StaticResource Button}" Click="Login" 
+                            Content="Вернуться к окну входа" FontSize="13" Background="Transparent" 
+                            Foreground="#FFC8D0DC" FontFamily="Rockwell Extra" VerticalAlignment="Bottom" 
+                            HorizontalAlignment="Center" Margin="0,10,0,0" Height="50" Width="150"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
