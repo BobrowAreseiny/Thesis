@@ -25,7 +25,7 @@ namespace Thesis.Data.Model
             catch
             {
                 Image = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\noimage.png"));
-            }           
+            }
             Name = product.Name;
             Size = basket.Size.Size;
             SizeId = basket.Size.Id;

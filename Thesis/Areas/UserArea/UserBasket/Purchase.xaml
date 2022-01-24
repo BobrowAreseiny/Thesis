@@ -162,9 +162,11 @@
                         VerticalAlignment="Bottom" Width="159" Click="Buy" Height="55"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Right" Width="350" Margin="10,10,50,10">
-                <ListView x:Name="_products" Background="Transparent"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                           Width="280" Height="50" Margin="10" Foreground="White"/>
+                <ListView x:Name="_creel" Background="Transparent" Margin="0,15,0,0"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="500">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="ListBoxItem.Margin" Value="5"/>
@@ -173,13 +175,20 @@
                                     <ControlTemplate>
                                         <Border CornerRadius="10" BorderThickness="3" 
                                                 BorderBrush="Black" Background="White" 
-                                                Height="100" Width="200">
+                                                Height="70" Width="250">
                                             <Grid>
-                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                                    <Label Content="{Binding ProductSize.Name}" Margin="5"
+                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                            Orientation="Horizontal">
+                                                    <Label Content="{Binding Product}" Margin="5"
+                                                           FontFamily="Calibri" Foreground="Black" 
+                                                           FontSize="15" FontWeight="Bold"/>
+                                                    <Label Content="{Binding SizeName}" Margin="5"
                                                            FontFamily="Calibri" Foreground="Black" 
                                                            FontSize="15" FontWeight="Bold"/>
                                                     <Label Content="{Binding Count}" Margin="5"
+                                                           FontFamily="Calibri" Foreground="Black" 
+                                                           FontSize="15" FontWeight="Bold"/>
+                                                    <Label Content="{Binding Cost}" Margin="5"
                                                            FontFamily="Calibri" Foreground="Black" 
                                                            FontSize="15" FontWeight="Bold"/>
                                                 </StackPanel>
@@ -197,6 +206,11 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
+                <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,30,10"
+                        HorizontalAlignment="Right" Background="#FFFBBB43">
+                    <Label Content="{Binding Status}" FontWeight="Bold"
+                           Foreground="Black" x:Name="itogCount"/>
+                </Border>
             </StackPanel>
         </Grid>
     </Border>

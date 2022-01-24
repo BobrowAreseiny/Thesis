@@ -26,7 +26,6 @@ namespace Thesis.Areas.UserArea.UserBasket
         private readonly ProductSize _size;
         private readonly List<Basket> _basket;
         private int _count;
-        private bool isProductChaange = false;
 
         public AddToBasket(ProductSize size, List<Basket> basket)
         {
@@ -42,7 +41,6 @@ namespace Thesis.Areas.UserArea.UserBasket
             _count = product.Count; 
             _size = product.Size;
             _basket = basket;
-            isProductChaange = true;
             Data(_size);
         }
 
@@ -105,19 +103,13 @@ namespace Thesis.Areas.UserArea.UserBasket
                 Basket basket = new Basket(_size, _count);
                 if (_basket != null)
                 {
-                    Basket addToBasket = _basket.Where(x => x.Size.Id == basket.Size.Id).FirstOrDefault();
+                    Basket addToBasket = _basket
+                        .FirstOrDefault(x => x.Size.Id == basket.Size.Id);
                     if (addToBasket != null)
                     {
                         _basket.Remove(addToBasket);
-
-                        if (isProductChaange != true)
-                        {
-                            addToBasket.Count += basket.Count;
-                        }
-                        else
-                        {
-                            addToBasket.Count = basket.Count;
-                        }
+                        addToBasket.Count = basket.Count;
+                        addToBasket.Cost = (double)addToBasket.Size.Product.Price * addToBasket.Count;
                         _basket.Add(addToBasket);
                     }
                     else

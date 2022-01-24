@@ -75,7 +75,12 @@ namespace Thesis.Areas.UserArea
         private void AdminArea(object sender, RoutedEventArgs e)
         {
             MainManagerWindow window = new MainManagerWindow();
-            // MainMarketingWindow window = new MainMarketingWindow();
+            window.Show();
+        }
+
+        private void ManagerArea(object sender, RoutedEventArgs e)
+        {
+            MainMarketingWindow window = new MainMarketingWindow();
             window.Show();
         }
 

@@ -1,12 +1,13 @@
-﻿<Page x:Class="Thesis.Areas.AdminArea.UserOrderInteraction.UserOrderDescription"
+﻿<Page x:Class="Thesis.Areas.MarketingArea.UsersOrders.SelectedOrder"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      Title="UserOrderDescription"
+      Title="SelectedOrder"  
       d:DesignHeight="1080" d:DesignWidth="1920"
       IsVisibleChanged="UpdateData">
+    
     <Page.Resources>
         <Style TargetType="{x:Type ProgressBar}" x:Key="progressBar">
             <Setter Property="Template">
@@ -165,106 +166,113 @@
                                   Background="#3FFFFFFF" Margin="20,0,100,0"/>
             </StackPanel>
         </Grid>
-        <Grid  Grid.Column="0" Grid.Row="2">
+        <Grid Grid.Column="0" Grid.Row="2">
             <StackPanel>
                 <ListView x:Name="_order" Background="Transparent"
                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,10,10,300"
-                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                   SelectionChanged="OrderEdit">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="ListBoxItem.Margin" Value="5"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Grid Height="350" Width="250">
-                                    <Grid.Background>
-                                        <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                                    <TranslateTransform/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#FF6E4F5B" Offset="0"/>
-                                            <GradientStop Color="#FF4F436E" Offset="1"/>
-                                        </RadialGradientBrush>
-                                    </Grid.Background>
-                                    <Grid.Triggers>
-                                        <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                   ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ListBoxItem.Margin" Value="5"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Grid Height="350" Width="250">
+                                            <Grid.Background>
+                                                <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
+                                                    <RadialGradientBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </RadialGradientBrush.RelativeTransform>
+                                                    <GradientStop Color="#FF6E4F5B" Offset="0"/>
+                                                    <GradientStop Color="#FF4F436E" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                  Storyboard.TargetName="TopMenuArea1"
                                                                  From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                  Storyboard.TargetName="TopMenuArea1" 
                                                                  From="1.0" To="0" Duration="0:0:0.3"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Grid.Triggers>
-                                    <Border CornerRadius="10" Margin="30" VerticalAlignment="Top" 
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </Grid.Triggers>
+                                            <Border CornerRadius="10" Margin="30" VerticalAlignment="Top" 
                                                     HorizontalAlignment="Stretch" Background="#FFFBBB43">
-                                        <Label Content="{Binding OrderNumber}" Margin="10" FontFamily="Calibri"
+                                                <Label Content="{Binding OrderNumber}" Margin="10" FontFamily="Calibri"
                                                FontSize="20" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center"/>
-                                    </Border>
-                                    <Border CornerRadius="10" Margin="30,30,30,60" 
+                                            </Border>
+                                            <Border CornerRadius="10" Margin="30,30,30,60" 
                                             VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                                             Background="#FF988AAA" Height="180">
-                                        <StackPanel>
-                                            <Label Content="{Binding Counterparty}" Height="30"
+                                                <StackPanel>
+                                                    <Label Content="{Binding Counterparty}" Height="30"
                                                    VerticalAlignment="Top" Margin="5,20,5,0" FontFamily="Calibri" 
                                                    FontSize="15" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center">
-                                            </Label>
-                                            <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
+                                                    </Label>
+                                                    <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
                                                    Margin="5,20,5,0" FontFamily="Calibri" FontSize="15" FontWeight="Bold" 
                                                    Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            </Label>
-                                            <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
+                                                    </Label>
+                                                    <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
                                                             Height="30" Padding="0.5" CornerRadius="5" Background="Black">
-                                                <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
+                                                        <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
                                                              Value="{Binding OrderConstructionMade}" Margin="2" Style="{DynamicResource progressBar}">
-                                                </ProgressBar>
+                                                        </ProgressBar>
+                                                    </Border>
+                                                </StackPanel>
                                             </Border>
-                                        </StackPanel>
-                                    </Border>
-                                    <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                            <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
                                             HorizontalAlignment="Right" Background="#FFFBBB43">
-                                        <Label Content="{Binding Status}" FontWeight="Bold"
+                                                <Label Content="{Binding Status}" FontWeight="Bold"
                                                Foreground="Black" x:Name="statusLabel"/>
-                                    </Border>
-                                    <DockPanel Background="#4C000000" LastChildFill="True"
+                                            </Border>
+                                            <DockPanel Background="#4C000000" LastChildFill="True"
                                                Visibility="Visible" Opacity="0" Name="TopMenuArea1">
-                                    </DockPanel>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" Margin="20"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                                            </DockPanel>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Margin="20"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
                 <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Добавить пункт заказа" 
-                        Foreground="White" Click="AddOrderConstruction" 
-                        Margin="70,0,70,200" Height="100"/>
+                        Content="Отчетик" 
+                        Foreground="White"
+                        Margin="70,0,70,20" Height="100"/>
+                <Button Style="{StaticResource buttonDataGrid}" 
+                        Content="Отчетик" 
+                        Foreground="White"
+                        Margin="70,0,70,20" Height="100"/> 
+                <Button Style="{StaticResource buttonDataGrid}" 
+                        Content="Отчетик" 
+                        Foreground="White"
+                        Margin="70,0,70,20" Height="100"/>
             </StackPanel>
-    </Grid>
-    <DataGrid BorderThickness="0,1,0,1" Background="#331F0303" 
+        </Grid>
+        <DataGrid BorderThickness="0,1,0,1" Background="#331F0303" 
                   ColumnHeaderStyle="{StaticResource MaterialDesignFlatButton}" 
                   RowDetailsVisibilityMode="Collapsed" Foreground="White"  Grid.Column="1"
                   BorderBrush="#FF437DC3"  AutoGenerateColumns="False"  x:Name="_orderConstruction" 
@@ -279,22 +287,6 @@
                 <DataGridTextColumn Header="Статус" Binding ="{Binding Status}"/>
                 <DataGridTextColumn Header="Номер заказа" Binding ="{Binding UserOrder.OrderNumber}"/>
                 <DataGridTextColumn Header="Размер продукта" Binding ="{Binding ProductSize.Size}"/>
-                <DataGridTemplateColumn Width="150">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Удалить" Click="Delete" FontWeight="Bold"
-                                                Height="30" Style="{DynamicResource buttonDataGrid}" Width="140"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="150">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Редактировать" Click="Edit" FontWeight="Bold"
-                                                Height="30" Style="{DynamicResource buttonDataGrid}" Width="140"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

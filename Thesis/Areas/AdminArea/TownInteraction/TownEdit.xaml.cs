@@ -44,7 +44,8 @@ namespace Thesis.Areas.AdminArea.TownInteraction
                 {
                     _context.Town.Add(_selectedTown);
                 }
-                Town town = _context.Town.FirstOrDefault(f => f.Id == _selectedTown.Id);
+                Town town = _context.Town
+                    .FirstOrDefault(f => f.Id == _selectedTown.Id);
                 if (town != null)
                 {
                     town.TownName = _selectedTown.TownName;

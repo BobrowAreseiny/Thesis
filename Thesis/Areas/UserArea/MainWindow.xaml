@@ -634,8 +634,13 @@
                 HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="10,60,0,0" VerticalAlignment="Top" Click="AdminArea" 
                 Height="55" x:Name="adminstrationButton"/>
+        <Button Content="Manager" Background="Transparent" Width="234" 
+                FontSize="40" Grid.Row="1" FontWeight="Bold" Style="{StaticResource a}" 
+                HorizontalAlignment="Left" Grid.Column="0"
+                Margin="10,120,0,0" VerticalAlignment="Top" Click="ManagerArea" 
+                Height="55"/>
         <Button Content="Аптечка" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
-                Style="{StaticResource a}" HorizontalAlignment="Left" Margin="10,120,0,0" Grid.Row="1"
+                Style="{StaticResource a}" HorizontalAlignment="Left" Margin="10,177,0,0" Grid.Row="1"
                 VerticalAlignment="Top" Width="250" Click="Help" Height="55"/>
     </Grid>
 </Window>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,18 +14,21 @@ namespace Thesis.Areas.UserArea.UserBasket
 {
     /// <summary>
     /// Логика взаимодействия для Purchase.xaml
-    /// </summary>
+    /// </summary> 
+
     public partial class Purchase : Window
     {
         private readonly List<Basket> _basket = new List<Basket>();
         private readonly ApplicationUser _account = null;
-        private static Random rand = new Random();
+
+     
 
         public Purchase(ApplicationUser user, List<Basket> basket)
         {
             InitializeComponent();
             _account = user;
             _basket = basket;
+            Data();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -36,10 +38,16 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Data()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            double price = 0;
+            foreach (Basket item in _basket)
             {
-                _products.ItemsSource = _basket;
+                price += item.Cost;
             }
+            if (price != 0)
+            {
+                itogCount.Content = price;
+                _creel.ItemsSource = _basket;
+            }           
         }
 
         private void Buy(object sender, RoutedEventArgs e)

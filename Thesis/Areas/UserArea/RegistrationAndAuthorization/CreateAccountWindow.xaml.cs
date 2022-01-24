@@ -37,19 +37,17 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             string phoneRegex = @"(8 0(25|29|33|34) ([0-9]{3}( [0-9]{2}){2}))";
             int? _counterpartyId;
 
-            if (passward.Password == confirmPassward.Password)
-            {
-                if (EmailIsValid(email.Text) & CountIsValid(fio) & DataRegex(telephone, phoneRegex))
+
+            if (EmailIsValid(email.Text) & CountIsValid(fio) & DataRegex(telephone, phoneRegex) & (passward.Password == confirmPassward.Password))
                 {
-                    _counterpartyId = CounterpartyTable(telephone.Text, fio.Text, firm.Text, null);
-                    if (_counterpartyId != null)
+                _counterpartyId = CounterpartyTable(telephone.Text, fio.Text, firm.Text, null);
+                if (_counterpartyId != null)
+                {
+                    ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), (int)_counterpartyId);
+                    if (user != null)
                     {
-                        ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), (int)_counterpartyId);
-                        if (user != null)
-                        {
-                            new MainWindow(user).Show();
-                            Close();
-                        }
+                        new MainWindow(user).Show();
+                        Close();
                     }
                 }
             }

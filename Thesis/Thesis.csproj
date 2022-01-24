@@ -165,6 +165,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Areas\MarketingArea\UsersOrders\SelectedOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Areas\MarketingArea\UsersOrders\UserOrders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Areas\UserArea\ProductsWindows\ProductsCatalog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -261,6 +269,12 @@
     </Compile>
     <Compile Include="Areas\MarketingArea\MainMarketingWindow.xaml.cs">
       <DependentUpon>MainMarketingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\MarketingArea\UsersOrders\SelectedOrder.xaml.cs">
+      <DependentUpon>SelectedOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\MarketingArea\UsersOrders\UserOrders.xaml.cs">
+      <DependentUpon>UserOrders.xaml</DependentUpon>
     </Compile>
     <Compile Include="Areas\UserArea\ProductsWindows\ProductsCatalog.xaml.cs">
       <DependentUpon>ProductsCatalog.xaml</DependentUpon>

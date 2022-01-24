@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CreateAccountWindow" Height="719.401" Width="500" WindowStartupLocation="CenterScreen" 
+        Title="CreateAccountWindow" Height="720" Width="500" WindowStartupLocation="CenterScreen" 
         AllowsTransparency="True" Background="Transparent" WindowStyle="None">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
