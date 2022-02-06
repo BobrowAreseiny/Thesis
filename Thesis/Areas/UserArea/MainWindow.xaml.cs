@@ -41,22 +41,9 @@ namespace Thesis.Areas.UserArea
         public void Data()
         {
             List<DataProduct> data = new List<DataProduct>();
-            List<Product> loveProducts = new List<Product>();
             using (ApplicationDbContext _context = new ApplicationDbContext())
             {
-                List<Product> products = _context.Product.Take(20).ToList();
-                int productCount = products.Count();
-                if (productCount > 3)
-                {
-                    loveProducts = _context.Product
-                        .OrderByDescending(x => x.CountOnStorage)
-                        .Skip(productCount - 3).Take(3)
-                        .ToList();
-                    if (loveProducts != null)
-                    {
-                        _newProductsList.ItemsSource = loveProducts;
-                    }
-                }
+                List<Product> products = _context.Product.Take(4).ToList();
 
                 if (products != null)
                 {
@@ -67,6 +54,7 @@ namespace Thesis.Areas.UserArea
                     if (data != null)
                     {
                         _productList.ItemsSource = data;
+                        _newProductsList.ItemsSource = data.Skip(data.Count - 3).ToList();
                     }
                 }
             }

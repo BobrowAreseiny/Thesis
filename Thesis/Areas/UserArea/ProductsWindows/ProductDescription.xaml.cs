@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
@@ -17,6 +18,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private readonly string _pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         private readonly List<Basket> _basket;
         private readonly ApplicationUser _account;
+        private readonly int? _productId;
 
         public ProductDescription(int? productId, ApplicationUser user, List<Basket> basket)
         {
@@ -24,19 +26,15 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             Data(productId);
             _basket = basket;
             _account = user;
+            _productId = productId;
         }
 
-        private void Buy(object sender, RoutedEventArgs e)
+        private void AddToBasketWholesale(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void AddToBasket(object sender, RoutedEventArgs e)
-        {
-            if (_productSize.SelectedItem is ProductSize selectedSize)
+            if (_productId != null)
             {
-                new AddToBasket(selectedSize, _basket).ShowDialog();
-            };
+                new AddToBasketWholesale((int)_productId, _basket).ShowDialog();
+            }
         }
 
         private void Basket(object sender, RoutedEventArgs e)
@@ -75,6 +73,29 @@ namespace Thesis.Areas.UserArea.ProductsWindows
                     productImage.Source = BitmapFrame.Create(new Uri(_pathToFile + @"\Data\ImageDefault\noimage.png"));
                 }
             }
+        }
+
+        private void AddToBasket(object sender, SelectionChangedEventArgs e)
+        {
+            if (_productSize.SelectedItem is ProductSize selectedSize)
+            {
+                Basket selecteditem = _basket
+                  .Where(x => x.Size.Id == selectedSize.Id)
+                  .FirstOrDefault();
+                if (selecteditem != null)
+                {
+                    new AddToBasket(selecteditem, _basket).ShowDialog();
+                }
+                else
+                {
+                    new AddToBasket(selectedSize, _basket).ShowDialog();
+                }
+            };
+        }
+
+        private void Description(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

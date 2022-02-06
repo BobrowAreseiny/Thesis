@@ -83,7 +83,9 @@ namespace Thesis.Areas.UserArea.UserBasket
             int? productSizeId = (sender as Button).Content as int?;
             if (productSizeId != null)
             {
-                Basket selecteditem = _basket.Where(x => x.Size.Id == productSizeId).FirstOrDefault();
+                Basket selecteditem = _basket
+                    .Where(x => x.Size.Id == productSizeId)
+                    .FirstOrDefault();
                 if (selecteditem != null)
                 {
                     new AddToBasket(selecteditem, _basket).ShowDialog();

@@ -1,20 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea.UserBasket
 {
     /// <summary>
-    /// Логика взаимодействия для AddToBasket.xaml
+    /// Логика взаимодействия для AddToBasketWholesale.xaml
     /// </summary>
-    public partial class AddToBasket : Window
+    public partial class AddToBasketWholesale : Window
     {
+        private readonly string _pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+        private readonly List<Basket> _basket;
+        private readonly int _productId;
+        private int _count;
+    
+
         private class SelectedProduct
         {
             public string Size { get; set; }
@@ -22,34 +36,23 @@ namespace Thesis.Areas.UserArea.UserBasket
             public BitmapFrame ProductImage { get; set; }
         }
 
-        private readonly string _pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-        private readonly ProductSize _size;
-        private readonly List<Basket> _basket;
-        private int _count;
-
-        public AddToBasket(ProductSize size, List<Basket> basket)
+        public AddToBasketWholesale(int productId, List<Basket> basket)
         {
             InitializeComponent();
             _count = 1;
-            Data(size);
-            _size = size;
+            Data(productId);
             _basket = basket;
-        }
-        public AddToBasket(Basket product, List<Basket> basket)
-        {
-            InitializeComponent();
-            _count = product.Count;
-            _size = product.Size;
-            _basket = basket;
-            Data(_size);
+            _productId = productId;
         }
 
-        private void Data(ProductSize productSize)
+        private void Data(int productId)
         {
             using (ApplicationDbContext _context = new ApplicationDbContext())
             {
                 BitmapFrame image = null;
-                Product dataProduct = _context.Product.Where(x => x.Id == productSize.ProductId).FirstOrDefault();
+                Product dataProduct = _context.Product
+                    .Where(x => x.Id == productId)
+                    .FirstOrDefault();
                 if (dataProduct != null)
                 {
                     try
@@ -60,11 +63,11 @@ namespace Thesis.Areas.UserArea.UserBasket
                     {
                         image = BitmapFrame.Create(new Uri(_pathToFile + @"\Data\ImageDefault\noimage.png"));
                     }
+
                     SelectedProduct selectedProduct = new SelectedProduct()
                     {
                         Name = dataProduct.Name,
-                        ProductImage = image,
-                        Size = productSize.Size
+                        ProductImage = image
                     };
 
                     DataContext = selectedProduct;
@@ -98,34 +101,46 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void AddBasket(object sender, RoutedEventArgs e)
         {
-            if (_count != 0)
+            List<ProductSize> selectedProductSize;
+            using (ApplicationDbContext _context = new ApplicationDbContext())
             {
-                Basket basket = new Basket(_size, _count);
-                if (_basket != null)
+                selectedProductSize = _context.ProductSize
+                    .Where(x => x.ProductId == _productId)
+                    .Include(x => x.Product)
+                    .ToList();
+            }
+            foreach (ProductSize item in selectedProductSize)
+            {
+                Basket addToBasket = _basket
+                    .FirstOrDefault(x => x.Size.Id == item.Id);
+                if (_count != 0)
                 {
-                    Basket addToBasket = _basket
-                        .FirstOrDefault(x => x.Size.Id == basket.Size.Id);
-                    if (addToBasket != null)
+                    Basket basket = new Basket(item, _count);
+                    if (_basket != null)
                     {
-                        _basket.Remove(addToBasket);
-                        addToBasket.Count = basket.Count;
-                        addToBasket.Cost = (double)addToBasket.Size.Product.Price * addToBasket.Count;
-                        _basket.Add(addToBasket);
+                        if (addToBasket != null)
+                        {
+                            _basket.Remove(addToBasket);
+                            addToBasket.Count += basket.Count;
+                            addToBasket.Cost = (double)addToBasket.Size.Product.Price * addToBasket.Count;
+                            _basket.Add(addToBasket);
+                        }
+                        else
+                        {
+                            _basket.Add(basket);
+                        }
                     }
                     else
                     {
                         _basket.Add(basket);
                     }
+                    Close();
                 }
-                else
-                {
-                    _basket.Add(basket);
-                }
-                Close();
             }
         }
+          
 
-        private void SetCount(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void SetCount(object sender, TextChangedEventArgs e)
         {
             if (countOfProducts.Text != string.Empty)
             {
@@ -148,4 +163,3 @@ namespace Thesis.Areas.UserArea.UserBasket
         }
     }
 }
-

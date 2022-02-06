@@ -138,11 +138,11 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <Button Style="{StaticResource yellowButton}" 
-                                                Content="В корзину" Width="120" Margin="30,20,0,0"
-                                                Height="45" Click="AddToBasket" HorizontalAlignment="Left">
+                                                Content="Оптом" Width="120" Margin="30,20,0,0"
+                                                Height="45" Click="AddToBasketWholesale" HorizontalAlignment="Left">
                                     </Button>
                                             <Button Style="{StaticResource yellowButton}" Width="124"
-                                                Content="Описание" Margin="30,20,0,0" Click="Buy" 
+                                                Content="Описание" Margin="30,20,0,0" Click="Description" 
                                                 Height="45" HorizontalAlignment="Left"/>
                                 </StackPanel>
                                 <Label Content="Цена" Foreground="White" FontWeight="Bold"
@@ -150,7 +150,8 @@
                                 <TextBlock Text ="{Binding Price}" TextWrapping="Wrap" 
                                            Foreground="White" FontSize="17" Margin="30,0,0,0"/>
                                     <StackPanel>
-                                    <ListView x:Name="_productSize" ScrollViewer.CanContentScroll="False">
+                                    <ListView x:Name="_productSize" ScrollViewer.CanContentScroll="False"
+                                              SelectionChanged="AddToBasket">
                                         <ListView.ItemContainerStyle>
                                             <Style TargetType="{x:Type ListViewItem}">
                                                 <Setter Property="ListBoxItem.Margin" Value="5"/>

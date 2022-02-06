@@ -235,12 +235,12 @@
                         <CheckBox IsChecked="False" x:Name="_number" Click="DateSort"/>
                     </Border>
                 </StackPanel>
-                <Button Content="Отчет"
+                <Button Content="Отчет по заказу" Click ="OrderReport"
                         Margin="70,20,70,20" Height="100" 
                         Foreground="White" Style="{StaticResource button}">
                 </Button>
-                <Button Content="[eq"
-                        Margin="70,20,70,20" Height="100" 
+                <Button Content="Отчет по проданой продукции"
+                        Margin="70,20,70,20" Height="100" Click="SaleReport"
                         Foreground="White" Style="{StaticResource button}">
                 </Button>
                 <Button Content="[eq"

@@ -290,7 +290,57 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
+        <!--<Grid Grid.Row="1">
+            <TabControl Margin="10,10,-77,10" BorderBrush="Gainsboro">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" 
+                                            CornerRadius="4,4,0,0" Margin="2,0">
+                                        <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabItem Header="О программе">
+                    <TextBlock TextWrapping="Wrap" Text="Программное обеспечение предусматривает режимы 
+                               ведения системного каталога, отражающего перечень товаров, а также 
+                               реализовывает поиск, сортировку, выдачу подробной информации о товаре, 
+                               перечень заказов и статус их выполнения, методы формирования отчетов 
+                               и накладных."/>
+                </TabItem>
+                <TabItem Header="Поиск товаров">
+                    <TextBlock TextWrapping="Wrap" Text="Для поиска товаров необадимо перейти на 
+                               вкладку с катологом товаров и в поле поиск ввести название товара."/>
+                </TabItem>
+                <TabItem Header="Покупка товаров">
+                    <TextBlock TextWrapping="Wrap" Text="Для покупки товара необходимо выбрать 
+                               товар, добавить его в корзину, после нажать на кнопку купить и 
+                               ввести данные."/>
+                </TabItem>
+                <TabItem Header="Изменение песональных данных">
+                    <TextBlock TextWrapping="Wrap" Text="Необходимо перейти на вкладку с 
+                               профилем и изменить данные, для подтверждения личности требуется
+                               ввести пароль повторно."/>
+                </TabItem>
+            </TabControl>
+        </Grid>-->
         <!--<StackPanel Orientation="Horizontal" Grid.ColumnSpan="3" HorizontalAlignment="Center">
                     <Grid Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="000,1200,0,0"
                       HorizontalAlignment="Left" Height="300" Width="400">
@@ -522,7 +572,7 @@
                 </Grid>-->
 
         <ListView Margin="0,600,0,0" Grid.Row="1" Grid.Column="1" x:Name="_productList"
-                   ScrollViewer.CanContentScroll="False">
+                   ScrollViewer.CanContentScroll="False" HorizontalAlignment="Center">
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="ListBoxItem.Margin" Value="5"/>

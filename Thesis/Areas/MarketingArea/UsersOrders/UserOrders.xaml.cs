@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Thesis.Data;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.MarketingArea.UsersOrders
@@ -12,6 +15,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
     /// </summary>
     public partial class UserOrders : Page
     {
+        private readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         private List<OrderData> _data = new List<OrderData>();
         private readonly int? userId = null;
 
@@ -101,12 +105,36 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             Application.Current.Shutdown();
         }
 
-
         private void UpdateData(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
                 Data(userId);
+            }
+        }
+
+
+
+        private void OrderReport(object sender, RoutedEventArgs e)
+        {   
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                List<OrderConstruction> data = _context.OrderConstruction
+                    .Where(x => x.UserOrderId == 1)
+                    .ToList();
+                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
+                File.WriteAllBytes(desktopPath + @"\Report.xlsx", reportExcel);
+            }
+        }
+
+        private void SaleReport(object sender, RoutedEventArgs e)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                List<UserOrder> data = _context.UserOrder
+                   .ToList();
+                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
+                File.WriteAllBytes(desktopPath + @"\SaleReport.xlsx", reportExcel);
             }
         }
     }
