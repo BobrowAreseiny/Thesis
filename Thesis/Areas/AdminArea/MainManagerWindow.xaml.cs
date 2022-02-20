@@ -22,27 +22,36 @@ namespace Thesis.Areas.ManagerArea
     public partial class MainManagerWindow : Window
     {
         private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-        DispatcherTimer timer;
-        double eqWidth;
-        bool hidden;
+        private DispatcherTimer timer;
+        private double leftPanelWidth;
+        private bool hidden;
+
         public MainManagerWindow()
         {
             InitializeComponent();
             ImageDelete();
             dataView.Content = new UserOrders();
+
             ImageSetter();
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 0);
-            timer.Tick += timer_Tick;
-            eqWidth = eq.Width;
-            eq.Width = 50;
+            Timer();
         }
-        private void timer_Tick(object sender, EventArgs e)
+
+        private void Timer()
         {
-            if(hidden)
+            timer = new DispatcherTimer
             {
-                eq.Width += 1;
-                if(eq.Width >= eqWidth)
+                Interval = new TimeSpan(0, 0, 0, 0, 0)
+            };
+            timer.Tick += Timer_Tick;
+            leftPanelWidth = leftPanel.Width;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (hidden)
+            {
+                leftPanel.Width += 1;
+                if (leftPanel.Width >= leftPanelWidth)
                 {
                     timer.Stop();
                     hidden = false;
@@ -50,8 +59,8 @@ namespace Thesis.Areas.ManagerArea
             }
             else
             {
-                eq.Width -= 1;
-                if (eq.Width <= 50)
+                leftPanel.Width -= 1;
+                if (leftPanel.Width <= 50)
                 {
                     timer.Stop();
                     hidden = true;
@@ -59,7 +68,7 @@ namespace Thesis.Areas.ManagerArea
             }
         }
 
-            private void ImageSetter()
+        private void ImageSetter()
         {
             try
             {
@@ -71,9 +80,7 @@ namespace Thesis.Areas.ManagerArea
                 imageCity.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
                 Три_полоски.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\menu.png"));
             }
-            catch
-            {
-            }
+            catch { }
         }
         private void TownTable(object sender, RoutedEventArgs e)
         {
@@ -112,7 +119,7 @@ namespace Thesis.Areas.ManagerArea
 
         private void ImageDelete()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 IEnumerable<string> imageInFolder = Directory
                     .GetFiles(pathToFile + "\\Data\\Image")
@@ -133,15 +140,9 @@ namespace Thesis.Areas.ManagerArea
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TimerStarter(object sender, RoutedEventArgs e)
         {
             timer.Start();
-
-        }
-
-        private void eq_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-      
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Data(int? productId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _productsdata = productId != null
                     ? _context.Product.Where(x => x.Id == productId).ToList()
@@ -62,7 +62,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int productId = (int)((Button)sender).Content;
                 Product selectedData = _context.Product

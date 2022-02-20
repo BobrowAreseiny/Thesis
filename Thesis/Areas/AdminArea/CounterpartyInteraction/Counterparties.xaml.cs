@@ -29,7 +29,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void Data(int? roleId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _data = roleId != null
                     ? _context.Counterparty.Where(x => x.Id == roleId).ToList()
@@ -81,7 +81,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int counterpartyId = (int)((Button)sender).Content;
                 Counterparty selectedData = _context.Counterparty.Where(x => x.Id == counterpartyId).FirstOrDefault();

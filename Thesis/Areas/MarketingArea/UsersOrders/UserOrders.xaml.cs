@@ -33,7 +33,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         private void Data(int? userId)
         {
             List<UserOrder> usersOrders = new List<UserOrder>();
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 _data = new List<OrderData>();
@@ -115,7 +115,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void OrderReport(object sender, RoutedEventArgs e)
         {   
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 List<OrderConstruction> data = _context.OrderConstruction
                     .Where(x => x.UserOrderId == 1)
@@ -127,7 +127,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void SaleReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 List<UserOrder> data = _context.UserOrder
                    .ToList();
@@ -138,7 +138,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void ProductReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 List<OrderConstruction> data = _context.OrderConstruction
                    .ToList();

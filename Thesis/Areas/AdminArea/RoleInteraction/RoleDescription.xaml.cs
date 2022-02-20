@@ -41,7 +41,7 @@ namespace Thesis.Areas.AdminArea.RoleInteraction
             UserRole roles = new UserRole();
             List<ApplicationUser> users = new List<ApplicationUser>();
 
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             { 
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if(_role.Items.Count != 0)
@@ -68,7 +68,7 @@ namespace Thesis.Areas.AdminArea.RoleInteraction
         {
             if (_usersList.SelectedItem is ApplicationUser user)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     NavigationService.Navigate(new AccountEdit(user));
                 }

@@ -21,7 +21,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Data()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _town = _context.Town.ToList();
                 if (_town != null)
@@ -86,7 +86,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
             int sizeId = (int)(sender as Button).Content;
             if (sizeId != 0)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     Town data = _context.Town.Where(x => x.Id == sizeId).FirstOrDefault();
                     _context.Entry(data).State = EntityState.Deleted;

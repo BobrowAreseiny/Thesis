@@ -43,7 +43,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _order.Counterparty = _context.Counterparty
                         .Where(x => x.Id == ((Counterparty)_counterparty.SelectedItem).Id)
@@ -83,7 +83,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Data()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 if (_order.Id != 0)
                 {

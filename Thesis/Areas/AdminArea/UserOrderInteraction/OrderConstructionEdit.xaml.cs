@@ -42,7 +42,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _construction.ProductSize = _context.ProductSize
                         .Where(x => x.Id == ((ProductSize)_productSize.SelectedItem).Id)
@@ -86,7 +86,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Data(OrderConstruction construction)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _productSize.ItemsSource = _construction.Id != 0
                     ? _context.ProductSize.Where(x => x.ProductId == construction.ProductSize.ProductId).ToList()

@@ -21,7 +21,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private void Login(object sender, RoutedEventArgs e)
         {
             string passwordHash = Crypto.Hash(password.Password);
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 ApplicationUser user = _context.ApplicationUser
                     .Where(x => x.Email == email.Text && x.UserPassword == passwordHash)

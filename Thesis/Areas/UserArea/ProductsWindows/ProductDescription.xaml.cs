@@ -52,7 +52,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private void Data(int? productId)
         {
             Product product = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _productSize.ItemsSource = _context.ProductSize
                     .Where(x => x.ProductId == productId)

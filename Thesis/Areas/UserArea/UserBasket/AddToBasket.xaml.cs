@@ -46,7 +46,7 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Data(ProductSize productSize)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 BitmapFrame image = null;
                 Product dataProduct = _context.Product.Where(x => x.Id == productSize.ProductId).FirstOrDefault();

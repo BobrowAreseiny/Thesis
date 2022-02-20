@@ -22,7 +22,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
         private void Data(int OrderId)
         {
             OrderData data = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if (_order.Items.Count != 0)
@@ -58,7 +58,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void OrderEdit(object sender, SelectionChangedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 if (_order.SelectedItem is OrderData item)
                 {
@@ -81,7 +81,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
         {
             if (_orderConstruction.SelectedItem is OrderConstruction construction)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     var data = _context.OrderConstruction
                         .Where(x => x.Id == construction.Id)

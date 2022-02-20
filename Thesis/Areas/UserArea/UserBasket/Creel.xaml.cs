@@ -44,7 +44,7 @@ namespace Thesis.Areas.UserArea.UserBasket
             //}
             foreach (Basket item in _basket)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     Product product = _context.Product
                         .Where(x => x.Id == item.Size.ProductId)

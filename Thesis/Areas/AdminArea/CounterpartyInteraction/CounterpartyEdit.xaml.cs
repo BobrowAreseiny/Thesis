@@ -31,7 +31,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _counterparty.Address = _context.Address
                      .Where(x => x.Id == ((Address)_street.SelectedItem).Id)
@@ -64,7 +64,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
         private void Data(int? counterpartyId)
         {
 
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 Counterparty counterparty = _context.Counterparty

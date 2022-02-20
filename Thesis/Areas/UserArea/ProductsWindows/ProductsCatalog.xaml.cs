@@ -29,7 +29,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void Data()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _data = new List<DataProduct>();
                 foreach (Product item in _context.Product.Take(productsCount).ToList())

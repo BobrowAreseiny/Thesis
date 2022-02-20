@@ -39,7 +39,7 @@ namespace Thesis.Areas.AdminArea.MaterialInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 if (_material.Id == 0)
                 {

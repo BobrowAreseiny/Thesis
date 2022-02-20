@@ -81,7 +81,7 @@ namespace Thesis.Areas.UserArea.UserBasket
         {
             int? orderId = null;
             string number = string.Empty;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int count = _context.UserOrder.Count();
                 Counterparty counterparty = _context.Counterparty
@@ -109,7 +109,7 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void AddOrderConstruction(int? orderId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 foreach (var item in _basket)
                 {
@@ -179,7 +179,7 @@ namespace Thesis.Areas.UserArea.UserBasket
         private int TownTable(string townName)
         {
             int _townId = 0;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 Town town = _context.Town.Where(x => x.TownName.ToLower() == townName.ToLower()).FirstOrDefault();
 
@@ -203,7 +203,7 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private bool CounterpartyEdit(int? addressId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 Counterparty counterparty = _context.Counterparty
                     .Where(x => x.Id == _account.CounterpartyId)
@@ -221,7 +221,7 @@ namespace Thesis.Areas.UserArea.UserBasket
         private int? AdressTable(string street, string buildingNumber, string roomNumber, string addressIndex, int townId)
         {
             int? addressId = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 Address address = new Address()
                 {

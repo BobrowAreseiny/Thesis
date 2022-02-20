@@ -23,7 +23,7 @@ namespace Thesis.Areas.AdminArea.MaterialInteraction
 
         private void Data()
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _data = null;
                 _data = _context.Material.ToList();
@@ -73,7 +73,7 @@ namespace Thesis.Areas.AdminArea.MaterialInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int materialId = (int)((Button)sender).Content;
                 Material selectedData = _context.Material.Where(x => x.Id == materialId).FirstOrDefault();

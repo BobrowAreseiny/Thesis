@@ -42,7 +42,7 @@ namespace Thesis.Areas.UserArea
         public void Data()
         {
             List<DataProduct> data = new List<DataProduct>();
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 List<Product> products = _context.Product.Take(4).ToList();
 

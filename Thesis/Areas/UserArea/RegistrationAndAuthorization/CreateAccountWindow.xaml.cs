@@ -131,7 +131,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private int? CounterpartyTable(string telephone, string fio, string name, int? adressId)
         {
             int? _counterpartyId = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 Counterparty counterparty = new Counterparty()
                 {
@@ -149,7 +149,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private ApplicationUser ApplicationUserTable(string email, string userPassword, int counterpartyId, int roleId = 2)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 ApplicationUser applicationUser = new ApplicationUser()
                 {

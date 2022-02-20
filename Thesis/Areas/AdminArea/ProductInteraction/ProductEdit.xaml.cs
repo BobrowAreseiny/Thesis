@@ -44,7 +44,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _product.Sex = _context.Sex
                         .Where(x => x.Id == ((Sex)_sex.SelectedItem).Id)
@@ -82,7 +82,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Data(int? Id)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
 
                 _material.ItemsSource = _context.Material

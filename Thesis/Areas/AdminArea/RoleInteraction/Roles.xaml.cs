@@ -20,7 +20,7 @@ namespace Thesis.Areas.AdminArea.RoleInteraction
         {
             List<UserRole> roles = new List<UserRole>();
 
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 roles = _context.UserRole.ToList();
             }

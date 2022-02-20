@@ -385,6 +385,9 @@
     <Compile Include="Data\Model\Sex.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Model\sysdiagrams.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Model\Town.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -442,6 +445,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
+    <Content Include="Data\Model\Database.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Content>
+    <Content Include="Data\Model\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
     <Resource Include="Data\ImageDefault\Eye.png" />
     <Resource Include="Data\ImageDefault\order.png" />
     <Resource Include="Data\ImageDefault\user.png" />
@@ -450,16 +463,6 @@
     <Resource Include="Data\ImageDefault\comedy.png" />
     <Resource Include="Data\ImageDefault\cloth.png" />
     <Resource Include="Data\ImageDefault\menu.png" />
-    <Content Include="Data\Model\Database.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\Model\Database.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Database.edmx</DependentUpon>
-      <LastGenOutput>Database.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" />

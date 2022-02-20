@@ -20,7 +20,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Data(int productId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if (_product.Items.Count != 0)
@@ -63,7 +63,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
             int sizeId = (int)(sender as Button).Content;
             if (sizeId != 0)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     ProductSize data = _context.ProductSize.Where(x => x.Id == sizeId).FirstOrDefault();
                     _context.Entry(data).State = EntityState.Deleted;

@@ -28,7 +28,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Data(Town town)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if (_town.Items.Count != 0)
@@ -105,7 +105,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
             int addressId = (int)(sender as Button).Content;
             if (addressId != 0)
             {
-                using (ApplicationDbContext _context = new ApplicationDbContext())
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     Address data = _context.Address.Where(x => x.Id == addressId).FirstOrDefault();
                     _context.Entry(data).State = EntityState.Deleted;

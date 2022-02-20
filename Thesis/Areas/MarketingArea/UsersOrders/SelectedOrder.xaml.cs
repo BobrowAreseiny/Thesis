@@ -27,7 +27,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         private void Data(int OrderId)
         {
             OrderData data = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if (_order.Items.Count != 0)
@@ -83,7 +83,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             ApplicationUser appUser = null;
             UserOrder userOrder = null;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 userOrder = _context.UserOrder
                     .Where(x => x.Id == _userOrderId)

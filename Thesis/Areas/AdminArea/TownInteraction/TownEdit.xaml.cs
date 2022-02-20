@@ -38,7 +38,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 if (_selectedTown.Id == 0)
                 {

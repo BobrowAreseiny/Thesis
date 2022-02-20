@@ -27,7 +27,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int? productId = (_product.SelectedItem as Product).Id;
                 _size.Product = _context.Product
@@ -70,7 +70,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
         private void Data(ProductSize size)
         {
             DataContext = size;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
 

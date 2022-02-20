@@ -47,7 +47,7 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Data(int productId)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 BitmapFrame image = null;
                 Product dataProduct = _context.Product
@@ -102,7 +102,7 @@ namespace Thesis.Areas.UserArea.UserBasket
         private void AddBasket(object sender, RoutedEventArgs e)
         {
             List<ProductSize> selectedProductSize;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 selectedProductSize = _context.ProductSize
                     .Where(x => x.ProductId == _productId)

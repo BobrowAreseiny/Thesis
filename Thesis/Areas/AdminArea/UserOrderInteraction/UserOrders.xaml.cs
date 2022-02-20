@@ -28,7 +28,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
         private void Data(int? userId)
         {
             List<UserOrder> usersOrders = new List<UserOrder>();
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 _data = new List<OrderData>();
@@ -106,7 +106,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void DeleteOrder(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int orderId = (int)((Button)sender).Content;
                 UserOrder selectedData = _context.UserOrder.Where(x => x.Id == orderId).FirstOrDefault();

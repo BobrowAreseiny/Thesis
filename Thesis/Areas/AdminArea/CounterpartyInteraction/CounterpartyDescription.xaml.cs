@@ -68,7 +68,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
             List<OrderData> ordersData = new List<OrderData>();
             OrderData orderData = null;
 
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 if (_conterparty.Items.Count != 0)

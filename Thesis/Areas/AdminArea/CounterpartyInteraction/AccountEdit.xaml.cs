@@ -29,7 +29,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 int? roleId = (_role.SelectedItem as UserRole).Id;
                 _user.Counterparty = _context.Counterparty
@@ -75,7 +75,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
         private void Data(ApplicationUser user)
         {
             DataContext = user;
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
 

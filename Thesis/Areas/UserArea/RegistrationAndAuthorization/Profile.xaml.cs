@@ -38,7 +38,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private void Data(int? userId)
         {
             List<UserOrder> usersOrders = new List<UserOrder>();
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 usersOrders = _context.UserOrder.Where(x => x.CounterpartyId == userId).ToList();
@@ -85,7 +85,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 ApplicationUser user = _context.ApplicationUser
                             .Where(x => x.Id == _account.Id)

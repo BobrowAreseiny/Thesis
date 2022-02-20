@@ -4,30 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ae35fc125c8d4aeea7b670ac2888e053" Name="Diagram1" ZoomLevel="40">
-        <EntityTypeShape EntityType="DiplomaModel.Address" Width="1.5" PointX="0.75" PointY="9.125" />
-        <EntityTypeShape EntityType="DiplomaModel.ApplicationUser" Width="1.5" PointX="8.25" PointY="9.25" />
-        <EntityTypeShape EntityType="DiplomaModel.Counterparty" Width="1.5" PointX="3" PointY="9.125" />
-        <EntityTypeShape EntityType="DiplomaModel.Material" Width="1.5" PointX="0.75" PointY="3.625" />
-        <EntityTypeShape EntityType="DiplomaModel.OrderConstruction" Width="1.5" PointX="7.5" PointY="3" />
-        <EntityTypeShape EntityType="DiplomaModel.Product" Width="1.5" PointX="3" PointY="2.375" />
-        <EntityTypeShape EntityType="DiplomaModel.ProductSize" Width="1.5" PointX="5.25" PointY="3.25" />
-        <EntityTypeShape EntityType="DiplomaModel.Season" Width="1.5" PointX="0.75" PointY="6.375" />
-        <EntityTypeShape EntityType="DiplomaModel.Sex" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="DiplomaModel.Town" Width="1.5" PointX="1.5" PointY="12.625" />
-        <EntityTypeShape EntityType="DiplomaModel.UserOrder" Width="1.5" PointX="5.25" PointY="9" />
-        <EntityTypeShape EntityType="DiplomaModel.UserRole" Width="1.5" PointX="6" PointY="6.625" />
-        <AssociationConnector Association="DiplomaModel.FK__Address__TownId__38996AB5" />
-        <AssociationConnector Association="DiplomaModel.FK__Counterpa__Addre__3D5E1FD2" />
-        <AssociationConnector Association="DiplomaModel.FK__Applicati__Count__412EB0B6" />
-        <AssociationConnector Association="DiplomaModel.FK__Applicati__UserR__4222D4EF" />
-        <AssociationConnector Association="DiplomaModel.FK__UserOrder__Count__45F365D3" />
-        <AssociationConnector Association="DiplomaModel.FK__Product__Materia__4F7CD00D" />
-        <AssociationConnector Association="DiplomaModel.FK__OrderCons__Produ__5812160E" />
-        <AssociationConnector Association="DiplomaModel.FK__OrderCons__UserO__571DF1D5" />
-        <AssociationConnector Association="DiplomaModel.FK__Product__SeasonI__5070F446" />
-        <AssociationConnector Association="DiplomaModel.FK__Product__SexId__5165187F" />
-        <AssociationConnector Association="DiplomaModel.FK__ProductSi__Produ__5441852A" />
+      <Diagram DiagramId="68084355589a407b8fe2ec9963690a42" Name="Diagram1">
+        <EntityTypeShape EntityType="DiplomaModel.Address" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.ApplicationUser" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Counterparty" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Material" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.OrderConstruction" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Product" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.ProductSize" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Season" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Sex" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.Town" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.UserOrder" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaModel.UserRole" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="DiplomaModel.FK__Address__TownId__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Counterpa__Addre__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Applicati__Count__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Applicati__UserR__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__UserOrder__Count__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Product__Materia__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__OrderCons__Produ__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__OrderCons__UserO__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Product__SeasonI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__Product__SexId__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaModel.FK__ProductSi__Produ__5441852A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

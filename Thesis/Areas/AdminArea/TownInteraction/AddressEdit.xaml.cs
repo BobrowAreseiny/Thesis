@@ -41,7 +41,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _address.Town = _context.Town
                     .Where(x => x.Id == ((Town)_towns.SelectedItem).Id)
@@ -79,7 +79,7 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Data(Address _address)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
+            using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _towns.ItemsSource = _context.Town.ToList();
                 if (_address.Id != 0)

@@ -199,15 +199,14 @@
                         Width="150" Height="65" FontSize="40" FontWeight="Bold" Margin="0,20,50,0"/>
                 <Grid Background="#7FFFFFFF"
                       HorizontalAlignment="Left"
-                      x:Name="eq"
-                      Width="200"
-                      MouseEnter="eq_MouseEnter">
+                      x:Name="leftPanel"
+                      Width="190">
                     <Button VerticalAlignment="Top" 
                             HorizontalAlignment="Right"
                             Height="50"
                             Width="50"
                             Background="Transparent"
-                            Click="Button_Click">
+                            Click="TimerStarter">
                         <Image x:Name="Три_полоски"/>
                     </Button>
                     <StackPanel Orientation="Vertical" Margin="0,100,0,40" Width="200" 

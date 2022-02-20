@@ -13,10 +13,10 @@ namespace Thesis.Data.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ApplicationDbContext : DbContext
+    public partial class ApplicationDbContent : DbContext
     {
-        public ApplicationDbContext()
-            : base("name=ApplicationDbContext")
+        public ApplicationDbContent()
+            : base("name=ApplicationDbContent")
         {
         }
     
@@ -34,6 +34,7 @@ namespace Thesis.Data.Model
         public virtual DbSet<ProductSize> ProductSize { get; set; }
         public virtual DbSet<Season> Season { get; set; }
         public virtual DbSet<Sex> Sex { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Town> Town { get; set; }
         public virtual DbSet<UserOrder> UserOrder { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
