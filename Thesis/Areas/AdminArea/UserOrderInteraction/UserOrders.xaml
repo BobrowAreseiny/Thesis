@@ -260,6 +260,15 @@
                                 <CheckBox IsChecked="False" x:Name="_number" Click="DateSort"/>
                             </Border>
                         </StackPanel>
+                        <StackPanel Margin="10,20,0,20" Orientation="Horizontal"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="Сортировка по готовности:" Foreground="White"
+                           FontSize="22" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <Border Background="White" BorderThickness="10" CornerRadius="11">
+                                <CheckBox IsChecked="False" x:Name="_status" Click="StatusSort"/>
+                            </Border>
+                        </StackPanel>
                         <Button Content="Добавить заказ" 
                                 Click="AddOrderNumber" 
                                 Margin="70,20,70,20" Height="50" 

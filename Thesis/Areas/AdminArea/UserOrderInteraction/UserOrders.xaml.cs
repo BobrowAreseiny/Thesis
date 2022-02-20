@@ -76,6 +76,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             if (_number.IsChecked == true)
             {
                 data = data.OrderBy(x => x.DateOfShipment).ToList();
+                _status.IsChecked = false;
                 _usersOrders.ItemsSource = null;
                 _usersOrders.ItemsSource = data;
             }
@@ -86,8 +87,26 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             }
         }
 
+        private void StatusSort(object sender, RoutedEventArgs e)
+        {
+            List<OrderData> data = _data;
+            if (_status.IsChecked == true)
+            {
+                data = data.OrderByDescending(x => x.Status != "Готов").ToList();
+                _number.IsChecked = false;
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = data;
+            }
+            else
+            {
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = _data;
+            }
+
+        }
         private void Sherch(object sender, TextChangedEventArgs e)
         {
+            _status.IsChecked = false;
             _number.IsChecked = false;
             List<OrderData> data = _data
                 .Where(x => x.OrderNumber.Value.ToString() == textSearch.Text)
