@@ -55,7 +55,6 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
               HorizontalAlignment="Center" VerticalAlignment="Center" Width="1200" Height="44" Margin="356,28" >
             <StackPanel>
@@ -67,17 +66,27 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1">
-            <ListView  x:Name="_productList" Margin="50,5,450,150"
+            <ListView  x:Name="_productList" 
+                       Margin="50,5,50,150"
                        ScrollViewer.CanContentScroll="False" 
-                       SelectionChanged="ProductDescription">
+                       SelectionChanged="ProductDescription"
+                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <!--<ListViewItem/>-->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="ListBoxItem.Margin" Value="5"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate>
-                                    <Border HorizontalAlignment="Center" VerticalAlignment="Center" Height="300" 
-                                        Width="900" BorderBrush="Black" BorderThickness="2" CornerRadius="5">
+                                    <Border HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Height="300"
+                                            Width="1200"
+                                            Background="#4CFFFFFF"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
+                                            CornerRadius="10">
                                         <Grid>
                                             <Grid.Triggers>
                                                 <EventTrigger RoutedEvent="DockPanel.MouseEnter">
@@ -99,49 +108,57 @@
                                                     </BeginStoryboard>
                                                 </EventTrigger>
                                             </Grid.Triggers>
-                                            <Border Width="250" HorizontalAlignment="Left" Background="Black"
-                                                CornerRadius="10" BorderThickness="3">
+                                            <StackPanel Orientation="Horizontal">
+                                            <Border Width="250" 
+                                                    HorizontalAlignment="Left" 
+                                                    Background="White"
+                                                    Margin="5"
+                                                    CornerRadius="10" BorderThickness="3">
                                                 <Image Source="{Binding ProductImage}" Margin="5"/>
                                             </Border>
-                                            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
-                                                <Label Content="{Binding Name}" FontSize="30" 
-                                                   FontFamily="Calibri" FontWeight="Bold" 
-                                                   Foreground="Black" Margin="10">
-                                                </Label>
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                                <StackPanel HorizontalAlignment="Center" Margin="0,0,0,0">
+                                                    <Label Content="{Binding Name}" 
+                                                           FontSize="25" 
+                                                           FontFamily="Calibri" 
+                                                           FontWeight="Bold" 
+                                                           Foreground="Black" 
+                                                           Margin="10">
+                                                    </Label>
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                         HorizontalAlignment="Left" Margin="10">
-                                                    <Label Content="Код продукта: " FontWeight="Bold"
-                                                       FontSize="25" Foreground="Black" 
+                                                        <Label Content="Код продукта: " FontWeight="Bold"
+                                                       FontSize="20" Foreground="Black" 
                                                        FontFamily="Calibri">
-                                                    </Label>
-                                                    <Label Content="{Binding ProductCode}" FontWeight="Bold"
-                                                       FontSize="25" Foreground="Black" 
+                                                        </Label>
+                                                        <Label Content="{Binding ProductCode}" FontWeight="SemiBold"
+                                                       FontSize="20" Foreground="Black" 
                                                        FontFamily="Calibri">
-                                                    </Label>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                                                        </Label>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                         HorizontalAlignment="Left" Margin="10">
-                                                    <Label Content="Цена: " FontWeight="Bold"
-                                                       FontSize="25" Foreground="Black" 
+                                                        <Label Content="Цена: " FontWeight="Bold"
+                                                       FontSize="20" Foreground="Black" 
                                                        FontFamily="Calibri">
-                                                    </Label>
-                                                    <Label Content="{Binding Price}" FontWeight="Bold"
-                                                       FontSize="25" Foreground="Black" 
+                                                        </Label>
+                                                        <Label Content="{Binding Price}" FontWeight="SemiBold"
+                                                       FontSize="20" Foreground="Black" 
                                                        FontFamily="Calibri">
-                                                    </Label>
+                                                        </Label>
+                                                    </StackPanel>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                            <Border CornerRadius="10" VerticalAlignment="Bottom" Margin="5"
                                                 HorizontalAlignment="Right" Background="#FFFBBB43">
-                                                <Grid>
+                                                <Grid Margin="5">
                                                     <StackPanel Orientation="Horizontal">
                                                         <Label Content="Количество: " FontWeight="Bold"
-                                                           FontSize="22" Foreground="Black" 
+                                                           FontSize="20" Foreground="Black" 
                                                            FontFamily="Calibri" VerticalAlignment="Bottom" 
                                                            HorizontalAlignment="Right">
                                                         </Label>
-                                                        <Label Content="{Binding CountOnStorage}" FontWeight="Bold"
-                                                           FontSize="22" Foreground="Black" 
+                                                        <Label Content="{Binding CountOnStorage}" FontWeight="SemiBold"
+                                                           FontSize="20" Foreground="Black" 
                                                            FontFamily="Calibri" VerticalAlignment="Bottom" 
                                                            HorizontalAlignment="Right">
                                                         </Label>

@@ -443,6 +443,13 @@
   <ItemGroup>
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
     <Resource Include="Data\ImageDefault\Eye.png" />
+    <Resource Include="Data\ImageDefault\order.png" />
+    <Resource Include="Data\ImageDefault\user.png" />
+    <Resource Include="Data\ImageDefault\product.png" />
+    <Resource Include="Data\ImageDefault\city.png" />
+    <Resource Include="Data\ImageDefault\comedy.png" />
+    <Resource Include="Data\ImageDefault\cloth.png" />
+    <Resource Include="Data\ImageDefault\menu.png" />
     <Content Include="Data\Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Database.edmx</DependentUpon>
