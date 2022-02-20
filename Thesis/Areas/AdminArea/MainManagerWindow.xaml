@@ -191,19 +191,46 @@
             <Button Style="{StaticResource exitButton}" Content="EXIT" Click="Exit" 
                         VerticalAlignment="Top" Background="Transparent" HorizontalAlignment="Right" 
                         FontSize="30" FontWeight="Bold" Margin="0,10,50,0"/>
-            
             <Grid Background="#7FFFFFFF"
                       HorizontalAlignment="Left"
                       x:Name="leftPanel"
-                      Width="210">
-                <Button VerticalAlignment="Top" 
-                            HorizontalAlignment="Right"
-                            Height="50"
-                            Width="50"
-                            Background="Transparent"
-                            Click="TimerStarter">
-                    <Image x:Name="Три_полоски"/>
-                </Button>
+                      Width="50">
+                <ToggleButton VerticalAlignment="Top" 
+                              HorizontalAlignment="Right"
+                              Height="50"
+                              Width="50"
+                              Click="TimerStarter"
+                              x:Name="TimerButt">
+                    <ToggleButton.Background>
+                        <ImageBrush x:Name="Три_полоски"/>
+                    </ToggleButton.Background>
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard x:Name="HideSP">
+                                    <DoubleAnimation Storyboard.TargetName="leftPanel"
+                                                     Storyboard.TargetProperty="Width"
+                                                     BeginTime="0:0:0"
+                                                     From="200"
+                                                     To="50"
+                                                     Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard>
+                                <Storyboard x:Name="ShowSP">
+                                    <DoubleAnimation Storyboard.TargetName="leftPanel"
+                                                     Storyboard.TargetProperty="Width"
+                                                     BeginTime="0:0:0"
+                                                     From="50"
+                                                     To="200"
+                                                     Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
                 <StackPanel Orientation="Vertical" Margin="0,100,0,40" Width="200" 
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Top">
