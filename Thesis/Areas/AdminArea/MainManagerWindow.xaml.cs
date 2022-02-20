@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -31,7 +32,6 @@ namespace Thesis.Areas.ManagerArea
             InitializeComponent();
             ImageDelete();
             dataView.Content = new UserOrders();
-
             ImageSetter();
             Timer();
         }

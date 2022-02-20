@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="68084355589a407b8fe2ec9963690a42" Name="Diagram1">
+      <Diagram DiagramId="68084355589a407b8fe2ec9963690a42" Name="Diagram1" ZoomLevel="64">
         <EntityTypeShape EntityType="DiplomaModel.Address" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DiplomaModel.ApplicationUser" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DiplomaModel.Counterparty" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
