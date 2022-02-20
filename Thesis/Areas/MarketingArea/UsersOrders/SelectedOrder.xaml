@@ -161,9 +161,9 @@
                         HorizontalAlignment="Center" Content="Назад" 
                         Click="Back" Height="30" VerticalAlignment="Top"/>
                 <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
-                                 Content="Выход" Click="Exit" Height="30" VerticalAlignment="Top"/>
+                        Content="Выход" Click="Exit" Height="30" VerticalAlignment="Top"/>
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
-                                  Background="#3FFFFFFF" Margin="20,0,100,0"/>
+                      Background="#3FFFFFFF" Margin="20,0,100,0"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
@@ -263,12 +263,8 @@
                         Foreground="White"
                         Margin="70,0,70,20" Height="100"/>
                 <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Отчетик" 
-                        Foreground="White"
-                        Margin="70,0,70,20" Height="100"/> 
-                <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Отчетик" 
-                        Foreground="White"
+                        Content="Оповестить" 
+                        Foreground="White" Click="Notify"
                         Margin="70,0,70,20" Height="100"/>
             </StackPanel>
         </Grid>

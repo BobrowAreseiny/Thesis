@@ -224,7 +224,7 @@
                         <CheckBox IsChecked="False" x:Name="_number" Click="DateSort"/>
                     </Border>
                 </StackPanel>
-                <Button Content="Add Material" Click="AddOrderNumber" 
+                <Button Content="Добавить заказ" Click="AddOrderNumber" 
                         Margin="70,20,70,20" Height="100" 
                         Foreground="White" Style="{StaticResource button}">
                 </Button>

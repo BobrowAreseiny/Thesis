@@ -38,10 +38,10 @@ namespace Thesis.Areas.UserArea.UserBasket
         private void Data()
         {
             creel.Clear();
-            if (_user.Items.Count != 0)
-            {
-                _user.Items.Clear();
-            }
+            //if (_user.Items.Count != 0)
+            //{
+            //    _user.Items.Clear();
+            //}
             foreach (Basket item in _basket)
             {
                 using (ApplicationDbContext _context = new ApplicationDbContext())
@@ -58,7 +58,7 @@ namespace Thesis.Areas.UserArea.UserBasket
             }
             if (creel != null)
             {
-                _user.Items.Add(_account);
+                //_user.Items.Add(_account);
                 _creel.ItemsSource = null;
                 _creel.ItemsSource = creel.OrderBy(x => x.Name);
             }

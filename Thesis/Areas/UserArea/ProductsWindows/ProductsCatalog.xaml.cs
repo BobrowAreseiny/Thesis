@@ -14,10 +14,9 @@ namespace Thesis.Areas.UserArea.ProductsWindows
     public partial class ProductsCatalog : Window
     {
         private readonly List<Basket> _basket = new List<Basket>();
-        private readonly ApplicationUser _account = null;
-
         private List<DataProduct> _data = new List<DataProduct>();
         private List<DataProduct> _staticData = new List<DataProduct>();
+        private readonly ApplicationUser _account = null;
         private int productsCount = 10;
 
         public ProductsCatalog(ApplicationUser user, List<Basket> basket)
@@ -201,7 +200,5 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             _count.IsChecked = false;
             _cost.IsChecked = false;
         }
-
-
     }
 }

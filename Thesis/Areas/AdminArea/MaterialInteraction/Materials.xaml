@@ -89,7 +89,7 @@
                         <CheckBox IsChecked="False" x:Name="_name" Click="NameSort"/>
                     </Border>
                 </StackPanel>
-                <Button Content="Add Material" Click="AddMaterial" 
+                <Button Content="Добавить материал" Click="AddMaterial" 
                         Margin="70,20,70,20" Height="100" 
                         Foreground="White" Style="{StaticResource button}">
                 </Button>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Creel" Height="1080" Width="1920" WindowStyle="None" 
-         WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="Button" x:Key="yellowButton">
             <Setter Property="Background" Value="#FFFBBB43" />
@@ -306,7 +306,7 @@
                 </ListView>-->
             </Grid>
 
-            <Grid Grid.Row="2" Grid.Column="1">
+            <!--<Grid Grid.Row="2" Grid.Column="1">
                 <StackPanel>
                     <ListView x:Name="_user" Margin="50"
                           ScrollViewer.CanContentScroll="False">
@@ -345,7 +345,7 @@
                     <Button Margin="100" Height="70" Click="Buy"
                             Width="200" Content="Купить"/>
                 </StackPanel>
-            </Grid>
+            </Grid>-->
         </Grid>
     </Grid>
 </Window>

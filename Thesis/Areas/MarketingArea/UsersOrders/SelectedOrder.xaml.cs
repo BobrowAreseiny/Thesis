@@ -1,5 +1,9 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.Win32;
+using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -72,6 +76,54 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             if (Visibility == Visibility.Visible)
             {
                 Data(_userOrderId);
+            }
+        }
+
+        private void Notify(object sender, RoutedEventArgs e)
+        {
+            ApplicationUser appUser = null;
+            UserOrder userOrder = null;
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                userOrder = _context.UserOrder
+                    .Where(x => x.Id == _userOrderId)
+                    .FirstOrDefault();
+
+                appUser = userOrder.Counterparty.ApplicationUser.FirstOrDefault();
+            }
+
+            OpenFileDialog OPF = new OpenFileDialog();
+            string path = string.Empty;
+            if (OPF.ShowDialog() == true)
+            {
+                path = OPF.FileName;
+            }
+            if (appUser != null)
+            {
+                try
+                {
+                    MailAddress from = new MailAddress("otikominsk@gmail.com", "Otiko");
+                    MailAddress to = new MailAddress(appUser.Email);
+                    MailMessage mail = new MailMessage(from, to)
+                    {
+                        Subject = "Статус заказа",
+                        Body = $"<h2>Здравствуйте {appUser.Counterparty.Name}, только что был готов ваш заказ № {userOrder.OrderNumber}. <br>" +
+                        "<br><br>Внимание, сообщение отправлено автоматически, на него не нужно отвечать.</h2>"
+                    };
+
+                    mail.Attachments.Add(new Attachment(path));
+                    mail.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
+                    {
+                        Credentials = new NetworkCredential("otikominsk@gmail.com", "52K262911"),
+                        EnableSsl = true
+                    };
+                    smtp.Send(mail);
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
     }

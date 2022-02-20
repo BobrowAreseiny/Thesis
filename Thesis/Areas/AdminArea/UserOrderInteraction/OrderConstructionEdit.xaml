@@ -78,7 +78,7 @@
                             VerticalAlignment="Center" HorizontalAlignment="Right" 
                             Width="110" Height="45" FontSize="25" FontWeight="Bold" Margin="0,13,10,13" />
 
-                <TextBlock Text="Вставить название" Grid.Row="1" Grid.Column="0" 
+                <TextBlock Text="Номер продукта" Grid.Row="1" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment ="Center"/>
                 <TextBlock Text="Количество" Grid.Row="2" Grid.Column="0"
                            HorizontalAlignment="Center" VerticalAlignment ="Center"/>

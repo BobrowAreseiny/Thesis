@@ -1,10 +1,7 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
-using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Drawing.Slicer;
 using OfficeOpenXml.Style;
-using OfficeOpenXml.Table;
-using OfficeOpenXml.Table.PivotTable;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +11,76 @@ namespace Thesis.Data
 {
     public class MarketExcelGenerator
     {
-        
+        public byte[] Generate(List<OrderConstruction> report, int _row)
+        {
+            FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\ProductReport.xlsx");
+
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+            ExcelPackage package = new ExcelPackage(null, template);
+            ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+            int row = _row;
+
+            sheet.Columns.AutoFit();
+            sheet.Columns.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            foreach (OrderConstruction item in report)
+            {
+                sheet.Cells[row, 1].Value = item.UserOrder.DateOfPayment;
+                sheet.Cells[row, 2].Value = item.ProductSize.Product.Name;
+                sheet.Cells[row, 3].Value = item.ProductSize.Size;
+                sheet.Cells[row, 4].Value = item.UserOrder.Counterparty.Address.Town.TownName;
+                sheet.Cells[row, 5].Value = item.Amount;
+                row++;
+            }
+            PivotSlicersProducts(sheet);
+            sheet.Columns.AutoFit();
+            return package.GetAsByteArray();
+        }
+        private void PivotSlicersProducts(ExcelWorksheet sheet)
+        {
+            ExcelWorksheet wsPivot = sheet.Workbook.Worksheets[0];
+
+            ExcelPivotTableSlicer monthSlicer = wsPivot.PivotTables[0].Fields["Месяц"].AddSlicer();
+            monthSlicer.Caption = "Месяцы";
+            monthSlicer.ChangeCellAnchor(eEditAs.Absolute);
+            monthSlicer.SetPosition(80, 1550);
+            monthSlicer.SetSize(200, 200);
+            monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
+            monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
+            monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[5].PivotTables[0]);
+            monthSlicer.Style = eSlicerStyle.Other2;
+
+            ExcelPivotTableSlicer regionSlicer = wsPivot.PivotTables[0].Fields["Год"].AddSlicer();
+            regionSlicer.Caption = "Годы";
+            regionSlicer.ChangeCellAnchor(eEditAs.Absolute);
+            regionSlicer.SetPosition(280, 1550);
+            regionSlicer.SetSize(200, 200);
+            regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
+            regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
+            regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
+            regionSlicer.Style = eSlicerStyle.Other2;
+
+            ExcelPivotTableSlicer organizationSlicer = wsPivot.PivotTables[0].Fields["Продукт"].AddSlicer();
+            organizationSlicer.Caption = "Продукт";
+            organizationSlicer.ChangeCellAnchor(eEditAs.Absolute);
+            organizationSlicer.SetPosition(80, 1250);
+            organizationSlicer.SetSize(200, 200);
+            organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
+            organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
+            organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[5].PivotTables[0]);
+            organizationSlicer.Style = eSlicerStyle.Other2;
+
+            ExcelPivotTableSlicer yearSlicer = wsPivot.PivotTables[0].Fields["Регион"].AddSlicer();
+            yearSlicer.Caption = "Регионы";
+            yearSlicer.ChangeCellAnchor(eEditAs.Absolute);
+            yearSlicer.SetPosition(280, 1250);
+            yearSlicer.SetSize(200, 200);
+            yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
+            yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
+            yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[5].PivotTables[0]);
+            yearSlicer.Style = eSlicerStyle.Other2;
+        }
+
         public byte[] Generate(List<UserOrder> report)
         {
             FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\SaleReport.xlsx");
@@ -36,12 +102,11 @@ namespace Thesis.Data
                 row++;
             }
 
-            PivotSlicers(sheet);
+            PivotSlicersSale(sheet);
             sheet.Columns.AutoFit();
             return package.GetAsByteArray();
         }
-
-        private void PivotSlicers(ExcelWorksheet sheet)
+        private void PivotSlicersSale(ExcelWorksheet sheet)
         {
             ExcelWorksheet wsPivot = sheet.Workbook.Worksheets[0];
 
@@ -115,7 +180,7 @@ namespace Thesis.Data
             sheet.Cells[4, 6].Value = "СЗАО Отико";
             sheet.Cells[6, 6].Value = order.Counterparty.Name;
         }
-        private void OrderConstructionReport(ExcelWorksheet sheet,int row)
+        private void OrderConstructionReport(ExcelWorksheet sheet, int row)
         {
             sheet.Cells[row, 1, row, 2].Merge = true;//№
             sheet.Cells[row, 3, row, 6].Merge = true;//Код
@@ -136,7 +201,6 @@ namespace Thesis.Data
             sheet.Cells[row, 42, row, 45].Style.Numberformat.Format = "$#,##";
             sheet.Cells[row, 46].Style.Numberformat.Format = "$#,##";
         }
-      
         private void OrderConstructionReportData(ExcelWorksheet sheet, int row, OrderConstruction item)
         {
             sheet.Cells[row, 1].Value = row - 10;
@@ -150,8 +214,7 @@ namespace Thesis.Data
             sheet.Cells[row, 42].Formula = $"V{row} * AB{row} * 0.2";
             sheet.Cells[row, 46].Formula = $"V{row} * AB{row} * 1.2";
         }
-
-        private void OrderConstructionReportStyle(ExcelWorksheet sheet,int row)
+        private void OrderConstructionReportStyle(ExcelWorksheet sheet, int row)
         {
             using (ExcelRange range = sheet.Cells[11, 1, row - 1, 46])
             {

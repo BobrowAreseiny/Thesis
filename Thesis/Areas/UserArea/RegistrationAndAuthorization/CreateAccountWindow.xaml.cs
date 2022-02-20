@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -39,7 +38,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
 
             if (EmailIsValid(email.Text) & CountIsValid(fio) & DataRegex(telephone, phoneRegex) & (passward.Password == confirmPassward.Password))
-                {
+            {
                 _counterpartyId = CounterpartyTable(telephone.Text, fio.Text, firm.Text, null);
                 if (_counterpartyId != null)
                 {

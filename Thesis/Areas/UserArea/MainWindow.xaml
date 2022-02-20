@@ -7,6 +7,48 @@
         Title="MainWindow" WindowStyle="None" Height="2000" Width="1920" 
         WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
+        <Style TargetType="{x:Type Grid}" x:Key="scale">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" 
+                                    From="1" 
+                                    To="1.2" 
+                                    Duration="0:0:0.1">
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" 
+                                    From="1" 
+                                    To="1.2" Duration="0:0:0.1">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX" 
+                                    From="1.2" 
+                                    To="1" 
+                                    Duration="0:0:0.1">
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY" 
+                                    From="1.2" 
+                                    To="1" Duration="0:0:0.1">
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="Button" x:Key="ButtView2">
             <Setter Property="Background" Value="#FFFBBB43" />
             <Setter Property="Foreground" Value="Black" />
@@ -420,81 +462,98 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Border CornerRadius="20" BorderBrush="White" BorderThickness="2" Width="260" Height="410">
-                                            <Grid Margin="1">
-                                                <Grid.Triggers>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                 Storyboard.TargetName="Blure"
-                                                                 From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                 Storyboard.TargetName="Blure" 
-                                                                 From="1.0" To="0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                </Grid.Triggers>
-                                                <Image Source ="{Binding ProductImage}" MouseDown="DataSelector"
-                                                       VerticalAlignment="Center"/>
-                                                <Border CornerRadius="0,0,20,20" VerticalAlignment="Bottom" Height="130">
-                                                    <Border.Background>
-                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                            <GradientStop Color="#00000000" Offset="0"/>
-                                                            <GradientStop Color="Black" Offset="1"/>
-                                                            <GradientStop Color="Black" Offset="0.245"/>
-                                                            <GradientStop Color="#5A000000" Offset="0.095"/>
-                                                        </LinearGradientBrush>
-                                                    </Border.Background>
-                                                </Border>
+                                        <Grid Width="260" Height="410" Style="{StaticResource scale}">
+                                            <Grid.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform x:Name="transform" CenterX="70" 
+                                                                    CenterY="80"  ScaleX="1"  ScaleY="1"/>
+                                                </TransformGroup>
+                                            </Grid.RenderTransform>
+                                            <StackPanel>
+                                                <Border CornerRadius="20" BorderBrush="White" BorderThickness="2">
 
-                                                <Border CornerRadius="20,20,0,0" VerticalAlignment="Top" Height="30">
-                                                    <Border.Background>
-                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                            <GradientStop Offset="1"/>
-                                                            <GradientStop Color="Black" Offset="0.006"/>
-                                                            <GradientStop Color="Black" Offset="0.692"/>
-                                                            <GradientStop Color="#5A000000" Offset="0.887"/>
-                                                        </LinearGradientBrush>
-                                                    </Border.Background>
-                                                </Border>
+                                                    <Grid Margin="1">
+                                                        <Grid.Triggers>
+                                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                                                     Storyboard.TargetName="Blure"
+                                                                                     From="0.0" To="1.0" Duration="0:0:0.3"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger>
+                                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                                <BeginStoryboard>
+                                                                    <Storyboard>
+                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                                                     Storyboard.TargetName="Blure" 
+                                                                                     From="1.0" To="0" Duration="0:0:0.3"/>
+                                                                    </Storyboard>
+                                                                </BeginStoryboard>
+                                                            </EventTrigger>
+                                                        </Grid.Triggers>
+                                                        <CheckBox Visibility="Collapsed" x:Name="cbDropdown"/>
+                                                        <Image Source ="{Binding ProductImage}" MouseDown="DataSelector"
+                                                           VerticalAlignment="Center"/>
+                                                        <Border CornerRadius="0,0,20,20" VerticalAlignment="Bottom" Height="130">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Color="#00000000" Offset="0"/>
+                                                                    <GradientStop Color="Black" Offset="1"/>
+                                                                    <GradientStop Color="Black" Offset="0.245"/>
+                                                                    <GradientStop Color="#5A000000" Offset="0.095"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                        </Border>
 
-                                                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                                    <Label Content="{Binding ProductCode}" HorizontalAlignment="Left"
-                                                   FontFamily="Calibri" FontSize="15" 
-                                                   FontWeight="Bold" Foreground="White"/>
-                                                    <Label Content="{Binding Name}" HorizontalAlignment="Left"
-                                                   FontFamily="Calibri" FontSize="15" 
-                                                   FontWeight="Bold" Foreground="White"/>
-                                                    <Label Content ="{Binding Price}" HorizontalAlignment="Left" 
-                                                   Margin="0,0,0,10" FontFamily="Calibri" 
-                                                   FontSize="15" Background="Transparent"
-                                                   BorderBrush="#FFED9A9A" Foreground="White"/>
-                                                </StackPanel>
-                                                <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
-                                                HorizontalAlignment="Right" Background="#FFFBBB43">
-                                                    <Label x:Name ="InStock" FontWeight="Bold" Foreground="Black"/>
+                                                        <Border CornerRadius="20,20,0,0" VerticalAlignment="Top" Height="30">
+                                                            <Border.Background>
+                                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                    <GradientStop Offset="1"/>
+                                                                    <GradientStop Color="Black" Offset="0.006"/>
+                                                                    <GradientStop Color="Black" Offset="0.692"/>
+                                                                    <GradientStop Color="#5A000000" Offset="0.887"/>
+                                                                </LinearGradientBrush>
+                                                            </Border.Background>
+                                                        </Border>
+                                                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                                            <Label Content="{Binding ProductCode}" HorizontalAlignment="Left"
+                                                               FontFamily="Calibri" FontSize="15" 
+                                                               FontWeight="Bold" Foreground="White"/>
+                                                            <Label Content="{Binding Name}" HorizontalAlignment="Left"
+                                                               FontFamily="Calibri" FontSize="15" 
+                                                               FontWeight="Bold" Foreground="White"/>
+                                                            <Label Content ="{Binding Price}" HorizontalAlignment="Left" 
+                                                               Margin="0,0,0,10" FontFamily="Calibri" 
+                                                               FontSize="15" Background="Transparent"
+                                                               BorderBrush="#FFED9A9A" Foreground="White"/>
+                                                        </StackPanel>
+                                                        <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                                            HorizontalAlignment="Right" Background="#FFFBBB43">
+                                                            <Label x:Name ="InStock" FontWeight="Bold" Foreground="Black"/>
+                                                        </Border>
+                                                        <Border CornerRadius="20" Background="#4C000000" 
+                                                            Visibility="Visible" Name="Blure" Opacity="0">
+                                                            <DockPanel LastChildFill="True">
+                                                                <Button Style="{DynamicResource heart}" Width="40" VerticalAlignment="Top" 
+                                                                    HorizontalAlignment="Right" Margin="10,10,0,0" Height="40" 
+                                                                    Click="AddToBasket" x:Name ="AddBasket_1"/>
+                                                                <Button Style="{DynamicResource ProductView}" VerticalAlignment="Center" 
+                                                                    Width="50" Margin="-45,-20,0,0" Height="50" 
+                                                                    Click="ProductDescription" Content = "{Binding Id}"/>
+                                                            </DockPanel>
+                                                        </Border>
+                                                    </Grid>
                                                 </Border>
-                                                <Border CornerRadius="20" Background="#4C000000" 
-                                                Visibility="Visible" Name="Blure" Opacity="0">
-                                                    <DockPanel LastChildFill="True">
-                                                        <Button Style="{DynamicResource heart}" Width="40" VerticalAlignment="Top" 
-                                                        HorizontalAlignment="Right" Margin="10,10,0,0" Height="40" 
-                                                        Click="AddToBasket" x:Name ="AddBasket_1"/>
-                                                        <Button Style="{DynamicResource ProductView}" VerticalAlignment="Center" 
-                                                        Width="50" Margin="-45,-20,0,0" Height="50" 
-                                                        Click="ProductDescription" Content = "{Binding Id}"/>
-                                                    </DockPanel>
+                                                <Border CornerRadius="20" BorderBrush="White" 
+                                                        BorderThickness="2" x:Name="dropdownContent">
+                                                    <StackPanel x:Name="dropdownInnerContent">
+                                                        
+                                                    </StackPanel>
                                                 </Border>
-                                            </Grid>
-                                        </Border>
+                                            </StackPanel>
+                                        </Grid>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -649,7 +708,7 @@
                                                         HorizontalAlignment="Right" Margin="10,10,0,0" Height="40" 
                                                         Click="AddToBasket" x:Name ="AddBasket_1"/>
                                                 <Button Style="{DynamicResource ProductView}" VerticalAlignment="Center" 
-                                                        Width="50" Margin="-45,-20,0,0" Height="50" 
+                                                        Width="50" Margin="-45,-20,0,0" Height="50"
                                                         Click="ProductDescription" Content = "{Binding Id}"/>
                                             </DockPanel>
                                         </Border>
@@ -684,12 +743,12 @@
                 HorizontalAlignment="Left" Grid.Column="0" Grid.ColumnSpan="2"
                 Margin="10,60,0,0" VerticalAlignment="Top" Click="AdminArea" 
                 Height="55" x:Name="adminstrationButton"/>
-        <Button Content="Manager" Background="Transparent" Width="234" 
+        <Button Content="Работник" Background="Transparent" Width="234" 
                 FontSize="40" Grid.Row="1" FontWeight="Bold" Style="{StaticResource a}" 
                 HorizontalAlignment="Left" Grid.Column="0"
                 Margin="10,120,0,0" VerticalAlignment="Top" Click="ManagerArea" 
                 Height="55"/>
-        <Button Content="Аптечка" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
+        <Button Content="Покупатель" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
                 Style="{StaticResource a}" HorizontalAlignment="Left" Margin="10,177,0,0" Grid.Row="1"
                 VerticalAlignment="Top" Width="250" Click="Help" Height="55"/>
     </Grid>

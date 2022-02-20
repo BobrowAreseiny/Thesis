@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using Thesis.Areas.ManagerArea;
 using Thesis.Areas.MarketingArea;
 using Thesis.Areas.UserArea.ProductsWindows;
@@ -54,7 +55,7 @@ namespace Thesis.Areas.UserArea
                     if (data != null)
                     {
                         _productList.ItemsSource = data;
-                        _newProductsList.ItemsSource = data.Skip(data.Count - 3).ToList();
+                        //_newProductsList.ItemsSource = data.Skip(data.Count - 3).ToList();
                     }
                 }
             }
@@ -107,6 +108,7 @@ namespace Thesis.Areas.UserArea
         {
             Application.Current.Shutdown();
         }
+
         private void AccountShow(object sender, RoutedEventArgs e)
         {
             if (_account == null)
@@ -141,5 +143,27 @@ namespace Thesis.Areas.UserArea
             new LoginWindow().Show();
             Close();
         }
+
+        //private void Grid_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    StackPanel cbDropdown = _newProductsList.ItemContainerStyle.Resources.FindName("dropdownInnerContent") as StackPanel;
+        //   // cbDropdown.IsChecked = false;
+        //   // DoubleAnimation heightAnimation = new DoubleAnimation(0, _openCloseDuration)
+        //    //{
+        //    //    Duration = new Duration(TimeSpan.FromMilliseconds(200))
+        //    //};
+        //    //dropdownContent.BeginAnimation(HeightProperty, heightAnimation);
+        //}
+
+        //private void Grid_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //cbDropdown.IsChecked = true;
+        //    //dropdownInnerContent.Measure(new Size(dropdownContent.MaxWidth, dropdownContent.MaxHeight));
+        //    //DoubleAnimation heightAnimation = new DoubleAnimation(0, dropdownInnerContent.DesiredSize.Height, _openCloseDuration)
+        //    //{
+        //    //    Duration = new Duration(TimeSpan.FromMilliseconds(200))
+        //    //};
+        //    //dropdownContent.BeginAnimation(HeightProperty, heightAnimation);
+        //}
     }
 }
