@@ -235,9 +235,9 @@
         <StackPanel>
             <StackPanel HorizontalAlignment="Center">
                 <Grid HorizontalAlignment="Left" 
-              VerticalAlignment="Top" 
-              Width="1200" 
-              Margin="50 20 0 0">
+                      VerticalAlignment="Top" 
+                      Width="1200" 
+                      Margin="50 20 0 0">
                     <StackPanel>
                         <Border Background="#7FFFFFFF" Height="45" Margin="0 0 100 0" CornerRadius="23">
                             <TextBox Foreground="#FF383838" Padding="0,15,50,0" Margin="25,0,25,0"
@@ -282,6 +282,7 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       SelectionChanged="OrderSelector"
                       Margin="20">
+                <!--<ListViewItem/>-->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="ListBoxItem.Margin" Value="10"/>

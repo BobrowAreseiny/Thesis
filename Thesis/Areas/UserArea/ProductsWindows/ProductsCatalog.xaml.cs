@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 
@@ -25,8 +28,8 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             Data();
             _basket = basket;
             _account = user;
-        }
 
+        }
         private void Data()
         {
             using (ApplicationDbContent _context = new ApplicationDbContent())
@@ -45,6 +48,13 @@ namespace Thesis.Areas.UserArea.ProductsWindows
                 _material.ItemsSource = _context.Material.ToList();
                 _sex.ItemsSource = _context.Sex.ToList();
                 _season.ItemsSource = _context.Season.ToList();
+                //var _mat = _context.Material.ToList();
+                //_mat.Insert(0, new Material
+                //{
+                //    MaterialName = "Материалы"
+                //});
+                //_material.ItemsSource = _mat;
+                //_material.SelectedIndex = 0;
             }
         }
 
@@ -200,5 +210,6 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             _count.IsChecked = false;
             _cost.IsChecked = false;
         }
+
     }
 }
