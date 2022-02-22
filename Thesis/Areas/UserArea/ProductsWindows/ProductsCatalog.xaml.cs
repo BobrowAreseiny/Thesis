@@ -25,6 +25,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             Data();
             _basket = basket;
             _account = user;
+            
         }
 
         private void Data()
@@ -65,7 +66,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void NameSort(object sender, RoutedEventArgs e)
         {
-            _count.IsChecked = false;
+            //_count.IsChecked = false;
             _date.IsChecked = false;
             _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.Name).ToList();
@@ -84,7 +85,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private void DateSort(object sender, RoutedEventArgs e)
         {
             _name.IsChecked = false;
-            _count.IsChecked = false;
+            //_count.IsChecked = false;
             _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.DateOfCreation).ToList();
             DataSort(_data);
@@ -94,7 +95,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         {
             _name.IsChecked = false;
             _date.IsChecked = false;
-            _count.IsChecked = false;
+            //_count.IsChecked = false;
             _data = _data.OrderByDescending(x => x.Price).ToList();
             DataSort(_data);
         }
@@ -189,7 +190,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             }
             _name.IsChecked = false;
             _date.IsChecked = false;
-            _count.IsChecked = false;
+            //_count.IsChecked = false;
             _cost.IsChecked = false;
         }
 
@@ -197,7 +198,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         {
             _name.IsChecked = false;
             _date.IsChecked = false;
-            _count.IsChecked = false;
+            //_count.IsChecked = false;
             _cost.IsChecked = false;
         }
     }

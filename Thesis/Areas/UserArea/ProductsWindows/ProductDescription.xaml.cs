@@ -95,7 +95,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void Description(object sender, RoutedEventArgs e)
         {
-
+            Scrol.ScrollToVerticalOffset(700);
         }
     }
 }
