@@ -201,5 +201,6 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             //_count.IsChecked = false;
             _cost.IsChecked = false;
         }
+
     }
 }

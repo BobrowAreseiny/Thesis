@@ -144,6 +144,11 @@ namespace Thesis.Areas.UserArea
             Close();
         }
 
+        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            MainInfo.Visibility = Visibility.Visible;
+        }
+
         //private void Grid_MouseLeave(object sender, MouseEventArgs e)
         //{
         //    StackPanel cbDropdown = _newProductsList.ItemContainerStyle.Resources.FindName("dropdownInnerContent") as StackPanel;

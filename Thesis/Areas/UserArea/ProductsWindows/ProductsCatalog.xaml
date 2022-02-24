@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ProductsCatalog" WindowStyle="None" Height="1080" Width="1920" 
-        WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="ProductsCatalog" Height="800" Width="1400" 
+        MinWidth="1400" 
+        MinHeight="800" 
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="{x:Type Border}" x:Key="canv">
             <Style.Triggers>
@@ -81,11 +84,11 @@
     </Window.Resources>
     <Grid Background="#FF151515">
         <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="220"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel Margin="1">
             <Grid Grid.Row="0" 
                   Margin="0 40 0 30"
                   Grid.Column="0" 
@@ -102,10 +105,14 @@
                     </Border>
                 </StackPanel>
             </Grid>
-            <Grid>
-                <StackPanel Margin="130 5 0 5"  
+            <StackPanel Margin="130 10 10 10"  
                             Orientation="Horizontal"
-                            Height="55">
+                        HorizontalAlignment="Left">
+                <StackPanel>
+                    <Label Content="Материалы " 
+                           FontWeight="SemiBold"
+                           Foreground="#dcdcdc"
+                           FontSize="20"/>
                     <ComboBox Foreground="#FF727272" 
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
                               Text="Выбор материала" 
@@ -115,24 +122,35 @@
                               x:Name="_material" 
                               MinWidth="200" 
                               SelectionChanged="ChangeValueComboBox"/>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0">
+                    <Label Content="Пол " 
+                           Foreground="#dcdcdc"
+                           FontWeight="SemiBold"
+                           FontSize="20"/>
                     <ComboBox Foreground="#FF727272" Text="Выбор материала" 
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              Margin="10 0 0 0"
                               BorderBrush="#dcdcdc"
                               DisplayMemberPath="SexName" 
                               FontSize="14"
                               x:Name="_sex" 
                               MinWidth="200" SelectionChanged="ChangeValueComboBox"/>
+                </StackPanel>
+                <StackPanel Margin="10 0 0 0">
+                    <Label Content="Сезоны " 
+                           Foreground="#dcdcdc"
+                           FontWeight="SemiBold"
+                           FontSize="20"/>
                     <ComboBox Foreground="#FF727272" Text="Выбор материала" 
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              Margin="10 0 0 0"
                               BorderBrush="#dcdcdc"
                               DisplayMemberPath="SeasonName" 
                               FontSize="14"
                               x:Name="_season" 
                               MinWidth="200"
                               SelectionChanged="ChangeValueComboBox"/>
-                    <Button  Margin="10 0 0 0"
+                </StackPanel>
+                <Button  Margin="10 35 0 0"
                              Height="40"
                              Width="40"
                              BorderBrush="#dcdcdc"
@@ -140,71 +158,71 @@
                              Background="Transparent"
                              Click="DropSettings"
                              Padding="0 0 0 0">
-                        <Button.Content>
-                            <Image Height="30"
+                    <Button.Content>
+                        <Image Height="30"
                                    Width="30"
                                    Source="ImageDefault\reset.png"/>
-                        </Button.Content>
-                    </Button>
-                    </StackPanel>
-            </Grid>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
         </StackPanel>
-        <Grid Grid.Row="2" Grid.Column="1">
+        <Grid Grid.Row="2"
+              HorizontalAlignment="Left">
             <StackPanel Orientation="Horizontal">
-            <Grid HorizontalAlignment="Left" 
-                  Width="50"
+                <Grid HorizontalAlignment="Left" 
+                  Width="45"
                   Background="#0CFFFFFF"
                   x:Name="leftPanel">
-                <ToggleButton VerticalAlignment="Top" 
+                    <ToggleButton VerticalAlignment="Top" 
                               HorizontalAlignment="Right"
-                              Height="50"
-                              Width="50"
+                              Height="40"
+                              Width="40"
                               x:Name="TimerButt"
                               IsChecked="False">
-                    <ToggleButton.Triggers>
-                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="HideSP">
-                                    <DoubleAnimation Storyboard.TargetName="leftPanel"
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideSP">
+                                        <DoubleAnimation Storyboard.TargetName="leftPanel"
                                                      Storyboard.TargetProperty="Width"
                                                      BeginTime="0:0:0"
-                                                     From="200"
+                                                     From="180"
                                                      To="50"
                                                      Duration="0:0:0.1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="ToggleButton.Checked">
-                            <BeginStoryboard>
-                                <Storyboard x:Name="ShowSP">
-                                    <DoubleAnimation Storyboard.TargetName="leftPanel"
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowSP">
+                                        <DoubleAnimation Storyboard.TargetName="leftPanel"
                                                      Storyboard.TargetProperty="Width"
                                                      BeginTime="0:0:0"
                                                      From="50"
-                                                     To="200"
+                                                     To="180"
                                                      Duration="0:0:0.1"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </ToggleButton.Triggers>
-                </ToggleButton>
-                <StackPanel Margin="0 100 0 0">
-                    <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                    <StackPanel Margin="0 100 0 0">
+                        <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
                             HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <CheckBox Foreground="White" IsChecked="False" Margin="50 0 0 0" x:Name="_name"
+                            <CheckBox Foreground="White" IsChecked="False" Margin="50 0 0 0" x:Name="_name"
                                Checked="NameSort">
-                            <CheckBox.Content>
-                                <Image Source="ImageDefault\NameSorting.png" 
-                                       Height="50"
-                                       Width="50"
+                                <CheckBox.Content>
+                                    <Image Source="ImageDefault\NameSorting.png" 
+                                       Height="40"
+                                       Width="40"
                                        Margin="-100 0 0 0"/>
-                            </CheckBox.Content>
-                        </CheckBox>
-                        <Label Content="название " Foreground="White"
+                                </CheckBox.Content>
+                            </CheckBox>
+                            <Label Content="Название " Foreground="#dcdcdc"
                            FontSize="20" HorizontalAlignment="Left"
                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    </StackPanel>
-                    <!--<StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
+                        </StackPanel>
+                        <!--<StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Center" >
                         <CheckBox Foreground="White"
@@ -222,105 +240,108 @@
                                VerticalAlignment="Center"
                            FontSize="20" Margin="0,0,10,0"/>
                     </StackPanel>-->
-                    <StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
+                        <StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
                             HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <CheckBox Foreground="White" 
+                            <CheckBox Foreground="White" 
                                   IsChecked="False" 
                                   x:Name="_date"
                                   Margin="50 0 0 0"
                                   Checked="DateSort" >
-                            <CheckBox.Content>
-                                <Image Source="ImageDefault\date.png" 
-                                       Height="50"
-                                       Width="50"
+                                <CheckBox.Content>
+                                    <Image Source="ImageDefault\date.png" 
+                                       Height="40"
+                                       Width="40"
                                        Margin="-100 0 0 0"/>
-                            </CheckBox.Content>
-                        </CheckBox>
-                        <Label Content="Дата " FontSize="20" 
+                                </CheckBox.Content>
+                            </CheckBox>
+                            <Label Content="Дата " FontSize="20" 
                                VerticalAlignment="Center"
-                           Foreground="White" Margin="0,0,10,0"/>
-                    </StackPanel>
-                    <StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
+                           Foreground="#dcdcdc" Margin="0,0,10,0"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,20,0,20" Orientation="Horizontal" 
                             HorizontalAlignment="Left">
-                        <CheckBox Foreground="White" 
+                            <CheckBox Foreground="White" 
                                   Margin="50 0 0 0"
                                   IsChecked="False" x:Name="_cost"
                               Checked="CostSort" >
-                            <CheckBox.Content>
-                                <Image Source="ImageDefault\price.png" 
-                                       Height="50"
-                                       Width="50"
+                                <CheckBox.Content>
+                                    <Image Source="ImageDefault\price.png" 
+                                       Height="40"
+                                       Width="40"
                                        Margin="-100 0 0 0"/>
-                            </CheckBox.Content>
-                        </CheckBox>
-                        <Label Content="Цена " FontSize="20" 
+                                </CheckBox.Content>
+                            </CheckBox>
+                            <Label Content="Цена " FontSize="20" 
                                VerticalAlignment="Center"
-                           Foreground="White" Margin="0,0,10,0"/>
+                           Foreground="#dcdcdc" Margin="0,0,10,0"/>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </Grid>
-                <ListView  x:Name="_productList" 
-                       Margin="80,10,0,80"
-                           Width="1700"
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <ListView  x:Name="_productList" 
+                   Grid.Row="2"
+                       Margin="150,10,50,80"
+                       MaxWidth="1700"
                        HorizontalAlignment="Center"
                        ScrollViewer.CanContentScroll="False" 
                        SelectionChanged="ProductDescription"
                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                        ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <!--<ListViewItem/>-->
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="ListBoxItem.Margin" Value="10"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Border HorizontalAlignment="Center"
+            <!--<ListViewItem/>-->
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ListBoxItem.Margin" Value="10"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Border HorizontalAlignment="Center"
                                             Style="{StaticResource canv}"
                                             VerticalAlignment="Center"
                                             Height="300"
                                             Width="350"
                                             Background="#E5202020"
                                             CornerRadius="10">
-                                            <Border.RenderTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform 
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform 
                                                     CenterX="175" 
                                                     CenterY="200" 
                                                     ScaleX="1" 
                                                     ScaleY="1"/>
-                                                </TransformGroup>
-                                            </Border.RenderTransform>
-                                            <Grid>
-                                                <Grid.Triggers>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                    <Grid>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                          Storyboard.TargetName="Blure"
                                                                          From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                          Storyboard.TargetName="Blure" 
                                                                          From="1.0" To="0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                </Grid.Triggers>
-                                                <StackPanel Orientation="Vertical">
-                                                    <Border Width="350" 
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
+                                        <StackPanel Orientation="Vertical">
+                                            <Border Width="350" 
                                                     HorizontalAlignment="Left" 
                                                     Background="White"
                                                     CornerRadius="10 10 0 0">
-                                                        <Image Source="{Binding ProductImage}" 
+                                                <Image Source="{Binding ProductImage}" 
                                                        Height="170"
                                                        Margin="5"/>
-                                                    </Border>
-                                                    <TextBlock Text="{Binding Name}" 
+                                            </Border>
+                                            <TextBlock Text="{Binding Name}" 
                                                                FontSize="18" 
                                                                Width="320"
                                                                HorizontalAlignment="Left"
@@ -329,88 +350,89 @@
                                                                FontWeight="Black" 
                                                                Foreground="#FFDCDCDC" 
                                                                Margin="10">
-                                                    </TextBlock>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Horizontal" 
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" 
                                                                 Margin="5"
                                                             VerticalAlignment="Bottom"
                                                             HorizontalAlignment="Left">
-                                                    <Border CornerRadius="10"
+                                            <Border CornerRadius="10"
                                                             HorizontalAlignment="Left"
                                                             Margin="5"
                                                             Background="#FF373737">
-                                                        <StackPanel Orientation="Horizontal" 
+                                                <StackPanel Orientation="Horizontal" 
                                                                     Margin="3">
-                                                            <Label Content="Код: " 
+                                                    <Label Content="Код: " 
                                                                FontWeight="Bold"
                                                            FontSize="12" Foreground="Gainsboro" 
                                                            FontFamily="Calibri">
-                                                            </Label>
-                                                            <Label Content="{Binding ProductCode}" FontWeight="SemiBold"
+                                                    </Label>
+                                                    <Label Content="{Binding ProductCode}" FontWeight="SemiBold"
                                                        FontSize="12" Foreground="#FFDCDCDC" 
                                                        FontFamily="Calibri">
-                                                            </Label>
-                                                        </StackPanel>
-                                                    </Border>
-                                                    <Border CornerRadius="10"
+                                                    </Label>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border CornerRadius="10"
                                                             HorizontalAlignment="Left"
                                                             Margin="5"
                                                             Background="#FF373737">
-                                                        <StackPanel Orientation="Horizontal" 
+                                                <StackPanel Orientation="Horizontal" 
                                                         HorizontalAlignment="Left" Margin="3">
-                                                            <Label Content="Цена: " FontWeight="Bold"
+                                                    <Label Content="Цена: " FontWeight="Bold"
                                                        FontSize="12" Foreground="#FFDCDCDC" 
                                                        FontFamily="Calibri">
-                                                            </Label>
-                                                            <Label Content="{Binding Price}" FontWeight="SemiBold"
+                                                    </Label>
+                                                    <Label Content="{Binding Price}" FontWeight="SemiBold"
                                                        FontSize="12" Foreground="#FFDCDCDC" 
                                                        FontFamily="Calibri">
-                                                            </Label>
-                                                        </StackPanel>
-                                                    </Border>
-                                                    <Border CornerRadius="10" VerticalAlignment="Bottom" Margin="5"
+                                                    </Label>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border CornerRadius="10" VerticalAlignment="Bottom" Margin="5"
                                                 HorizontalAlignment="Left" Background="#373737">
-                                                        <StackPanel Margin="3" 
+                                                <StackPanel Margin="3" 
                                                                     Orientation="Horizontal">
-                                                            <Label Content="Количество: " FontWeight="Bold"
+                                                    <Label Content="Количество: " FontWeight="Bold"
                                                            FontSize="12" Foreground="#dcdcdc" 
                                                            FontFamily="Calibri" VerticalAlignment="Bottom" 
                                                            HorizontalAlignment="Right">
-                                                            </Label>
-                                                            <Label Content="{Binding CountOnStorage}" 
+                                                    </Label>
+                                                    <Label Content="{Binding CountOnStorage}" 
                                                                        FontWeight="SemiBold"
                                                            FontSize="12" Foreground="#dcdcdc" 
                                                            FontFamily="Calibri" VerticalAlignment="Bottom" 
                                                            HorizontalAlignment="Right">
-                                                            </Label>
-                                                        </StackPanel>
-                                                    </Border>
+                                                    </Label>
                                                 </StackPanel>
-                                                <Border Background="#19FFFFFF" BorderThickness="2" CornerRadius="5"
+                                            </Border>
+                                        </StackPanel>
+                                        <Border Background="#19FFFFFF" BorderThickness="2" CornerRadius="5"
                                                 Visibility="Visible" Opacity="0" Name="Blure"/>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal"  Margin="0,0,0,20"
-                        VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                <Button Content="хочу еще 10" Click="AddProducts"/>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1">
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Margin="20"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        <Button Content="Ещё" 
+                Click="AddProducts"
+                Grid.Row="2"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Center"
+                Margin="5"/>
+        <Grid Grid.Row="1" Margin="1">
             <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Center" 
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Margin="1">
                 <Grid Width="850" 
                       HorizontalAlignment="Left" 
                       Height="1"  

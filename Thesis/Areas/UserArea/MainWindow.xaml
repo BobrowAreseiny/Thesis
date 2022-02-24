@@ -332,6 +332,96 @@
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <TreeView Grid.Row="1"
+                  Margin="100 0 0 0"
+              Grid.Column="1"
+                  Foreground="White">
+            <TreeViewItem  Header="Товары">
+                <TreeViewItem Header="Покупка товара" Selected="TreeViewItem_Selected"/>
+            </TreeViewItem>
+            <TreeViewItem Header="Языки программирования">
+                <TreeViewItem Header="C-языки">
+                    <TreeViewItem Header="C#" />
+                    <TreeViewItem Header="C/C++" />
+                    <TreeViewItem Header="Java" />
+                </TreeViewItem>
+                <TreeViewItem Header="Basic">
+                    <TreeViewItem Header="Visual Basic (100% Хуита)" />
+                    <TreeViewItem Header="VB.Net (Звучит как хуита)" />
+                    <TreeViewItem Header="PureBasic (Basic, а значит, вполне возможно, 100% хуита) " />
+                </TreeViewItem>
+            </TreeViewItem>
+        </TreeView>
+        <Grid x:Name="MainInfo" 
+              Grid.Row="1"
+              Grid.Column="1"
+              Visibility="Hidden">
+            <StackPanel>
+                <Label Content="Добро пожаловать"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Foreground="#c4c4c4"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Margin="0 40 0 0"/>
+                <Label Content="Как посмотреть данные в аккаунте"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Foreground="#c4c4c4"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Margin="400 40 0 0"/>
+                <TextBlock Width="1000"
+                           TextWrapping="Wrap"
+                           Text="Вы можете посмотреть общую информацию и узнать, какие данные хранятся в вашем аккаунте."
+                           Foreground="#c4c4c4"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           Margin="405 20 0 0"/>
+                <Label Content="Шаг 1. Как посмотреть общие сведения"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Foreground="#c4c4c4"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Margin="400 40 0 0"/>
+                <TextBlock Width="1000"
+                           TextWrapping="Wrap"
+                           Text="Чтобы узнать, какими сервисами вы пользовались на устройствах, на которых выполнили вход в аккаунт, выполните описанные ниже действия. Обратите внимание, что будут показаны не все сервисы."
+                           Foreground="#c4c4c4"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           Margin="405 20 0 0"/>
+                <Label Content="Шаг 2. Как посмотреть подробные сведения"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Foreground="#c4c4c4"
+                   FontSize="30"
+                   FontWeight="Bold"
+                   Margin="400 40 0 0"/>
+                <TextBlock Width="1000"
+                           TextWrapping="Wrap"
+                           Text="Чтобы посмотреть, какие данные хранятся в определенном сервисе Google, найдите его название на странице статистики.
+                                                                                                                                        Выполните нужные действия. Обратите внимание, что некоторые из этих функций доступны не для всех сервисов. Кроме того, для некоторых сервисов также могут быть доступны и другие возможности.
+                                                                                                                                        Чтобы сохранить копию данных, под названием сервиса нажмите 'Скачать' Загрузить.
+                                                                                                                                        Чтобы открыть настройки, под названием сервиса выберите 'Настройки' Настройки. Если такого варианта нет, перейдите в сам сервис и измените параметры в нем.
+                                                                                                                                        Чтобы получить дополнительные сведения, нажмите Справочный центр."
+                           Foreground="#c4c4c4"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Left"
+                           Margin="405 20 0 0"/>
+            </StackPanel>
+        </Grid>
+        
+        
+        
+        
+        
+        
+        
         <!--<Grid Grid.Row="1">
             <TabControl Margin="10,10,-77,10" BorderBrush="Gainsboro">
                 <TabControl.Resources>

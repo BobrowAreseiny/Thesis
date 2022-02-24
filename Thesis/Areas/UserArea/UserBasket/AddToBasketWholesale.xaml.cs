@@ -161,5 +161,10 @@ namespace Thesis.Areas.UserArea.UserBasket
             Regex reg = new Regex("[^0-9]");
             return reg.IsMatch(str);
         }
+
+        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
     }
 }

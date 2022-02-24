@@ -449,6 +449,8 @@
     <Resource Include="Areas\UserArea\ProductsWindows\ImageDefault\price.png" />
     <Resource Include="Areas\UserArea\ProductsWindows\ImageDefault\count.png" />
     <Resource Include="Areas\UserArea\ProductsWindows\ImageDefault\reset.png" />
+    <Resource Include="Areas\UserArea\UserBasket\ImageDefault\edit.png" />
+    <Resource Include="Areas\UserArea\UserBasket\ImageDefault\trash.png" />
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
     <Content Include="Data\Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -105,10 +105,11 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                     {
                         user.UserPassword = Crypto.Hash(newPassward.Password);
                     }
-                    _context.SaveChanges();
+                    _context.SaveChanges(); 
+                    MessageBox.Show("Данные успешно изменены.// Стоит поменять на нормальный вывод");
                 }
             }
-            MessageBox.Show("Данные успешно изменены.// Стоит поменять на нормальный вывод");
+           
         }
 
         private bool EmailIsValid(string emailaddress)
@@ -146,6 +147,11 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                 newPassward.BorderBrush = Brushes.Red;
                 return false;
             }
+        }
+
+        private void newPassward_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
