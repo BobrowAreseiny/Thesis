@@ -113,17 +113,6 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             }
         }
 
-        private void OrderReport(object sender, RoutedEventArgs e)
-        {   
-            using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                List<OrderConstruction> data = _context.OrderConstruction
-                    .Where(x => x.UserOrderId == 1)
-                    .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
-                File.WriteAllBytes(desktopPath + @"\Report.xlsx", reportExcel);
-            }
-        }
 
         private void SaleReport(object sender, RoutedEventArgs e)
         {

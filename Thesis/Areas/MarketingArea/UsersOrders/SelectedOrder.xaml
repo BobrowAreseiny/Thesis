@@ -259,13 +259,21 @@
                     </ListView.ItemsPanel>
                 </ListView>
                 <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Отчетик" 
+                        Content="Накладная" 
                         Foreground="White"
-                        Margin="70,0,70,20" Height="100"/>
+                        Margin="70,0,70,20" Height="100" Click="TTN"/>
+                <Button Style="{StaticResource buttonDataGrid}" 
+                        Content="Чек" 
+                        Foreground="White"
+                        Margin="70,0,70,20" Height="100" Click="Bill"/>
                 <Button Style="{StaticResource buttonDataGrid}" 
                         Content="Оповестить" 
                         Foreground="White" Click="Notify"
-                        Margin="70,0,70,20" Height="100"/>
+                        Margin="70,0,70,20" Height="100"/>  
+               
+             
+               
+              
             </StackPanel>
         </Grid>
         <DataGrid BorderThickness="0,1,0,1" Background="#331F0303" 

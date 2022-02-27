@@ -130,37 +130,51 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private int? CounterpartyTable(string telephone, string fio, string name, int? adressId)
         {
-            int? _counterpartyId = null;
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                Counterparty counterparty = new Counterparty()
+                int? _counterpartyId = null;
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    Telephone = telephone,
-                    ContactPerson = fio,
-                    Name = name,
-                    AddressId = adressId,
-                };
-                _context.Counterparty.Add(counterparty);
-                _context.SaveChanges();
-                _counterpartyId = counterparty.Id;
+                    Counterparty counterparty = new Counterparty()
+                    {
+                        Telephone = telephone,
+                        ContactPerson = fio,
+                        Name = name,
+                        AddressId = adressId,
+                    };
+                    _context.Counterparty.Add(counterparty);
+                    _context.SaveChanges();
+                    _counterpartyId = counterparty.Id;
+                }
+                return _counterpartyId;
             }
-            return _counterpartyId;
+            catch
+            {
+                return null;
+            }
         }
 
         private ApplicationUser ApplicationUserTable(string email, string userPassword, int counterpartyId, int roleId = 2)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                ApplicationUser applicationUser = new ApplicationUser()
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    Email = email,
-                    UserPassword = userPassword,
-                    CounterpartyId = counterpartyId,
-                    UserRoleId = roleId,
-                };
-                _context.ApplicationUser.Add(applicationUser);
-                _context.SaveChanges();
-                return applicationUser;
+                    ApplicationUser applicationUser = new ApplicationUser()
+                    {
+                        Email = email,
+                        UserPassword = userPassword,
+                        CounterpartyId = counterpartyId,
+                        UserRoleId = roleId,
+                    };
+                    _context.ApplicationUser.Add(applicationUser);
+                    _context.SaveChanges();
+                    return applicationUser;
+                }
+            }
+            catch
+            {
+                return null;
             }
         }
     }

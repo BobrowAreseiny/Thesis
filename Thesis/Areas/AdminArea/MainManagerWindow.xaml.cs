@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Thesis.Areas.AdminArea.CounterpartyInteraction;
@@ -33,17 +31,6 @@ namespace Thesis.Areas.ManagerArea
             ImageDelete();
             dataView.Content = new UserOrders();
             ImageSetter();
-            //Timer();
-        }
-
-        private void Timer()
-        {
-            timer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 0)
-            };
-            timer.Tick += Timer_Tick;
-            leftPanelWidth = leftPanel.Width;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -142,7 +129,7 @@ namespace Thesis.Areas.ManagerArea
 
         private void TimerStarter(object sender, RoutedEventArgs e)
         {
-            //timer.Start();
+            
         }
     }
 }

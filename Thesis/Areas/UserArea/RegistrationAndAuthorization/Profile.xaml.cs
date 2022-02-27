@@ -47,11 +47,11 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                     foreach (UserOrder dataItem in usersOrders)
                     {
                         int OrderConstructionCount = _context.OrderConstruction
-                                                     .Where(x => x.UserOrderId == dataItem.Id)
-                                                     .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id)
+                            .Count();
                         int OrderConstructionMade = _context.OrderConstruction
-                                                    .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
-                                                    .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
+                            .Count();
 
                         OrderData item = new OrderData(dataItem, OrderConstructionCount, OrderConstructionMade);
                         _data.Add(item);

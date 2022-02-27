@@ -27,6 +27,7 @@ namespace Thesis.Areas.UserArea.UserBasket
         private void Buy(object sender, RoutedEventArgs e)
         {
             new Purchase(_account, _basket).Show();
+            Close();
         }
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
@@ -38,29 +39,27 @@ namespace Thesis.Areas.UserArea.UserBasket
         private void Data()
         {
             creel.Clear();
-            //if (_user.Items.Count != 0)
-            //{
-            //    _user.Items.Clear();
-            //}
-            foreach (Basket item in _basket)
+            if (_basket != null)
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                foreach (Basket item in _basket)
                 {
-                    Product product = _context.Product
-                        .Where(x => x.Id == item.Size.ProductId)
-                        .FirstOrDefault();
-
-                    if (product != null)
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
                     {
-                        creel.Add(new CreelData(item, product));
+                        Product product = _context.Product
+                            .Where(x => x.Id == item.Size.ProductId)
+                            .FirstOrDefault();
+
+                        if (product != null)
+                        {
+                            creel.Add(new CreelData(item, product));
+                        }
                     }
                 }
-            }
-            if (creel != null)
-            {
-                //_user.Items.Add(_account);
-                _creel.ItemsSource = null;
-                _creel.ItemsSource = creel.OrderBy(x => x.Name);
+                if (creel != null)
+                {
+                    _creel.ItemsSource = null;
+                    _creel.ItemsSource = creel.OrderBy(x => x.Name);
+                }
             }
         }
 
