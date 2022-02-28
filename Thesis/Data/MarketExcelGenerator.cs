@@ -15,7 +15,7 @@ namespace Thesis.Data
 
         public byte[] Generate(List<OrderConstruction> report, int _row)
         {
-            FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\ProductReport.xlsx");
+            FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\ReportProducts.xlsx");
 
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
             ExcelPackage package = new ExcelPackage(null, template);
@@ -45,7 +45,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer monthSlicer = wsPivot.PivotTables[0].Fields["Месяц"].AddSlicer();
             monthSlicer.Caption = "Месяцы";
             monthSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            monthSlicer.SetPosition(80, 1550);
+            monthSlicer.SetPosition(80, 1650);
             monthSlicer.SetSize(200, 200);
             monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
@@ -55,7 +55,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer regionSlicer = wsPivot.PivotTables[0].Fields["Год"].AddSlicer();
             regionSlicer.Caption = "Годы";
             regionSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            regionSlicer.SetPosition(280, 1550);
+            regionSlicer.SetPosition(280, 1650);
             regionSlicer.SetSize(200, 200);
             regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
@@ -65,7 +65,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer organizationSlicer = wsPivot.PivotTables[0].Fields["Продукт"].AddSlicer();
             organizationSlicer.Caption = "Продукт";
             organizationSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            organizationSlicer.SetPosition(80, 1250);
+            organizationSlicer.SetPosition(80, 1350);
             organizationSlicer.SetSize(200, 200);
             organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
             organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
@@ -75,7 +75,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer yearSlicer = wsPivot.PivotTables[0].Fields["Регион"].AddSlicer();
             yearSlicer.Caption = "Регионы";
             yearSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            yearSlicer.SetPosition(280, 1250);
+            yearSlicer.SetPosition(280, 1350);
             yearSlicer.SetSize(200, 200);
             yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
@@ -85,7 +85,7 @@ namespace Thesis.Data
 
         public byte[] Generate(List<UserOrder> report)
         {
-            FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\SaleReport.xlsx");
+            FileInfo template = new FileInfo(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\ReportSales.xlsx");
 
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
             ExcelPackage package = new ExcelPackage(null, template);
@@ -116,7 +116,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer monthSlicer = wsPivot.PivotTables[0].Fields["Месяцы"].AddSlicer();
             monthSlicer.Caption = "Месяцы";
             monthSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            monthSlicer.SetPosition(80, 950);
+            monthSlicer.SetPosition(80,1050);
             monthSlicer.SetSize(200, 600);
             monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
             monthSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
@@ -125,7 +125,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer regionSlicer = wsPivot.PivotTables[0].Fields["регион"].AddSlicer();
             regionSlicer.Caption = "Регионы";
             regionSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            regionSlicer.SetPosition(80, 1150);
+            regionSlicer.SetPosition(80, 1250);
             regionSlicer.SetSize(200, 200);
             regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             regionSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);
@@ -135,7 +135,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer organizationSlicer = wsPivot.PivotTables[0].Fields["организация"].AddSlicer();
             organizationSlicer.Caption = "Организации";
             organizationSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            organizationSlicer.SetPosition(280, 1150);
+            organizationSlicer.SetPosition(280, 1250);
             organizationSlicer.SetSize(200, 200);
             organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             organizationSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[4].PivotTables[0]);
@@ -145,7 +145,7 @@ namespace Thesis.Data
             ExcelPivotTableSlicer yearSlicer = wsPivot.PivotTables[0].Fields["годы"].AddSlicer();
             yearSlicer.Caption = "Годы";
             yearSlicer.ChangeCellAnchor(eEditAs.Absolute);
-            yearSlicer.SetPosition(480, 1150);
+            yearSlicer.SetPosition(480, 1250);
             yearSlicer.SetSize(200, 200);
             yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[2].PivotTables[0]);
             yearSlicer.Cache.PivotTables.Add(sheet.Workbook.Worksheets[3].PivotTables[0]);

@@ -15,7 +15,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
     /// </summary>
     public partial class UserOrders : Page
     {
-        private readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         private List<OrderData> _data = new List<OrderData>();
         private readonly int? userId = null;
 
@@ -42,11 +42,11 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                 foreach (UserOrder dataItem in usersOrders)
                 {
                     int OrderConstructionCount = _context.OrderConstruction
-                                                 .Where(x => x.UserOrderId == dataItem.Id)
-                                                 .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id)
+                            .Count();
                     int OrderConstructionMade = _context.OrderConstruction
-                                                .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
-                                                .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
+                            .Count();
 
                     OrderData item = new OrderData(dataItem, OrderConstructionCount, OrderConstructionMade);
                     _data.Add(item);
@@ -88,6 +88,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             List<OrderData> data = _data
                 .Where(x => x.OrderNumber.Value.ToString() == textSearch.Text)
                 .ToList();
+
             if (data != null)
             {
                 _usersOrders.ItemsSource = null;
@@ -116,24 +117,55 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void SaleReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                List<UserOrder> data = _context.UserOrder
-                   .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
-                File.WriteAllBytes(desktopPath + @"\SaleReport.xlsx", reportExcel);
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<UserOrder> data = _context.UserOrder
+                       .ToList();
+
+                    byte[] reportExcel = new MarketExcelGenerator().Generate(data);
+                    string commandText = pathToFile + @"\Sale.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+
+                    OpenFile(commandText, reportExcel);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка генерации отчета");
             }
         }
 
         private void ProductReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                List<OrderConstruction> data = _context.OrderConstruction
-                   .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data, 3);
-                File.WriteAllBytes(desktopPath + @"\ProductReport.xlsx", reportExcel);
-            }
+            //try
+            //{
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<OrderConstruction> data = _context.OrderConstruction
+                       .ToList();
+
+                    byte[] reportExcel = new MarketExcelGenerator().Generate(data, 3);
+                    string commandText = pathToFile + @"\Product.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+
+                    OpenFile(commandText, reportExcel);
+                }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Ошибка генерации отчета");
+            //}
+        }
+
+        private void OpenFile(string path, byte[] reportExcel)
+        {
+            File.WriteAllBytes(path, reportExcel);
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = path;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
         }
     }
 }

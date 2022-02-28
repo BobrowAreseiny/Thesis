@@ -21,8 +21,8 @@ namespace Thesis.Areas.ManagerArea
     public partial class MainManagerWindow : Window
     {
         private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-        private DispatcherTimer timer;
-        private double leftPanelWidth;
+        private readonly DispatcherTimer timer;
+        private readonly double leftPanelWidth;
         private bool hidden;
 
         public MainManagerWindow()

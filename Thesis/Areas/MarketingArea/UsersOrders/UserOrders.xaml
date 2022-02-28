@@ -245,7 +245,8 @@
                 </Button>
                 <Button Content="Отчет по товарам"
                         Margin="70,20,70,20" Height="100" 
-                        Foreground="White" Style="{StaticResource button}" Click="ProductReport">
+                        Foreground="White" Style="{StaticResource button}" 
+                        Click="ProductReport">
                 </Button>
             </StackPanel>
         </Grid>
