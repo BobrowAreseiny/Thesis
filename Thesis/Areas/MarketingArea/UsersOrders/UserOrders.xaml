@@ -248,6 +248,15 @@
                         Foreground="White" Style="{StaticResource button}" 
                         Click="ProductReport">
                 </Button>
+                <Button Content="Очистить Накладные"
+                        Margin="70,20,70,20" Height="100" Click="TTNDel"
+                        Foreground="White" Style="{StaticResource button}">
+                </Button>
+                <Button Content="Очистить Чеки"
+                        Margin="70,20,70,20" Height="100" 
+                        Foreground="White" Style="{StaticResource button}" 
+                        Click="BillDel">
+                </Button>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2">

@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea.UserBasket
@@ -27,7 +21,6 @@ namespace Thesis.Areas.UserArea.UserBasket
         private readonly List<Basket> _basket;
         private readonly int _productId;
         private int _count;
-    
 
         private class SelectedProduct
         {
@@ -41,7 +34,10 @@ namespace Thesis.Areas.UserArea.UserBasket
             InitializeComponent();
             _count = 1;
             Data(productId);
-            _basket = basket;
+            if (basket != null)
+            {
+                _basket = basket;
+            }
             _productId = productId;
         }
 
@@ -138,18 +134,10 @@ namespace Thesis.Areas.UserArea.UserBasket
                 }
             }
         }
-          
 
         private void SetCount(object sender, TextChangedEventArgs e)
         {
-            if (countOfProducts.Text != string.Empty)
-            {
-                _count = Convert.ToInt32(countOfProducts.Text);
-            }
-            else
-            {
-                _count = 1;
-            }
+            _count = countOfProducts.Text != string.Empty ? Convert.ToInt32(countOfProducts.Text) : 1;
         }
 
         private void NumericOnly(object sender, TextCompositionEventArgs e)
@@ -164,7 +152,10 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
     }
 }

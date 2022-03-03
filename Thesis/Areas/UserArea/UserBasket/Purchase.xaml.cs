@@ -30,8 +30,11 @@ namespace Thesis.Areas.UserArea.UserBasket
         {
             InitializeComponent();
             _account = user;
-            _basket = basket;
-            Data();
+            if (basket != null)
+            {
+                _basket = basket;
+                Data();
+            }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -215,7 +218,7 @@ namespace Thesis.Areas.UserArea.UserBasket
                         _context.SaveChanges();
                     }
                 }
-                
+
                 List<OrderConstruction> order = _context.OrderConstruction
                     .Where(x => x.UserOrderId == orderId)
                     .Include(x => x.UserOrder)

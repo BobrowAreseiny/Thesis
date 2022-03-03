@@ -5,11 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="ProductsCatalog" Height="800" Width="1400" 
-        MinWidth="1400" 
-        MinHeight="800" 
-        WindowStartupLocation="CenterScreen" 
-        WindowState="Maximized">
+        Title="ProductsCatalog" Height="1500" Width="1920" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Window.Resources>
         <Style TargetType="{x:Type Border}" x:Key="canv">
             <Style.Triggers>
@@ -438,11 +435,25 @@
                       Height="1"  
                       Background="#3FFFFFFF"/>
                 <Button Style="{StaticResource upperButton}" 
-                        Margin="20,0,20,0" 
+                        Margin="10,0,10,0" 
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"        
                         Content="Корзина" 
                         Click="Basket" 
+                        Height="30"/>
+                <Button Style="{StaticResource upperButton}" 
+                        Margin="10,0,10,0" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"        
+                        Content="Профиль" 
+                        Click="Profile" 
+                        Height="30"/>
+                <Button Style="{StaticResource upperButton}" 
+                        Margin="10,0,10,0" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"        
+                        Content="Справка" 
+                        Click="Help" 
                         Height="30"/>
                 <Grid Width="850" 
                       HorizontalAlignment="Left" 

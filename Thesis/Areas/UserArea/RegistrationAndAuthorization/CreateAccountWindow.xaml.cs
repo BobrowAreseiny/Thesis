@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Thesis.Areas.UserArea.ProductsWindows;
 using Thesis.Data.Model;
 using TicketBooking;
 
@@ -45,7 +46,8 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                     ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), (int)_counterpartyId);
                     if (user != null)
                     {
-                        new MainWindow(user).Show();
+                        //new MainWindow(user).Show();
+                        new ProductsCatalog(user).Show();
                         Close();
                     }
                 }

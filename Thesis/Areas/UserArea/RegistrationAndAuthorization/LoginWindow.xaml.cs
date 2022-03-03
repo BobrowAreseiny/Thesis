@@ -3,6 +3,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Thesis.Areas.ManagerArea;
+using Thesis.Areas.MarketingArea;
+using Thesis.Areas.UserArea.ProductsWindows;
 using Thesis.Data.Model;
 using TicketBooking;
 
@@ -29,8 +32,21 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
                 if (user != null)
                 {
-                    new MainWindow(user).Show();
-                    Close();
+                    if (user.UserRole.RoleName == "Администратор")
+                    {
+                        new MainManagerWindow().Show();
+                        Close();
+                    }
+                    else if (user.UserRole.RoleName == "Работник")
+                    {
+                        new MainMarketingWindow().Show();
+                        Close();
+                    }
+                    else if (user.UserRole.RoleName == "Пользователь")
+                    {
+                        new ProductsCatalog(user).Show();
+                        Close();
+                    }
                 }
                 else
                 {

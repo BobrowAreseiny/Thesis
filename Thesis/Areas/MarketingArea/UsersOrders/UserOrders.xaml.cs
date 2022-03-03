@@ -122,6 +122,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                 using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     List<UserOrder> data = _context.UserOrder
+                       .Where(x => x.Status == "Готов")
                        .ToList();
 
                     byte[] reportExcel = new MarketExcelGenerator().Generate(data);
@@ -139,11 +140,12 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void ProductReport(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
                     List<OrderConstruction> data = _context.OrderConstruction
+                       .Where(x => x.Status == "Готов")
                        .ToList();
 
                     byte[] reportExcel = new MarketExcelGenerator().Generate(data, 3);
@@ -152,11 +154,11 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
                     OpenFile(commandText, reportExcel);
                 }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Ошибка генерации отчета");
-            //}
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка генерации отчета");
+            }
         }
 
         private void OpenFile(string path, byte[] reportExcel)
@@ -166,6 +168,42 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             proc.StartInfo.FileName = path;
             proc.StartInfo.UseShellExecute = true;
             proc.Start();
+        }
+
+        private void TTNDel(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\Bill");
+
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+                MessageBox.Show("Данные удалены");
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void BillDel(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\TTN");
+
+                foreach (FileInfo file in dirInfo.GetFiles())
+                {
+                    file.Delete();
+                }
+                MessageBox.Show("Данные удалены");
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
         }
     }
 }

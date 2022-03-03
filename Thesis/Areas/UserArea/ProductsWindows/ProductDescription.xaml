@@ -83,16 +83,36 @@
                         <Grid Width="700" HorizontalAlignment="Left" Height="1"
                                   Background="#3FFFFFFF" Margin="150,0,0,0"/>
                         <Button Style="{StaticResource upperButton}" 
-                                Margin="20,0,0,0" 
+                                Margin="10,0,10,0" 
                                 HorizontalAlignment="Center"
                                 Content="Каталог товаров" 
                                 Click="ProductCatalog"/>
+                        <Button Style="{StaticResource upperButton}" 
+                                Margin="10,0,10,0" 
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"        
+                                Content="Профиль" 
+                                Click="Profile" 
+                                Height="30"/>
                         <Button Style="{StaticResource upperButton}"
-                                Margin="20,0,0,0" 
+                                Margin="10,0,10,0" 
                                 HorizontalAlignment="Center"
-                                Content="Корзина" Click="Basket" Height="30" VerticalAlignment="Top"/>
-                        <Grid Width="700" HorizontalAlignment="Left" Height="1"
-                                  Background="#3FFFFFFF" Margin="20,0,100,0"/>
+                                Content="Корзина" 
+                                Click="Basket" 
+                                Height="30" 
+                                VerticalAlignment="Top"/> 
+                        <Button Style="{StaticResource upperButton}"
+                                Margin="10,0,10,0" 
+                                HorizontalAlignment="Center"
+                                Content="Справка" 
+                                Click="Help" 
+                                Height="30" 
+                                VerticalAlignment="Top"/>
+                        <Grid Width="700" 
+                              HorizontalAlignment="Left"
+                              Height="1"
+                              Margin="20,0,100,0"
+                              Background="#3FFFFFFF"/>
                     </StackPanel>
                 </Grid>
 

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thesis.Areas.UserArea.ProductsWindows;
+using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 using TicketBooking;
 
@@ -149,9 +152,27 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             }
         }
 
-        private void newPassward_PasswordChanged(object sender, RoutedEventArgs e)
-        {
 
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Creel(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Creel(_account, _basket).Show();
+                Close();
+            }
         }
     }
 }

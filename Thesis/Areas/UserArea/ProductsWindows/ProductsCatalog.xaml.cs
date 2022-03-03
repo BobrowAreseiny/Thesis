@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 
@@ -19,13 +22,22 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private readonly ApplicationUser _account = null;
         private int productsCount = 10;
 
+        public ProductsCatalog(ApplicationUser user)
+        {
+            InitializeComponent();
+            Data();
+            _account = user;
+        }
+
         public ProductsCatalog(ApplicationUser user, List<Basket> basket)
         {
             InitializeComponent();
             Data();
-            _basket = basket;
+            if (basket != null)
+            {
+                _basket = basket;
+            }
             _account = user;
-            
         }
 
         private void Data()
@@ -60,32 +72,24 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void Basket(object sender, RoutedEventArgs e)
         {
-            new Creel(_account, _basket).Show();
-            Close();
+            if (_account != null)
+            {
+                new Creel(_account, _basket).Show();
+                Close();
+            }
         }
 
         private void NameSort(object sender, RoutedEventArgs e)
         {
-            //_count.IsChecked = false;
             _date.IsChecked = false;
             _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.Name).ToList();
             DataSort(_data);
         }
 
-        private void CountSort(object sender, RoutedEventArgs e)
-        {
-            _name.IsChecked = false;
-            _date.IsChecked = false;
-            _cost.IsChecked = false;
-            _data = _data.OrderByDescending(x => x.CountOnStorage).ToList();
-            DataSort(_data);
-        }
-
         private void DateSort(object sender, RoutedEventArgs e)
         {
             _name.IsChecked = false;
-            //_count.IsChecked = false;
             _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.DateOfCreation).ToList();
             DataSort(_data);
@@ -95,7 +99,6 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         {
             _name.IsChecked = false;
             _date.IsChecked = false;
-            //_count.IsChecked = false;
             _data = _data.OrderByDescending(x => x.Price).ToList();
             DataSort(_data);
         }
@@ -190,7 +193,6 @@ namespace Thesis.Areas.UserArea.ProductsWindows
             }
             _name.IsChecked = false;
             _date.IsChecked = false;
-            //_count.IsChecked = false;
             _cost.IsChecked = false;
         }
 
@@ -198,9 +200,29 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         {
             _name.IsChecked = false;
             _date.IsChecked = false;
-            //_count.IsChecked = false;
             _cost.IsChecked = false;
         }
 
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
+        }
     }
 }

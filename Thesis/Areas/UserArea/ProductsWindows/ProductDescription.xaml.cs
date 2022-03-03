@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 
@@ -45,7 +47,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
         {
-            new ProductsCatalog(_account,_basket).Show();
+            new ProductsCatalog(_account, _basket).Show();
             Close();
         }
 
@@ -96,6 +98,28 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private void Description(object sender, RoutedEventArgs e)
         {
             Scrol.ScrollToVerticalOffset(700);
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
         }
     }
 }

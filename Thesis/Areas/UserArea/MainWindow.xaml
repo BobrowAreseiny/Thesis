@@ -415,13 +415,13 @@
                            Margin="405 20 0 0"/>
             </StackPanel>
         </Grid>
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         <!--<Grid Grid.Row="1">
             <TabControl Margin="10,10,-77,10" BorderBrush="Gainsboro">
                 <TabControl.Resources>
@@ -639,7 +639,7 @@
                                                 <Border CornerRadius="20" BorderBrush="White" 
                                                         BorderThickness="2" x:Name="dropdownContent">
                                                     <StackPanel x:Name="dropdownInnerContent">
-                                                        
+
                                                     </StackPanel>
                                                 </Border>
                                             </StackPanel>
@@ -838,8 +838,12 @@
                 HorizontalAlignment="Left" Grid.Column="0"
                 Margin="10,120,0,0" VerticalAlignment="Top" Click="ManagerArea" 
                 Height="55"/>
-        <Button Content="Покупатель" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
-                Style="{StaticResource a}" HorizontalAlignment="Left" Margin="10,177,0,0" Grid.Row="1"
+        <Button Content="Справка" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
+                Style="{StaticResource a}" HorizontalAlignment="Left" Margin="18,265,0,0" Grid.Row="1"
                 VerticalAlignment="Top" Width="250" Click="Help" Height="55"/>
+        
+        <Button Content="Покупатель" Background="Transparent" FontSize="40" FontWeight="Bold" Grid.Column="0"
+            Style="{StaticResource a}" HorizontalAlignment="Left" Margin="0,194,0,0" Grid.Row="1"
+            VerticalAlignment="Top" Width="250" Click="Catalog" Height="55"/>
     </Grid>
 </Window>

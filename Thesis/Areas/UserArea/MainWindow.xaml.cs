@@ -130,6 +130,13 @@ namespace Thesis.Areas.UserArea
         private void Help(object sender, RoutedEventArgs e)
         {
 
+            string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+            System.Diagnostics.Process.Start(pathToFile);
+        }
+
+        private void Catalog(object sender, RoutedEventArgs e)
+        {
+
             //if (_account == null)
             //{
             //    new LoginWindow().Show();

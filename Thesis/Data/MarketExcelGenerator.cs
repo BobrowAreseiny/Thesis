@@ -27,7 +27,7 @@ namespace Thesis.Data
 
             foreach (OrderConstruction item in report)
             {
-                sheet.Cells[row, 1].Value = item.UserOrder.DateOfPayment;
+                sheet.Cells[row, 1].Value = item.UserOrder.DateOfShipment;
                 sheet.Cells[row, 2].Value = item.ProductSize.Product.Name;
                 sheet.Cells[row, 3].Value = item.ProductSize.Size;
                 sheet.Cells[row, 4].Value = item.UserOrder.Counterparty.Address.Town.TownName;
@@ -168,7 +168,6 @@ namespace Thesis.Data
             foreach (OrderConstruction item in report)
             {
                 Bill(sheet, row);
-                BillFormat(sheet, row);
                 BillData(sheet, row, item);
                 row++;
             }
@@ -191,12 +190,6 @@ namespace Thesis.Data
             sheet.Cells[row, 7, row, 14].Style.WrapText = true;
             sheet.Cells[row, 15, row, 21].Merge = true;//Размер
             sheet.Cells[row, 22, row, 27].Merge = true;//Кол-во
-        }
-        private void BillFormat(ExcelWorksheet sheet, int row)
-        {
-            sheet.Cells[row, 24, row, 27].Style.Numberformat.Format = "#";
-            sheet.Cells[row, 28].Style.Numberformat.Format = "$#,##";
-            sheet.Cells[row, 29].Style.Numberformat.Format = "$#,##";
         }
         private void BillData(ExcelWorksheet sheet, int row, OrderConstruction item)
         {
@@ -235,9 +228,8 @@ namespace Thesis.Data
                 sheet.Cells[row + 2, 1, row + 2, 29].Merge = true;
                 sheet.Cells[row + 3, 1, row + 3, 29].Merge = true;
                 sheet.Cells[row + 1, 20].Value = $"Итого к оплате: ";
-                sheet.Cells[row + 1, 29].Style.Numberformat.Format = "$#,##";
                 sheet.Cells[row + 1, 29].Formula = $"SUM(AC11:AC{row - 1})";
-                sheet.Cells[row + 2, 1, row + 2, 29].Value = $"Всего наименований {row - 11}, на сумму {count} $.";
+                sheet.Cells[row + 2, 1, row + 2, 29].Value = $"Всего наименований {row - 11}, на сумму {count}, BYN.";
                 count = 0;
             };
         }
@@ -258,7 +250,6 @@ namespace Thesis.Data
             foreach (OrderConstruction item in report)
             {
                 OrderConstructionReport(sheet, row);
-                OrderConstructionReportFormat(sheet, row);
                 OrderConstructionReportData(sheet, row, item);
                 row++;
             }
@@ -288,14 +279,7 @@ namespace Thesis.Data
             sheet.Cells[row, 42, row, 45].Merge = true;//Сумма НДС
             sheet.Cells[row, 46].Merge = true;//Сумма с НДС
         }
-        private void OrderConstructionReportFormat(ExcelWorksheet sheet, int row)
-        {
-            sheet.Cells[row, 24, row, 27].Style.Numberformat.Format = "#";
-            sheet.Cells[row, 28, row, 31].Style.Numberformat.Format = "$#,##";
-            sheet.Cells[row, 32, row, 36].Style.Numberformat.Format = "$#,##";
-            sheet.Cells[row, 42, row, 45].Style.Numberformat.Format = "$#,##";
-            sheet.Cells[row, 46].Style.Numberformat.Format = "$#,##";
-        }
+      
         private void OrderConstructionReportData(ExcelWorksheet sheet, int row, OrderConstruction item)
         {
             sheet.Cells[row, 1].Value = row - 10;
@@ -337,9 +321,8 @@ namespace Thesis.Data
                 sheet.Cells[row + 2, 1, row + 2, 46].Merge = true;
                 sheet.Cells[row + 3, 1, row + 3, 46].Merge = true;
                 sheet.Cells[row + 1, 32].Value = $"Итого к оплате: ";
-                sheet.Cells[row + 1, 46].Style.Numberformat.Format = "$#,##";
                 sheet.Cells[row + 1, 46].Formula = $"SUM(AT11:AT{row - 1})";
-                sheet.Cells[row + 2, 1, row + 2, 43].Value = $"Всего наименований {row - 11}, на сумму {count} $";
+                sheet.Cells[row + 2, 1, row + 2, 43].Value = $"Всего наименований {row - 11}, на сумму {count} BYN.";
                 sheet.Cells[row + 3, 1, row + 3, 43].Value = "Сумма прописью";
             };
         }

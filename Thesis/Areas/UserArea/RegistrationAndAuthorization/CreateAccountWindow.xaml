@@ -129,7 +129,7 @@
                              Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                              BorderThickness="2" TextWrapping="Wrap" FontSize="17" 
-                             Height="70" Width="290" Margin="5" ToolTip="ОАО БелГаз"/>
+                             Height="70" Width="290" Margin="5" ToolTip="Пример: ОАО БелГаз"/>
                     <TextBox x:Name="fio" PreviewTextInput="TextOnly" materialDesign:HintAssist.Hint="ФИО" 
                              Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
@@ -139,13 +139,13 @@
                              BorderBrush="#4CFFFFFF" Padding="10,0,0,0" Margin="5"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                              BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70" 
-                             Width="290" PreviewTextInput="EngTextOnly" ToolTip="Example@gmail.com"/>
+                             Width="290" PreviewTextInput="EngTextOnly" ToolTip="Обратите внимание в программе используется почта оканчивающаяся на @gmail.com. Пример: Example@gmail.com "/>
                     <TextBox x:Name="telephone" PreviewTextInput="NumericOnly" Margin="5"
                              materialDesign:HintAssist.Hint="Номер телефона" 
                              Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="290"
                              BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70"
-                             ToolTip="8 029 000 00 00"/>
+                             ToolTip="Пример: 8 029|033|034|025 000 00 00"/>
                     
                     <PasswordBox x:Name="passward" materialDesign:HintAssist.Hint="Пароль" 
                                  BorderThickness="2" Padding="10,0,0,0" Foreground="White" 

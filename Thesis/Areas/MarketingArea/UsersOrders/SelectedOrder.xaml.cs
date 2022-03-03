@@ -110,7 +110,6 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         Body = $"<h2>Здравствуйте {appUser.Counterparty.Name}, только что был готов ваш заказ № {userOrder.OrderNumber}. <br>" +
                         "<br><br>Внимание, сообщение отправлено автоматически, на него не нужно отвечать.</h2>"
                     };
-
                     mail.Attachments.Add(new Attachment(path));
                     mail.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
@@ -119,7 +118,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         EnableSsl = true
                     };
                     smtp.Send(mail);
-
+                    MessageBox.Show("Сообщение отправлено");
                 }
             }
             catch (FileNotFoundException)
@@ -147,6 +146,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         .Where(x => x.Id == _userOrderId)
                         .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
                 }
+                MessageBox.Show("Накладная сформирована");
             }
             catch
             {
@@ -168,6 +168,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                     File.WriteAllBytes(pathToFile + $@"\Bill\Report{_context.UserOrder
                         .Where(x => x.Id == _userOrderId)
                         .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
+                    MessageBox.Show("Чек сформирован");
                 }
             }
             catch
