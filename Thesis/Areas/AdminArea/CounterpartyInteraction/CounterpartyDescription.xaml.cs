@@ -96,9 +96,9 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
                         ordersData.Add(orderData);
 
                     }
-                    _accunt.Content = _context.ApplicationUser
-                        .Where(x => x.CounterpartyId == counterparty.Id)
-                        .FirstOrDefault();
+                    //_accunt.Content = _context.ApplicationUser
+                    //    .Where(x => x.CounterpartyId == counterparty.Id)
+                    //    .FirstOrDefault();
                     _orders.ItemsSource = ordersData;
                     _conterparty.Items.Add(counterparty);
                 }
@@ -121,6 +121,17 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
             {
                 Data(_counterparty);
             }
+        }
+        private void DeleteOrder(object sender, RoutedEventArgs e)
+        {
+            using (ApplicationDbContent _context = new ApplicationDbContent())
+            {
+                int orderId = (int)((Button)sender).Content;
+                UserOrder selectedData = _context.UserOrder.Where(x => x.Id == orderId).FirstOrDefault();
+                _context.UserOrder.Remove(selectedData);
+                _context.SaveChanges();
+            }
+            Data(_counterparty);
         }
     }
 }

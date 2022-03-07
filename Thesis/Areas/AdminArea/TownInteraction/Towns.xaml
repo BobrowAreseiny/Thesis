@@ -97,25 +97,33 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
-            <Grid Grid.Row="2" Grid.Column="1">
-                <ListView x:Name="_towns" Background="Transparent"
+            <Border CornerRadius="10" 
+                        Margin="10"
+                        Background="#33FFFFFF">
+                <StackPanel>
+                    <Label Content="Города"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Margin="10"/>
+                    <ListView x:Name="_towns" Background="Transparent"
                           Width="1700"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Hidden"
                               SelectionChanged="TownDescription"
                               IsVisibleChanged="UpdateData">
-                    <!--<ListBoxItem/>-->
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="ListBoxItem.Margin" Value="5"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Border CornerRadius="10" 
+                        <!--<ListBoxItem/>-->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border CornerRadius="10" 
                                                 Background="#7FFFFFFF" 
                                                 Height="70" Width="190">
-                                            <Grid>
-                                                <Grid.Triggers>
+                                                <Border.Triggers>
                                                     <EventTrigger RoutedEvent="DockPanel.MouseEnter">
                                                         <BeginStoryboard>
                                                             <Storyboard>
@@ -134,39 +142,40 @@
                                                             </Storyboard>
                                                         </BeginStoryboard>
                                                     </EventTrigger>
-                                                </Grid.Triggers>
-                                                <Label Content="{Binding TownName}" Margin="10"
+                                                </Border.Triggers>
+                                                <Grid>
+                                                    <Label Content="{Binding TownName}" Margin="10"
                                    FontFamily="Calibri" VerticalAlignment="Center"
                                    FontSize="15" FontWeight="Bold" Foreground="Black" 
-                                   HorizontalAlignment="Center">
-                                                </Label>
-                                                <DockPanel Background="#4C000000" LastChildFill="True"
+                                   HorizontalAlignment="Center"/>
+                                                    <DockPanel Background="#4C000000" LastChildFill="True"
                                                     Visibility="Visible" Opacity="0" Name="TopMenuArea1">
-                                                    <Button Click="Delete" HorizontalAlignment="Right" 
+                                                        <Button Click="Delete" HorizontalAlignment="Right" 
                                                         VerticalAlignment="Top" Content="{Binding Id}"
                                                     Foreground="Transparent"
                                                     BorderBrush="Transparent"
                                                     Height="40"
                                                     Width="40">
-                                                        <Button.Background>
-                                                            <ImageBrush ImageSource="ImageDefault\close.png"/>
-                                                        </Button.Background>
-                                                    </Button>
-                                                </DockPanel>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" Margin="20"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-            </Grid>
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="ImageDefault\close.png"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                    </DockPanel>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Margin="20"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+            </Border>
         </StackPanel>
     </Grid>
 </Page>

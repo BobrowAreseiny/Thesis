@@ -458,6 +458,11 @@
     <Resource Include="Areas\AdminArea\UserOrderInteraction\ImageDefault\add.png" />
     <Resource Include="Areas\AdminArea\TownInteraction\ImageDefault\add.png" />
     <Resource Include="Areas\AdminArea\TownInteraction\ImageDefault\close.png" />
+    <Resource Include="Areas\AdminArea\ImageDefault\exit.png" />
+    <Resource Include="Areas\AdminArea\ImageDefault\help.png" />
+    <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\add.png" />
+    <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\account.png" />
+    <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\close.png" />
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
     <Content Include="Data\Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

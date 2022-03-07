@@ -234,17 +234,16 @@
     <Grid>
         <StackPanel>
             <StackPanel HorizontalAlignment="Center">
-                <Grid HorizontalAlignment="Left" 
-              VerticalAlignment="Top" 
-              Width="1200" 
-              Margin="50 20 0 0">
-                    <StackPanel>
-                        <Border Background="#7FFFFFFF" Height="45" Margin="0 0 100 0" CornerRadius="23">
-                            <TextBox Foreground="#FF383838" Padding="0,15,50,0" Margin="25,0,25,0"
+                <Grid HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Width="1200" >
+                    <Border Background="#4CFFFFFF" Height="45"
+                            Width="1200"
+                        CornerRadius="23">
+                        <TextBox Foreground="White" Padding="0,15,50,0" Margin="25,0,25,0"
                              TextWrapping="Wrap" materialDesign:HintAssist.Hint="Поиск" x:Name="textSearch" 
                              FontFamily="Arial Black" TextChanged="Sherch"/>
-                        </Border>
-                    </StackPanel>
+                    </Border>
                 </Grid>
                 <Grid VerticalAlignment="Top"
                   HorizontalAlignment="Center">
@@ -291,118 +290,122 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <ListView x:Name="_usersOrders" Background="Transparent"
+            <Border>
+                <ListView x:Name="_usersOrders" Background="Transparent"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       SelectionChanged="OrderSelector"
                       Margin="20">
-                <!--<ListBoxItem/>-->
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="ListBoxItem.Margin" Value="10"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <Grid Height="350" Width="250" Style="{StaticResource canv}">
-                                        <Grid.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform x:Name="transform" 
+                    <!--<ListBoxItem/>-->
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListViewItem}">
+                            <Setter Property="ListBoxItem.Margin" Value="10"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Grid Height="350" Width="250" Style="{StaticResource canv}">
+                                            <Grid.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform x:Name="transform" 
                                                     CenterX="125" 
                                                     CenterY="170" 
                                                     ScaleX="1" 
                                                     ScaleY="1"/>
-                                            </TransformGroup>
-                                        </Grid.RenderTransform>
-                                        <Grid.Background>
-                                            <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
-                                                <RadialGradientBrush.RelativeTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </RadialGradientBrush.RelativeTransform>
-                                                <GradientStop Color="#FF6E4F5B" Offset="0"/>
-                                                <GradientStop Color="#FF4F436E" Offset="1"/>
-                                            </RadialGradientBrush>
-                                        </Grid.Background>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                </TransformGroup>
+                                            </Grid.RenderTransform>
+                                            <Grid.Background>
+                                                <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
+                                                    <RadialGradientBrush.RelativeTransform>
+                                                        <TransformGroup>
+                                                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                                            <TranslateTransform/>
+                                                        </TransformGroup>
+                                                    </RadialGradientBrush.RelativeTransform>
+                                                    <GradientStop Color="#FF6E4F5B" Offset="0"/>
+                                                    <GradientStop Color="#FF4F436E" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Grid.Background>
+                                            <Grid.Triggers>
+                                                <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                  Storyboard.TargetName="BlindArea"
                                                                  From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                                <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                                  Storyboard.TargetName="BlindArea" 
                                                                  From="1.0" To="0" Duration="0:0:0.3"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Grid.Triggers>
-                                        <Border CornerRadius="10" Margin="30" VerticalAlignment="Top" 
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </EventTrigger>
+                                            </Grid.Triggers>
+                                            <Border CornerRadius="10" Margin="30" VerticalAlignment="Top" 
                                                     HorizontalAlignment="Stretch" Background="#FFFBBB43">
-                                            <Label Content="{Binding OrderNumber}" Margin="10" FontFamily="Calibri"
+                                                <Label Content="{Binding OrderNumber}" Margin="10" FontFamily="Calibri"
                                                FontSize="20" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <Border CornerRadius="10" Margin="30,30,30,60" 
+                                            </Border>
+                                            <Border CornerRadius="10" Margin="30,30,30,60" 
                                             VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                                             Background="#FF988AAA" Height="180">
-                                            <StackPanel>
-                                                <Label Content="{Binding Counterparty}" Height="30"
+                                                <StackPanel>
+                                                    <Label Content="{Binding Counterparty}" Height="30"
                                                    VerticalAlignment="Top" Margin="5,20,5,0" FontFamily="Calibri" 
                                                    FontSize="15" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center">
-                                                </Label>
-                                                <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
+                                                    </Label>
+                                                    <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
                                                    Margin="5,20,5,0" FontFamily="Calibri" FontSize="15" FontWeight="Bold" 
                                                    Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                </Label>
-                                                <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
+                                                    </Label>
+                                                    <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
                                                             Height="30" Padding="0.5" CornerRadius="5" Background="Black">
-                                                    <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
+                                                        <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
                                                              Value="{Binding OrderConstructionMade}" Margin="2" Style="{DynamicResource progressBar}">
-                                                    </ProgressBar>
-                                                </Border>
-                                            </StackPanel>
-                                        </Border>
-                                        <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                                        </ProgressBar>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Border>
+                                            <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
                                             HorizontalAlignment="Right" Background="#FFFBBB43">
-                                            <Label Content="{Binding Status}" FontWeight="Bold"
+                                                <Label Content="{Binding Status}" FontWeight="Bold"
                                                Foreground="Black" x:Name="statusLabel"/>
-                                        </Border>
-                                        <DockPanel Background="#4C000000" LastChildFill="True"
+                                            </Border>
+                                            <DockPanel Background="#4C000000" LastChildFill="True"
                                                Visibility="Visible" Opacity="0" Name="BlindArea">
-                                            <Button Click="DeleteOrder" HorizontalAlignment="Right" 
-                                                        VerticalAlignment="Top" Content="{Binding Id}"
+                                                <Button Click="DeleteOrder"
+                                                    HorizontalAlignment="Right" 
+                                                        VerticalAlignment="Top"
+                                                    Content="{Binding Id}"
                                                     Foreground="Transparent"
                                                     BorderBrush="Transparent"
                                                     Height="40"
                                                     Width="40">
-                                                <Button.Background>
-                                                    <ImageBrush ImageSource="ImageDefault\close.png"/>
-                                                </Button.Background>
-                                            </Button>
-                                        </DockPanel>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
+                                                    <Button.Background>
+                                                        <ImageBrush ImageSource="ImageDefault\close.png"/>
+                                                    </Button.Background>
+                                                </Button>
+                                            </DockPanel>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
+            </Border>
         </StackPanel>
     </Grid>
 </Page>

@@ -90,18 +90,18 @@
     <Grid>
         <StackPanel>
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-              HorizontalAlignment="Left"
-                  Margin="200 0 0 0 "
+              HorizontalAlignment="Center"
                   VerticalAlignment="Center" Width="1200" >
-                <StackPanel>
-                    <Border Background="#4CFFFFFF" Height="45" CornerRadius="23">
-                        <TextBox Foreground="White" Padding="0,15,50,0" Margin="25,0,25,0"
+                <Border Background="#4CFFFFFF" Height="45"
+                         Width="1200"
+                        CornerRadius="23">
+                    <TextBox Foreground="White" Padding="0,15,50,0" Margin="25,0,25,0"
                              TextWrapping="Wrap" materialDesign:HintAssist.Hint="Поиск" x:Name="textSearch" 
                              FontFamily="Arial Black" TextChanged="Sherch"/>
-                    </Border>
-                </StackPanel>
+                </Border>
             </Grid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Left"
                         Margin="10">
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
                                   Background="#3FFFFFFF"/>
@@ -122,7 +122,7 @@
                                HorizontalAlignment="Center"
                                Foreground="White"
                                FontWeight="SemiBold"
-                               FontSize="15"
+                               FontSize="20"
                                Margin="10"/>
                         <ListView x:Name="_town" Background="Transparent"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -139,36 +139,39 @@
                                                 <Border CornerRadius="10" 
                                                 Background="#7FFFFFFF" 
                                                 Height="70" Width="190">
-                                                    <Grid>
-                                                        <Grid.Triggers>
-                                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                                <BeginStoryboard>
-                                                                    <Storyboard>
-                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                         Storyboard.TargetName="TopMenuArea1"
-                                                                         From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                                    </Storyboard>
-                                                                </BeginStoryboard>
-                                                            </EventTrigger>
-                                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                                <BeginStoryboard>
-                                                                    <Storyboard>
-                                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                         Storyboard.TargetName="TopMenuArea1" 
-                                                                         From="1.0" To="0" Duration="0:0:0.3"/>
-                                                                    </Storyboard>
-                                                                </BeginStoryboard>
-                                                            </EventTrigger>
-                                                        </Grid.Triggers>
-                                                        <Label Content="{Binding TownName}" Margin="10"
+                                                    <Border.Style>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Style.Triggers>
+                                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#7FFFFFFF" DecelerationRatio="1"
+                                    To="#CCFFFFFF" 
+                                    Duration="0:0:0.2"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#CCFFFFFF" DecelerationRatio="1"
+                                    To="#7FFFFFFF"
+                                    Duration="0:0:0.3"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Label Content="{Binding TownName}" Margin="10"
                                                FontFamily="Calibri" VerticalAlignment="Center"
                                                FontSize="15" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center">
                                                         </Label>
-                                                        <DockPanel Background="#4C000000" LastChildFill="True"
-                                                   Visibility="Visible" Opacity="0" Name="TopMenuArea1">
-                                                        </DockPanel>
-                                                    </Grid>
                                                 </Border>
                                             </ControlTemplate>
                                         </Setter.Value>
@@ -205,7 +208,7 @@
                                HorizontalAlignment="Center"
                                Foreground="White"
                                FontWeight="SemiBold"
-                               FontSize="15"
+                               FontSize="20"
                                Margin="10"/>
                         <ListView x:Name="_addresses" Background="Transparent"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"

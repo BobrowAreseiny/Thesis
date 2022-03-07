@@ -76,7 +76,8 @@
                            Grid.Row="1"
                            Grid.Column="0" />
 
-                <TextBox Text="{Binding TownName}" Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                <TextBox Text="{Binding TownName}" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          BorderBrush="#abadb3"
                          Foreground="#abadb3"
                          VerticalAlignment="Center"

@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d"
-      Title="AccountEdit" Height="352.603" Width="700"
+      Title="AccountEdit" Height="350" Width="700"
       IsVisibleChanged="UpdateData">
     <Page.Resources>
         <Style TargetType="{x:Type TextBlock}">
@@ -19,7 +19,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style x:Key="TransparantButton" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FF060303" />
+            <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#4CFFFFFF" />
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="80"/>
@@ -50,7 +50,7 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Border CornerRadius="30" Background="Black">
+        <Border CornerRadius="30" Background="#7F151515">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="300"/>
@@ -62,25 +62,73 @@
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="1"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="2"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="3"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
                 <TextBlock Text="Email" Grid.Row="1" Grid.Column ="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
-                <TextBlock Text="UserPassward" Grid.Row="2" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
-                <TextBlock Text="Роль" Grid.Row="3" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment ="Center"  />
+                <TextBlock Text="Пароль" 
+                           Grid.Row="2" Grid.Column ="0" 
+                           FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment ="Center"  />
+                <TextBlock Text="Роль" 
+                           Grid.Row="3" 
+                           Grid.Column ="0" 
+                           FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment ="Center"/>
+                <TextBox Text="{Binding Email}" 
+                         Grid.Row="1" 
+                         Grid.Column ="1" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         Width="350"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding UserPassword}" 
+                         Grid.Row="2" 
+                         Grid.Column ="1" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         Width="350"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
 
 
-                <TextBox Margin="20,10,0,10"  Text="{Binding Email}" Grid.Row="1" 
-                         Grid.Column ="1" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Margin="20,10,0,10" Text="{Binding UserPassword}" Grid.Row="2" 
-                         Grid.Column="1" Width="250" HorizontalAlignment="Left"/>
-
-
-                <ComboBox FontSize="15" Style="{StaticResource MaterialDesignFilledComboBox}" 
-                          Background="#7FFFFFFF" Margin="20,11,0,10"
-                          Grid.Row="3" Grid.Column ="1" Width="250" HorizontalAlignment="Left"
-                          DisplayMemberPath="RoleName" x:Name="_role" Foreground="Black"/>
+                <ComboBox FontSize="15" 
+                          Grid.Row="6" Grid.Column ="1" Width="350" 
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Foreground="#abadb3"
+                          BorderBrush="#abadb3"
+                          DisplayMemberPath="RoleName" x:Name="_role"/>
 
                 <Button Style="{StaticResource TransparantButton}"  Content="ВЫХОД" Click="Exit"
                         VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="0"

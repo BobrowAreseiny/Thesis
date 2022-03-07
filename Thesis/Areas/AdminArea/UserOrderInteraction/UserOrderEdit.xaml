@@ -139,7 +139,8 @@
                            HorizontalAlignment="Right" 
                            VerticalAlignment ="Center"  />
 
-                <TextBox Text="{Binding OrderNumber}" Grid.Row="1" 
+                <TextBox Text="{Binding OrderNumber}" 
+                         Grid.Row="1" 
                          Grid.Column ="1" 
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          BorderBrush="#abadb3"

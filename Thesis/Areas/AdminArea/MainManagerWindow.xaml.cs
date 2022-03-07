@@ -130,5 +130,28 @@ namespace Thesis.Areas.ManagerArea
         {
             
         }
+
+        private void leftPanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            TimerButt.IsChecked = true;
+        }
+
+        private void leftPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            TimerButt.IsChecked = false;
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\help.chm";
+                System.Diagnostics.Process.Start(pathToFile);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
+            }
+        }
     }
 }
