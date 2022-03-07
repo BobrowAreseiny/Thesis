@@ -256,8 +256,11 @@
                             <Label Content="Сортировка по названию: " Foreground="White"
                            FontSize="22" HorizontalAlignment="Center"
                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <Border Background="White" BorderThickness="10" CornerRadius="11">
-                                <CheckBox IsChecked="False" x:Name="_number" Click="DateSort"/>
+                            <Border Background="#fbbb43" BorderThickness="10" CornerRadius="9">
+                                <CheckBox IsChecked="False"
+                                          Background="#444444"
+                                          x:Name="_number" 
+                                          Click="DateSort"/>
                             </Border>
                         </StackPanel>
                         <StackPanel Margin="10,20,0,20" Orientation="Horizontal"
@@ -265,15 +268,26 @@
                             <Label Content="Сортировка по готовности:" Foreground="White"
                            FontSize="22" HorizontalAlignment="Center"
                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <Border Background="White" BorderThickness="10" CornerRadius="11">
-                                <CheckBox IsChecked="False" x:Name="_status" Click="StatusSort"/>
+                            <Border Background="#fbbb43" BorderThickness="10" CornerRadius="9">
+                                <CheckBox IsChecked="False"
+                                          Background="#444444"
+                                          x:Name="_status" Click="StatusSort"/>
                             </Border>
                         </StackPanel>
-                        <Button Content="Добавить заказ" 
-                                Click="AddOrderNumber" 
-                                Margin="70,20,70,20" Height="50" 
-                                Foreground="White" 
-                                Style="{StaticResource button}"/>    
+                        <Button Click="AddOrderNumber" 
+                                Margin="70,20,70,20" Height="40" 
+                                Foreground="#FF444444" 
+                                Style="{DynamicResource MainYellowButton}">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                                    <Image Source="ImageDefault\add.png"
+                                           Height="30"/>
+                                    <TextBlock Text="Добавить заказ"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>    
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -282,6 +296,7 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       SelectionChanged="OrderSelector"
                       Margin="20">
+                <!--<ListBoxItem/>-->
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="ListBoxItem.Margin" Value="10"/>
@@ -365,8 +380,16 @@
                                         </Border>
                                         <DockPanel Background="#4C000000" LastChildFill="True"
                                                Visibility="Visible" Opacity="0" Name="BlindArea">
-                                            <Button Click="DeleteOrder" HorizontalAlignment="Left" 
-                                                        VerticalAlignment="Top" Content="{Binding Id}"/>
+                                            <Button Click="DeleteOrder" HorizontalAlignment="Right" 
+                                                        VerticalAlignment="Top" Content="{Binding Id}"
+                                                    Foreground="Transparent"
+                                                    BorderBrush="Transparent"
+                                                    Height="40"
+                                                    Width="40">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="ImageDefault\close.png"/>
+                                                </Button.Background>
+                                            </Button>
                                         </DockPanel>
                                     </Grid>
                                 </ControlTemplate>

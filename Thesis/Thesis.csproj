@@ -67,6 +67,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -369,6 +370,7 @@
     <Compile Include="Data\Model\Material.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Model\NumberConverter.cs" />
     <Compile Include="Data\Model\OrderConstruction.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
@@ -451,6 +453,11 @@
     <Resource Include="Areas\UserArea\ProductsWindows\ImageDefault\reset.png" />
     <Resource Include="Areas\UserArea\UserBasket\ImageDefault\edit.png" />
     <Resource Include="Areas\UserArea\UserBasket\ImageDefault\trash.png" />
+    <Resource Include="Areas\AdminArea\UserOrderInteraction\ImageDefault\close.png" />
+    <Resource Include="Areas\AdminArea\UserOrderInteraction\ImageDefault\edit2.png" />
+    <Resource Include="Areas\AdminArea\UserOrderInteraction\ImageDefault\add.png" />
+    <Resource Include="Areas\AdminArea\TownInteraction\ImageDefault\add.png" />
+    <Resource Include="Areas\AdminArea\TownInteraction\ImageDefault\close.png" />
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
     <Content Include="Data\Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

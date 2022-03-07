@@ -65,7 +65,6 @@ namespace Thesis.Areas.ManagerArea
                 imageActors.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\comedy.png"));
                 imageMaterial.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\cloth.png"));
                 imageCity.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
-                Три_полоски.ImageSource = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\menu.png"));
             }
             catch { }
         }

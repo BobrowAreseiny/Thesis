@@ -208,9 +208,6 @@
                               Width="50"
                               Click="TimerStarter"
                               x:Name="TimerButt">
-                    <ToggleButton.Background>
-                        <ImageBrush x:Name="Три_полоски"/>
-                    </ToggleButton.Background>
                     <ToggleButton.Triggers>
                         <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                             <BeginStoryboard>

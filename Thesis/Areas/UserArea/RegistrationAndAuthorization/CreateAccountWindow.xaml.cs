@@ -103,6 +103,29 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private void NumericOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsNumeric(e.Text);
+            var tb = (sender as TextBox);
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+                return;
+            }
+            else cnt++;
+            if (cnt > maxLenght)
+            {
+                cnt = maxLenght;
+                e.Handled = true;
+                return;
+            }
+            tb.Text = tb.Text + e.Text;
+            if (cnt == 3 || cnt == 6)
+            {
+                tb.Text = tb.Text + " ";
+            }
+            else if (cnt == 9)
+            {
+                tb.Text = tb.Text + " ";
+            }
+            e.Handled = true;
         }
         private static bool IsNumeric(string str)
         {
@@ -110,6 +133,8 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             return reg.IsMatch(str);
         }
 
+        private int cnt = 0;
+        private int maxLenght = 11;
         private void TextOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsText(e.Text);
@@ -178,6 +203,13 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             {
                 return null;
             }
+        }
+
+        private void telephone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tb = (sender as TextBox);
+            tb.CaretIndex = tb.Text.Length;
+            cnt = tb.Text.Replace(" ", "").Replace("-", "").Length;
         }
     }
 }

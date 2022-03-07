@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Navigation;
 using Thesis.Data.Model;
 
@@ -105,4 +106,64 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             }
         }
     }
+    [ValueConversion(typeof(decimal), typeof(string))]
+    public class CostConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            return ((decimal)value).ToString("#,###", culture) + " руб.";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            decimal result;
+            if (decimal.TryParse(value.ToString(), System.Globalization.NumberStyles.Any,
+                         culture, out result))
+            {
+                return result;
+            }
+            else if (decimal.TryParse(value.ToString().Replace(" руб.", ""), System.Globalization.NumberStyles.Any,
+                         culture, out result))
+            {
+                return result;
+            }
+            return value;
+        }
+    }
+    [ValueConversion(typeof(decimal), typeof(string))]
+    public class CountConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            return ((decimal)value).ToString("#,###", culture);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter,
+            System.Globalization.CultureInfo culture)
+        {
+            decimal result;
+            try
+            {
+                if (decimal.TryParse(value.ToString(), System.Globalization.NumberStyles.Any,
+                             culture, out result))
+                {
+                    return result;
+                }
+                else if (decimal.TryParse(value.ToString().Replace("", ""), System.Globalization.NumberStyles.Any,
+                             culture, out result))
+                {
+                    return result;
+                }
+            }
+            catch
+            {
+
+            }
+             return value;
+        }
+    }
 }
+

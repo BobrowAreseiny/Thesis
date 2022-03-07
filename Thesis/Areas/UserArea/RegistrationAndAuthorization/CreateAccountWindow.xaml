@@ -145,8 +145,7 @@
                              Foreground="White" BorderBrush="#4CFFFFFF" Padding="10,0,0,0" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="290"
                              BorderThickness="2" TextWrapping="Wrap" FontSize="17" Height="70"
-                             ToolTip="Пример: 8 029|033|034|025 000 00 00"/>
-                    
+                             ToolTip="Пример: 8 029|033|034|025 000 00 00" TextChanged="telephone_TextChanged"/>
                     <PasswordBox x:Name="passward" materialDesign:HintAssist.Hint="Пароль" 
                                  BorderThickness="2" Padding="10,0,0,0" Foreground="White" 
                                  BorderBrush="#4CFFFFFF" FontSize="17" Margin="5"
