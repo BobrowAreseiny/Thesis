@@ -158,17 +158,21 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             try
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                if (MessageBox.Show($"Сформировать чек?", "Внимание",
+                  MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    List<OrderConstruction> data = _context.OrderConstruction
-                        .Where(x => x.UserOrderId == _userOrderId)
-                        .ToList();
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        List<OrderConstruction> data = _context.OrderConstruction
+                            .Where(x => x.UserOrderId == _userOrderId)
+                            .ToList();
 
-                    byte[] reportExcel = new MarketExcelGenerator().GenerateBill(data);
-                    File.WriteAllBytes(pathToFile + $@"\Bill\Report{_context.UserOrder
-                        .Where(x => x.Id == _userOrderId)
-                        .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
-                    MessageBox.Show("Чек сформирован");
+                        byte[] reportExcel = new MarketExcelGenerator().GenerateBill(data);
+                        File.WriteAllBytes(pathToFile + $@"\Bill\Report{_context.UserOrder
+                            .Where(x => x.Id == _userOrderId)
+                            .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
+                        MessageBox.Show("Чек сформирован");
+                    }
                 }
             }
             catch

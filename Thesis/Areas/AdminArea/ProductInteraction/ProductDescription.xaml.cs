@@ -12,6 +12,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
     public partial class ProductDescription : Page
     {
         private readonly int _productId;
+        private readonly Product product1 = new Product();
         public ProductDescription(int productId)
         {
             InitializeComponent();
@@ -34,6 +35,9 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
                     .Where(x => x.Id == productId)
                     .FirstOrDefault();
                 _product.Items.Add(product);
+                _context.Product
+                    .Where(p => p.Id == productId)
+                    .ToList();
             }
         }
 

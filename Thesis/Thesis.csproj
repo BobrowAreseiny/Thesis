@@ -463,6 +463,17 @@
     <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\add.png" />
     <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\account.png" />
     <Resource Include="Areas\AdminArea\CounterpartyInteraction\ImageDefault\close.png" />
+    <Resource Include="Areas\AdminArea\MaterialInteraction\ImageDefault\close.png" />
+    <Resource Include="Areas\AdminArea\MaterialInteraction\ImageDefault\add.png" />
+    <Resource Include="Areas\AdminArea\ProductInteraction\ImageDefault\add.png" />
+    <Resource Include="Areas\AdminArea\ProductInteraction\ImageDefault\close.png" />
+    <Resource Include="Areas\MarketingArea\ImageDefault\exit.png" />
+    <Resource Include="Areas\MarketingArea\ImageDefault\help.png" />
+    <Resource Include="Areas\MarketingArea\UsersOrders\ImageDefault\close.png" />
+    <Resource Include="Areas\MarketingArea\UsersOrders\ImageDefault\add.png" />
+    <Resource Include="Areas\MarketingArea\UsersOrders\ImageDefault\report.png" />
+    <Resource Include="Areas\MarketingArea\UsersOrders\ImageDefault\doebat.png" />
+    <Resource Include="Areas\MarketingArea\UsersOrders\ImageDefault\bill.png" />
     <Content Include="Data\ImageDefault\AmogusBackground.jfif" />
     <Content Include="Data\Model\Database.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

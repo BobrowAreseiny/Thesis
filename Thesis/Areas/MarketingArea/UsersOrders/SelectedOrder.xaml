@@ -160,8 +160,6 @@
                 <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" 
                         HorizontalAlignment="Center" Content="Назад" 
                         Click="Back" Height="30" VerticalAlignment="Top"/>
-                <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
-                        Content="Выход" Click="Exit" Height="30" VerticalAlignment="Top"/>
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
                       Background="#3FFFFFFF" Margin="20,0,100,0"/>
             </StackPanel>
@@ -169,7 +167,7 @@
         <Grid Grid.Column="0" Grid.Row="2">
             <StackPanel>
                 <ListView x:Name="_order" Background="Transparent"
-                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,10,10,300"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10"
                    ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
@@ -258,22 +256,48 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
-                <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Накладная" 
-                        Foreground="White"
-                        Margin="70,0,70,20" Height="100" Click="TTN"/>
-                <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Чек" 
-                        Foreground="White"
-                        Margin="70,0,70,20" Height="100" Click="Bill"/>
-                <Button Style="{StaticResource buttonDataGrid}" 
-                        Content="Оповестить" 
-                        Foreground="White" Click="Notify"
-                        Margin="70,0,70,20" Height="100"/>  
-               
-             
-               
-              
+                <Button Click="TTN" 
+                                Margin="70,20,50,20" Height="40" 
+                                Foreground="#FF444444" 
+                                Style="{DynamicResource MainYellowButton}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                            <Image Source="ImageDefault\report.png"
+                                           Height="30"/>
+                            <TextBlock Text="Накладная"
+                                               VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Click="Bill" 
+                                Margin="70,20,50,20" Height="40" 
+                                Foreground="#FF444444" 
+                                Style="{DynamicResource MainYellowButton}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                            <Image Source="ImageDefault\bill.png"
+                                           Height="30"/>
+                            <TextBlock Text="Чек"
+                                               VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Click="Notify" 
+                                Margin="70,20,50,20" Height="40" 
+                                Foreground="#FF444444" 
+                                Style="{DynamicResource MainYellowButton}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                            <Image Source="ImageDefault\doebat.png"
+                                           Height="30"/>
+                            <TextBlock Text="Оповестить"
+                                               VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
         <DataGrid BorderThickness="0,1,0,1" Background="#331F0303" 
