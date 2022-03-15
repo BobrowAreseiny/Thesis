@@ -66,12 +66,29 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             }
         }
 
-        private void DateSort(object sender, RoutedEventArgs e)
+        private void NameSort(object sender, RoutedEventArgs e)
         {
             List<OrderData> data = _data;
             if (_number.IsChecked == true)
             {
-                data = data.OrderBy(x => x.DateOfShipment).ToList();
+                data = data.Where(x => x.Status == "Готов").ToList();
+                _date.IsChecked = false;
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = data;
+            }
+            else
+            {
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = _data;
+            }
+        }
+        private void DateSort(object sender, RoutedEventArgs e)
+        {
+            List<OrderData> data = _data;
+            if (_date.IsChecked == true)
+            {
+                data = data.OrderByDescending(x => x.DateOfShipment).ToList();
+                _number.IsChecked = false;
                 _usersOrders.ItemsSource = null;
                 _usersOrders.ItemsSource = data;
             }
@@ -174,13 +191,17 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\Bill");
-
-                foreach (FileInfo file in dirInfo.GetFiles())
+                if (MessageBox.Show($"Удалить накладные?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    file.Delete();
+                    DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\Bill");
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    MessageBox.Show("Данные удалены");
                 }
-                MessageBox.Show("Данные удалены");
             }
             catch
             {
@@ -192,13 +213,17 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             try
             {
-                DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\TTN");
-
-                foreach (FileInfo file in dirInfo.GetFiles())
+                if (MessageBox.Show($"Удалить чеки?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    file.Delete();
+                    DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\TTN");
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    MessageBox.Show("Данные удалены");
                 }
-                MessageBox.Show("Данные удалены");
             }
             catch
             {

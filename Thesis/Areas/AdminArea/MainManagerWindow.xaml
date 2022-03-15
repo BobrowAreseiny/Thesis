@@ -360,7 +360,7 @@
                 </StackPanel>-->
 
                 <Frame x:Name="dataView" 
-                       Margin="230,100,30,0"
+                       Margin="230,100,30,20"
                        NavigationUIVisibility="Hidden"/>
         </Grid>
     </Grid>

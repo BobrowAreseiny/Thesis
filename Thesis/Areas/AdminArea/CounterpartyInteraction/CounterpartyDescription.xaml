@@ -258,12 +258,11 @@
                         Height="70"
                         Width="70"
                         Padding="0"
-                        Background="Transparent"
+                        Foreground="Transparent"
                         BorderBrush="#575757">
-                        <Button.Content>
-                            <Image Source="ImageDefault\account.png"
-                               Margin="5"/>
-                        </Button.Content>
+                        <Button.Background>
+                            <ImageBrush ImageSource="ImageDefault\account.png"/>
+                        </Button.Background>
                     </Button>
                 </StackPanel>
                 <ListView x:Name="_orders" Background="Transparent" Grid.Column="2" Grid.Row="2"

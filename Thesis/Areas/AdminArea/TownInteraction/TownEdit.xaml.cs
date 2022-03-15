@@ -38,20 +38,27 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                if (_selectedTown.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.Town.Add(_selectedTown);
+                    if (_selectedTown.Id == 0)
+                    {
+                        _context.Town.Add(_selectedTown);
+                    }
+                    Town town = _context.Town
+                        .FirstOrDefault(f => f.Id == _selectedTown.Id);
+                    if (town != null)
+                    {
+                        town.TownName = _selectedTown.TownName;
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                Town town = _context.Town
-                    .FirstOrDefault(f => f.Id == _selectedTown.Id);
-                if (town != null)
-                {
-                    town.TownName = _selectedTown.TownName;
-                }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 

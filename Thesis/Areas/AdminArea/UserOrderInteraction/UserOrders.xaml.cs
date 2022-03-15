@@ -125,14 +125,21 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void DeleteOrder(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                int orderId = (int)((Button)sender).Content;
-                UserOrder selectedData = _context.UserOrder.Where(x => x.Id == orderId).FirstOrDefault();
-                _context.UserOrder.Remove(selectedData);
-                _context.SaveChanges();
+                if ((sender as Button) != null)
+                {
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int orderId = (int)((Button)sender).Content;
+                        UserOrder selectedData = _context.UserOrder.Where(x => x.Id == orderId).FirstOrDefault();
+                        _context.UserOrder.Remove(selectedData);
+                        _context.SaveChanges();
+                    }
+                    Data(userId);
+                }
             }
-            Data(userId);
         }
 
         private void AddOrderNumber(object sender, RoutedEventArgs e)

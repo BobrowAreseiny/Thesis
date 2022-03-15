@@ -422,9 +422,8 @@
         <Button Content="Ещё" 
                 Click="AddProducts"
                 Grid.Row="2"
-                VerticalAlignment="Bottom"
                 HorizontalAlignment="Center"
-                Margin="5"/>
+                Margin="926,1185,926,5" Height="Auto"/>
         <Grid Grid.Row="1" Margin="1">
             <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Center" 

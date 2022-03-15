@@ -176,15 +176,16 @@
                           Style="{StaticResource MaterialDesignOutlinedComboBox}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
-                          Foreground="#FF595959"
                           BorderBrush="#abadb3"
-                          DisplayMemberPath="OrderNumber" x:Name="_userOrder"/>
+                          Foreground="#abadb3"
+                          DisplayMemberPath="OrderNumber" 
+                          x:Name="_userOrder"/>
                 <ComboBox FontSize="15" Style="{StaticResource MaterialDesignOutlinedComboBox}" 
                           VerticalAlignment="Center"
                           HorizontalAlignment="Center"
                           BorderBrush="#abadb3"
                           Grid.Row="6" Grid.Column ="1" Width="350" 
-                          DisplayMemberPath="Size" x:Name="_productSize" Foreground="#FF595959"/>
+                          DisplayMemberPath="Size" x:Name="_productSize" Foreground="#abadb3"/>
                 <Button FontSize="25" Style="{StaticResource a}" Background="Transparent"
                      FontWeight="Bold"   Grid.Row="6" Grid.Column="1" HorizontalAlignment ="Right" Content="ЗАПИСАТЬ"
                  VerticalAlignment="Bottom" Click="Add" Margin="0,0,10,-50" Width="152" />

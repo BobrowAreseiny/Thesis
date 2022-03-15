@@ -59,12 +59,18 @@ namespace Thesis.Areas.ManagerArea
         {
             try
             {
-                imageOrder.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\order.png"));
-                imageUser.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\user.png"));
-                imageProduct.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\product.png"));
-                imageActors.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\comedy.png"));
-                imageMaterial.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\cloth.png"));
-                imageCity.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
+                imageOrder.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\order.png"));
+                imageUser.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\user.png"));
+                imageProduct.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\product.png"));
+                imageActors.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\comedy.png"));
+                imageMaterial.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\cloth.png"));
+                imageCity.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
             }
             catch { }
         }
@@ -128,7 +134,7 @@ namespace Thesis.Areas.ManagerArea
 
         private void TimerStarter(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void leftPanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

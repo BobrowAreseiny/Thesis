@@ -48,14 +48,18 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void AccountDescription(object sender, RoutedEventArgs e)
         {
-            ApplicationUser user = new ApplicationUser();
-
-            if (((Button)sender).Content is ApplicationUser selectedUser)
+            ApplicationUser appUser = null;
+            if (_accunt.Content != null)
             {
-                if (user != null)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    NavigationService.Navigate(new AccountEdit(selectedUser));
+                    appUser = _context.ApplicationUser
+                        .FirstOrDefault(x => x.Id == (int)_accunt.Content);
                 }
+            }
+            if (appUser != null)
+            {
+                NavigationService.Navigate(new AccountEdit(appUser));
             }
             else
             {
@@ -94,12 +98,13 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
                         orderData = new OrderData(dataItem, OrderConstructionCount, OrderConstructionMade);
 
                         ordersData.Add(orderData);
-
                     }
-                    //_accunt.Content = _context.ApplicationUser
-                    //    .Where(x => x.CounterpartyId == counterparty.Id)
-                    //    .FirstOrDefault();
                     _orders.ItemsSource = ordersData;
+                    if (counterparty.ApplicationUser.Count != 0)
+                    {
+                        _accunt.Content = _context.ApplicationUser
+                            .FirstOrDefault(x => x.CounterpartyId == counterparty.Id).Id;
+                    }
                     _conterparty.Items.Add(counterparty);
                 }
             }
@@ -122,16 +127,26 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
                 Data(_counterparty);
             }
         }
+
         private void DeleteOrder(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                int orderId = (int)((Button)sender).Content;
-                UserOrder selectedData = _context.UserOrder.Where(x => x.Id == orderId).FirstOrDefault();
-                _context.UserOrder.Remove(selectedData);
-                _context.SaveChanges();
+                if ((sender as Button) != null)
+                {
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int orderId = (int)((Button)sender).Content;
+                        UserOrder selectedData = _context.UserOrder
+                            .Where(x => x.Id == orderId)
+                            .FirstOrDefault();
+                        _context.UserOrder.Remove(selectedData);
+                        _context.SaveChanges();
+                    }
+                    Data(_counterparty);
+                }
             }
-            Data(_counterparty);
         }
     }
 }

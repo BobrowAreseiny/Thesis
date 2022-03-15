@@ -295,7 +295,8 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       SelectionChanged="OrderSelector"
-                      Margin="20">
+                      Margin="20"
+                      Height="870">
                     <!--<ListBoxItem/>-->
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">

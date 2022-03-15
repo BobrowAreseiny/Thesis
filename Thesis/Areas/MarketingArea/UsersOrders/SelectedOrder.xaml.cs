@@ -133,6 +133,8 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void TTN(object sender, RoutedEventArgs e)
         {
+            string commandText = string.Empty;
+            byte[] reportExcel = null;
             try
             {
                 using (ApplicationDbContent _context = new ApplicationDbContent())
@@ -141,12 +143,17 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         .Where(x => x.UserOrderId == _userOrderId)
                         .ToList();
 
-                    byte[] reportExcel = new MarketExcelGenerator().Generate(data);
-                    File.WriteAllBytes(pathToFile + $@"\TTN\Report{_context.UserOrder
+                    reportExcel = new MarketExcelGenerator().Generate(data);
+                    commandText = pathToFile + $@"\TTN\Report{_context.UserOrder
                         .Where(x => x.Id == _userOrderId)
-                        .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
+                        .FirstOrDefault().OrderNumber}.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
                 }
-                MessageBox.Show("Накладная сформирована");
+                if (MessageBox.Show($"Открыть сформированную накладную?", "Внимание",
+                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    OpenFile(commandText, reportExcel);
+                }
             }
             catch
             {
@@ -156,29 +163,41 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void Bill(object sender, RoutedEventArgs e)
         {
+            string commandText = string.Empty;
+            byte[] reportExcel = null;
             try
             {
-                if (MessageBox.Show($"Сформировать чек?", "Внимание",
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<OrderConstruction> data = _context.OrderConstruction
+                        .Where(x => x.UserOrderId == _userOrderId)
+                        .ToList();
+
+                    reportExcel = new MarketExcelGenerator().GenerateBill(data);
+                    commandText = pathToFile + $@"\Bill\Report{_context.UserOrder
+                        .Where(x => x.Id == _userOrderId)
+                        .FirstOrDefault().OrderNumber}.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+                }
+                if (MessageBox.Show($"Открыть сформированный чек?", "Внимание",
                   MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    using (ApplicationDbContent _context = new ApplicationDbContent())
-                    {
-                        List<OrderConstruction> data = _context.OrderConstruction
-                            .Where(x => x.UserOrderId == _userOrderId)
-                            .ToList();
-
-                        byte[] reportExcel = new MarketExcelGenerator().GenerateBill(data);
-                        File.WriteAllBytes(pathToFile + $@"\Bill\Report{_context.UserOrder
-                            .Where(x => x.Id == _userOrderId)
-                            .FirstOrDefault().OrderNumber}.xlsx", reportExcel);
-                        MessageBox.Show("Чек сформирован");
-                    }
+                    OpenFile(commandText, reportExcel);
                 }
             }
             catch
             {
                 MessageBox.Show("Неизвестная ошибка");
             }
+        }
+
+        private void OpenFile(string path, byte[] doc)
+        {
+            File.WriteAllBytes(path, doc);
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = path;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
         }
     }
 }

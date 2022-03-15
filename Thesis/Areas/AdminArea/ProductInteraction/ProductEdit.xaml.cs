@@ -44,75 +44,100 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _product.Sex = _context.Sex
-                        .Where(x => x.Id == ((Sex)_sex.SelectedItem).Id)
-                        .FirstOrDefault();
-                _product.Material = _context.Material
-                    .Where(x => x.Id == ((Material)_material.SelectedItem).Id)
-                    .FirstOrDefault();
-                _product.Season = _context.Season
-                    .Where(x => x.Id == ((Season)_season.SelectedItem).Id)
-                    .FirstOrDefault();
-                if (_product.Id != 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    Product data = _context.Product
-                        .Where(x => x.Id == _product.Id)
+                    _product.Sex = _context.Sex
+                            .Where(x => x.Id == ((Sex)_sex.SelectedItem).Id)
+                            .FirstOrDefault();
+                    _product.Material = _context.Material
+                        .Where(x => x.Id == ((Material)_material.SelectedItem).Id)
                         .FirstOrDefault();
-                    if (data != null)
+                    _product.Season = _context.Season
+                        .Where(x => x.Id == ((Season)_season.SelectedItem).Id)
+                        .FirstOrDefault();
+                    if (_product.Id != 0)
                     {
-                        data.Name = _product.Name;
-                        data.Price = _product.Price;
-                        data.ProductCode = _product.ProductCode;
-                        data.ProductImage = _product.ProductImage;
-                        data.Description = _product.Description;
-                        data.CountOnStorage = _product.CountOnStorage;
+                        Product data = _context.Product
+                            .Where(x => x.Id == _product.Id)
+                            .FirstOrDefault();
+                        if (data != null)
+                        {
+                            data.Name = _product.Name;
+                            data.Price = _product.Price;
+                            data.ProductCode = _product.ProductCode;
+                            data.ProductImage = _product.ProductImage;
+                            data.Description = _product.Description;
+                            data.CountOnStorage = _product.CountOnStorage;
+                        }
+                        _context.Entry(data).State = EntityState.Modified;
                     }
-                    _context.Entry(data).State = EntityState.Modified;
+                    else
+                    {
+                        _context.Product.Add(_product);
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                else
-                {
-                    _context.Product.Add(_product);
-                }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 
         private void Data(int? Id)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-
-                _material.ItemsSource = _context.Material
-                    .ToList();
-                _season.ItemsSource = _context.Season
-                    .ToList();
-                _sex.ItemsSource = _context.Sex
-                    .ToList();
-                if (Id != null)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _product = _context.Product
-                        .Where(x => x.Id == Id)
-                        .FirstOrDefault();
+                    _material.ItemsSource = _context.Material
+                        .ToList();
+                    _season.ItemsSource = _context.Season
+                        .ToList();
+                    _sex.ItemsSource = _context.Sex
+                        .ToList();
+                    if (Id != null)
+                    {
+                        _product = _context.Product
+                            .Where(x => x.Id == Id)
+                            .FirstOrDefault();
+                    }
+                    else
+                    {
+                        Product productNumber = _context.Product
+                            .OrderBy(x => x.Id)
+                            .Skip(_context.Product.Count() - 1)
+                            .FirstOrDefault();
+                        if (productNumber != null)
+                        {
+                            _product.ProductCode = (productNumber.Id + 1).ToString();
+                        }
+                    }
+                    if (_product != null)
+                    {
+                        _material.SelectedItem = _context.Material
+                            .Where(x => x.Id == _product.MaterialId)
+                            .FirstOrDefault();
+                        _season.SelectedItem = _context.Season
+                            .Where(x => x.Id == _product.SeasonId)
+                            .FirstOrDefault();
+                        _sex.SelectedItem = _context.Sex
+                            .Where(x => x.Id == _product.SexId)
+                            .FirstOrDefault();
+                    }
+                    DataContext = _product;
+                    ImageSourse(_product.ProductImage);
                 }
-                if (_product != null)
-                {
-                    _material.SelectedItem = _context.Material
-                        .Where(x => x.Id == _product.MaterialId)
-                        .FirstOrDefault();
-                    _season.SelectedItem = _context.Season
-                        .Where(x => x.Id == _product.SeasonId)
-                        .FirstOrDefault();
-                    _sex.SelectedItem = _context.Sex
-                        .Where(x => x.Id == _product.SexId)
-                        .FirstOrDefault();
-                }
-                DataContext = _product;
-                ImageSourse(_product.ProductImage);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex);
             }
         }
+
         private void ImageSourse(string Image)
         {
             try

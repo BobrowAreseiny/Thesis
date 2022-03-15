@@ -41,34 +41,41 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _address.Town = _context.Town
-                    .Where(x => x.Id == ((Town)_towns.SelectedItem).Id)
-                    .FirstOrDefault();
-                if (_address.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.Address.Add(_address);
-                }
-                else
-                {
-                    Address data = _context.Address
-                        .Where(f => f.Id == _address.Id)
-                        .Include(x => x.Town)
+                    _address.Town = _context.Town
+                        .Where(x => x.Id == ((Town)_towns.SelectedItem).Id)
                         .FirstOrDefault();
-
-                    if (data != null)
+                    if (_address.Id == 0)
                     {
-                        data.RoomNumber = _address.RoomNumber;
-                        data.Street = _address.Street;
-                        data.BuildingNumber = _address.BuildingNumber;
-                        data.AddressIndex = _address.AddressIndex;
-                        data.Town = _address.Town;
+                        _context.Address.Add(_address);
                     }
-                    _context.Entry(data).State = EntityState.Modified;
+                    else
+                    {
+                        Address data = _context.Address
+                            .Where(f => f.Id == _address.Id)
+                            .Include(x => x.Town)
+                            .FirstOrDefault();
+
+                        if (data != null)
+                        {
+                            data.RoomNumber = _address.RoomNumber;
+                            data.Street = _address.Street;
+                            data.BuildingNumber = _address.BuildingNumber;
+                            data.AddressIndex = _address.AddressIndex;
+                            data.Town = _address.Town;
+                        }
+                        _context.Entry(data).State = EntityState.Modified;
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 

@@ -132,7 +132,7 @@
                     </StackPanel>
                 </Border>
                 <Border CornerRadius="10" 
-                        Margin="10"
+                        Margin="10" MaxWidth="1300"
                         Background="#33FFFFFF">
                     <StackPanel>
                         <Label Content="Пользователь"

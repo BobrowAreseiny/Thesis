@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
     {
         private readonly ApplicationUser _user = new ApplicationUser();
         private int _counterpartyId;
+
         public AccountEdit(int counterpartyId)
         {
             InitializeComponent();
@@ -23,49 +25,60 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
         public AccountEdit(ApplicationUser user)
         {
             InitializeComponent();
-            _counterpartyId = (int)user.CounterpartyId;
-            _user = user;
+            if (user != null)
+            {
+                _counterpartyId = (int)user.CounterpartyId;
+                _user = user;
+            }
         }
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                int? roleId = (_role.SelectedItem as UserRole).Id;
-                _user.Counterparty = _context.Counterparty
-                            .Where(x => x.Id == _counterpartyId)
-                            .FirstOrDefault();
-                _user.UserRole = _context.UserRole
-                    .Where(x => x.Id == roleId)
-                    .FirstOrDefault();
-                if (_user.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.ApplicationUser.Add(_user);
-                }
-                else
-                {
-                    if (roleId != null)
-                    {
-                        ApplicationUser data = _context.ApplicationUser
-                            .Where(f => f.Id == _user.Id)
-                            .Include(x => x.Counterparty)
-                            .Include(x => x.UserRole)
-                            .FirstOrDefault();
+                    int? roleId = (_role.SelectedItem as UserRole).Id;
+                    _user.Counterparty = _context.Counterparty
+                                .Where(x => x.Id == _counterpartyId)
+                                .FirstOrDefault();
+                    _user.UserRole = _context.UserRole
+                        .Where(x => x.Id == roleId)
+                        .FirstOrDefault();
 
-                        if (data != null)
-                        {
-                            data.Email = _user.Email;
-                            data.UserPassword = Crypto.Hash(_user.UserPassword);
-                            data.Counterparty = _user.Counterparty;
-                            data.UserRole = _user.UserRole;
-                        }
-                        _context.Entry(data).State = EntityState.Modified;
+                    if (_user.Id == 0)
+                    {
+                        _context.ApplicationUser.Add(_user);
                     }
+                    else
+                    {
+                        if (roleId != null)
+                        {
+                            ApplicationUser data = _context.ApplicationUser
+                                .Where(f => f.Id == _user.Id)
+                                .Include(x => x.Counterparty)
+                                .Include(x => x.UserRole)
+                                .FirstOrDefault();
+
+                            if (data != null)
+                            {
+                                data.Email = _user.Email;
+                                data.UserPassword = Crypto.Hash(_user.UserPassword);
+                                data.Counterparty = _user.Counterparty;
+                                data.UserRole = _user.UserRole;
+                            }
+                            _context.Entry(data).State = EntityState.Modified;
+                        }
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                _context.SaveChanges();
-                NavigationService.GoBack();
             }
-        } 
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
+            }
+        }
 
         private void Exit(object sender, RoutedEventArgs e)
         {

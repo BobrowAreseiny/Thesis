@@ -64,7 +64,10 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
                 {
                     UserOrder orderEdit = _context.UserOrder
                         .FirstOrDefault(x => x.OrderNumber == item.OrderNumber);
-                    NavigationService.Navigate(new UserOrderEdit(orderEdit));
+                    if (orderEdit != null)
+                    {
+                        NavigationService.Navigate(new UserOrderEdit(orderEdit));
+                    }
                 }
             }
         }
@@ -74,22 +77,26 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             if (_orderConstruction.SelectedItem is OrderConstruction construction)
             {
                 NavigationService.Navigate(new OrderConstructionEdit(construction));
-            }         
+            }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            if (_orderConstruction.SelectedItem is OrderConstruction construction)
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                if (_orderConstruction.SelectedItem is OrderConstruction construction)
                 {
-                    var data = _context.OrderConstruction
-                        .Where(x => x.Id == construction.Id)
-                        .FirstOrDefault();
-                    _context.Entry(data).State = EntityState.Deleted;
-                    _context.SaveChanges();
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        OrderConstruction data = _context.OrderConstruction
+                            .Where(x => x.Id == construction.Id)
+                            .FirstOrDefault();
+                        _context.Entry(data).State = EntityState.Deleted;
+                        _context.SaveChanges();
+                    }
+                    Data(_userOrderId);
                 }
-                Data(_userOrderId);
             }
         }
 

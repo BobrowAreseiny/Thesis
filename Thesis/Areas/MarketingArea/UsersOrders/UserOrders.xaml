@@ -215,27 +215,36 @@
                             VerticalAlignment="Center">
                 <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Сортировка по названию: " Foreground="White"
+                    <Label Content="Сортировка по готовности: " Foreground="White"
                            FontSize="22" HorizontalAlignment="Center"
-                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                           VerticalAlignment="Center" Margin="10,0,0,0"/>
                     <Border Background="#fbbb43" BorderThickness="10"
-                            Margin="0,0,0,0" CornerRadius="9">
+                            CornerRadius="9" Margin="0 0 10 0">
                         <CheckBox IsChecked="False"
                                       Background="#444444"
                                       x:Name="_number" 
+                                      Click="NameSort"/>
+                    </Border>
+                </StackPanel>
+                <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Сортировка по дате: " Foreground="White"
+                           FontSize="22" HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                    <Border Background="#fbbb43" BorderThickness="10"
+                            Margin="70,0,0,0" CornerRadius="9">
+                        <CheckBox IsChecked="False"
+                                      Background="#444444"
+                                      x:Name="_date" 
                                       Click="DateSort"/>
                     </Border>
                 </StackPanel>
-                <!--<Button Content="Отчет по заказу" Click ="OrderReport"
-                        Margin="70,20,70,20" Height="100" 
-                        Foreground="White" Style="{StaticResource button}">
-                </Button>-->
                 <Button Click="SaleReport" 
-                                Margin="70,20,50,20" Height="40" 
-                                Foreground="#FF444444" 
-                                Style="{DynamicResource MainYellowButton}">
+                        Margin="70,20,50,20" Height="40" 
+                        Foreground="#FF444444" 
+                        Style="{DynamicResource MainYellowButton}">
                     <Button.Content>
-                        <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Horizontal" Width="180"
                                             Margin="5">
                             <Image Source="ImageDefault\report.png"
                                            Height="30"/>
@@ -245,12 +254,11 @@
                     </Button.Content>
                 </Button>
                 <Button Click="ProductReport" 
-                                Margin="70,20,50,20" Height="40" 
-                                Foreground="#FF444444" 
-                                Style="{DynamicResource MainYellowButton}">
+                        Margin="70,20,50,20" Height="40" 
+                        Foreground="#FF444444" 
+                        Style="{DynamicResource MainYellowButton}">
                     <Button.Content>
-                        <StackPanel Orientation="Horizontal"
-                                            Margin="5">
+                        <StackPanel Orientation="Horizontal" Width="180">
                             <Image Source="ImageDefault\report.png"
                                            Height="30"/>
                             <TextBlock Text="Отчет по товарам"
@@ -259,12 +267,12 @@
                     </Button.Content>
                 </Button>
                 <Button Click="TTNDel" 
-                                Margin="70,20,50,20" Height="40" 
-                                Foreground="#FF444444" 
-                                Style="{DynamicResource MainYellowButton}">
+                        Margin="70,20,50,20" Height="40" 
+                        Foreground="#FF444444" 
+                        Style="{DynamicResource MainYellowButton}">
                     <Button.Content>
                         <StackPanel Orientation="Horizontal"
-                                            Margin="5">
+                                            Margin="5" >
                             <Image Source="ImageDefault\add.png"
                                            Height="30">
                                 <Image.RenderTransform>
@@ -277,13 +285,12 @@
                     </Button.Content>
                 </Button>
                 <Button Click="BillDel" 
-                                Margin="70,20,50,20" Height="40" 
-                                Foreground="#FF444444" 
-                                Style="{DynamicResource MainYellowButton}">
+                        Margin="70,20,50,20" Height="40" 
+                        Foreground="#FF444444" 
+                        Style="{DynamicResource MainYellowButton}">
                     <Button.Content>
-                        <StackPanel Orientation="Horizontal"
-                                            Margin="5"
-                                    >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
+                                    Width="180">
                             <Image Source="ImageDefault\add.png"
                                            Height="30">
                                 <Image.RenderTransform>
@@ -299,9 +306,10 @@
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2">
             <ListView x:Name="_usersOrders" Background="Transparent"
-                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  SelectionChanged="OrderSelector">
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  SelectionChanged="OrderSelector" Height="900" Width="1500"
+                  Margin="10,10,200,200">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="ListBoxItem.Margin" Value="5"/>
@@ -353,25 +361,25 @@
                                             VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
                                             Background="#FF988AAA" Height="180">
                                             <StackPanel>
-                                                    <Label Content="{Binding Counterparty}" Height="30"
+                                                <Label Content="{Binding Counterparty}" Height="30"
                                                    VerticalAlignment="Top" Margin="5,20,5,0" FontFamily="Calibri" 
                                                    FontSize="15" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center">
-                                                    </Label>
-                                                    <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
+                                                </Label>
+                                                <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
                                                    Margin="5,20,5,0" FontFamily="Calibri" FontSize="15" FontWeight="Bold" 
                                                    Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                    </Label>
-                                                    <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
+                                                </Label>
+                                                <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
                                                             Height="30" Padding="0.5" CornerRadius="5" Background="Black">
-                                                        <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
+                                                    <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
                                                              Value="{Binding OrderConstructionMade}" Margin="2" Style="{DynamicResource progressBar}">
-                                                        </ProgressBar>
-                                                    </Border>
-                                                </StackPanel>
+                                                    </ProgressBar>
+                                                </Border>
+                                            </StackPanel>
                                         </Border>
                                         <DockPanel Background="#4C000000" LastChildFill="True"
                                                Visibility="Visible" Opacity="0" Name="BlindArea">
-                                           
+
                                         </DockPanel>
                                         <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
                                                     HorizontalAlignment="Right" Background="#FFFBBB43">

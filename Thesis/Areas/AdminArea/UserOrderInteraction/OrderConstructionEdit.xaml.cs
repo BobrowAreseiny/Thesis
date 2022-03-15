@@ -43,41 +43,48 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _construction.ProductSize = _context.ProductSize
-                        .Where(x => x.Id == ((ProductSize)_productSize.SelectedItem).Id)
-                        .FirstOrDefault();
-                _construction.UserOrder = _context.UserOrder
-                    .Where(x => x.Id == ((UserOrder)_userOrder.SelectedItem).Id)
-                    .FirstOrDefault();
-
-                if (_construction.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.OrderConstruction.Add(_construction);
-                }
-                else
-                {
-                    OrderConstruction data = _context.OrderConstruction
-                        .Where(f => f.Id == _construction.Id)
-                        .Include(x => x.ProductSize)
-                        .Include(x => x.UserOrder)
+                    _construction.ProductSize = _context.ProductSize
+                            .Where(x => x.Id == ((ProductSize)_productSize.SelectedItem).Id)
+                            .FirstOrDefault();
+                    _construction.UserOrder = _context.UserOrder
+                        .Where(x => x.Id == ((UserOrder)_userOrder.SelectedItem).Id)
                         .FirstOrDefault();
 
-                    if (data != null)
+                    if (_construction.Id == 0)
                     {
-                        data.Price = _construction.Price;
-                        data.Status = _construction.Status;
-                        data.NumberOfProucts = _construction.NumberOfProucts;
-                        data.Amount = _construction.Amount;
-                        data.ProductSize = _construction.ProductSize;
-                        data.UserOrder = _construction.UserOrder;
+                        _context.OrderConstruction.Add(_construction);
                     }
-                    _context.Entry(data).State = EntityState.Modified;
+                    else
+                    {
+                        OrderConstruction data = _context.OrderConstruction
+                            .Where(f => f.Id == _construction.Id)
+                            .Include(x => x.ProductSize)
+                            .Include(x => x.UserOrder)
+                            .FirstOrDefault();
+
+                        if (data != null)
+                        {
+                            data.Price = _construction.Price;
+                            data.Status = _construction.Status;
+                            data.NumberOfProucts = _construction.NumberOfProucts;
+                            data.Amount = _construction.Amount;
+                            data.ProductSize = _construction.ProductSize;
+                            data.UserOrder = _construction.UserOrder;
+                        }
+                        _context.Entry(data).State = EntityState.Modified;
+                    }
+                    _context.SaveChanges();
                 }
-                _context.SaveChanges();
+                NavigationService.GoBack();
             }
-            NavigationService.GoBack();
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
+            }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -87,25 +94,43 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Data(OrderConstruction construction)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _productSize.ItemsSource = _construction.Id != 0
-                    ? _context.ProductSize.Where(x => x.ProductId == construction.ProductSize.ProductId).ToList()
-                    : _context.ProductSize.ToList();
-                _userOrder.ItemsSource = _context.UserOrder.ToList();
-
-                if (_construction.Id != 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _userOrder.SelectedItem = _context.UserOrder
-                        .Where(x => x.Id == construction.UserOrderId)
-                        .FirstOrDefault();
-                    _productSize.SelectedItem = _context.ProductSize
-                        .Where(x => x.Id == construction.ProductSizeId)
-                        .FirstOrDefault();
+                    _productSize.ItemsSource = _construction.Id != 0
+                        ? _context.ProductSize.Where(x => x.ProductId == construction.ProductSize.ProductId).ToList()
+                        : _context.ProductSize.ToList();
+                    _userOrder.ItemsSource = _context.UserOrder.ToList();
+
+                    if (_construction.Id != 0)
+                    {
+                        _userOrder.SelectedItem = _context.UserOrder
+                            .Where(x => x.Id == construction.UserOrderId)
+                            .FirstOrDefault();
+                        _productSize.SelectedItem = _context.ProductSize
+                            .Where(x => x.Id == construction.ProductSizeId)
+                            .FirstOrDefault();
+                    }
+                    else
+                    {
+                        OrderConstruction orderConstructionNumber = _context.OrderConstruction
+                            .OrderBy(x => x.Id)
+                            .Skip(_context.OrderConstruction.Count() - 1)
+                            .FirstOrDefault();
+
+                        _construction.Status = "Ожидание";
+                        _construction.NumberOfProucts = orderConstructionNumber.Id + 1;
+                    }
                 }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
     }
+
     [ValueConversion(typeof(decimal), typeof(string))]
     public class CostConverter : IValueConverter
     {
@@ -132,6 +157,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             return value;
         }
     }
+
     [ValueConversion(typeof(decimal), typeof(string))]
     public class CountConverter : IValueConverter
     {
@@ -162,7 +188,7 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
             {
 
             }
-             return value;
+            return value;
         }
     }
 }

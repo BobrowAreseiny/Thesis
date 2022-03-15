@@ -34,6 +34,8 @@ namespace Thesis.Areas.UserArea.UserBasket
             {
                 _basket = basket;
                 Data();
+                DateTime date =  DateTime.Now;
+                cldSample.DisplayDateStart = date.AddDays(30);
             }
         }
 
@@ -73,39 +75,41 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Buy(object sender, RoutedEventArgs e)
         {
-            string indexRegex = @"^\d{5}(?:[-\s]\d{4})?$";
+            string indexRegex = @"^\d{6}(?:[-\s]\d{4})?$";
             int? _townId;
-
-            try
+            if (cldSample.SelectedDate != null)
             {
-                if (CountIsValid(street) & CountIsValid(buildingNumber) & CountIsValid(roomNumber) & CountIsValid(townName) & DataRegex(addressIndex, indexRegex) & dateOfShipment != null)
+                try
                 {
-                    _townId = TownTable(townName.Text);
-                    if (_townId != null)
+                    if (CountIsValid(street) & CountIsValid(buildingNumber) & CountIsValid(roomNumber) & CountIsValid(townName) & DataRegex(addressIndex, indexRegex))
                     {
-                        int? accountId = AdressTable(street.Text, buildingNumber.Text, roomNumber.Text, addressIndex.Text, (int)_townId);
-                        if (accountId != null)
+                        _townId = TownTable(townName.Text);
+                        if (_townId != null)
                         {
-                            if (CounterpartyEdit(accountId))
+                            int? accountId = AdressTable(street.Text, buildingNumber.Text, roomNumber.Text, addressIndex.Text, (int)_townId);
+                            if (accountId != null)
                             {
-                                int? orderId = AddUserOrder();
-                                if (orderId != null)
+                                if (CounterpartyEdit(accountId))
                                 {
-                                    if (AddOrderConstruction(orderId))
+                                    int? orderId = AddUserOrder();
+                                    if (orderId != null)
                                     {
-                                        Notify(orderId);
-                                        new ProductsCatalog(_account, null).Show();
-                                        Close();
+                                        if (AddOrderConstruction(orderId))
+                                        {
+                                            Notify(orderId);
+                                            new ProductsCatalog(_account, null).Show();
+                                            Close();
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Неизвестная ошибка");
+                catch
+                {
+                    MessageBox.Show("Неизвестная ошибка");
+                }
             }
         }
 
@@ -177,7 +181,7 @@ namespace Thesis.Areas.UserArea.UserBasket
                     Status = "Ожидание",
                     TotalAmount = 0,
                     OrderNumber = orderNumber.OrderNumber + 1,
-                    DateOfShipment = DateTime.Now.AddDays(Convert.ToInt32(dateOfShipment.Text)),
+                    DateOfShipment = cldSample.SelectedDate,
                 };
                 _context.UserOrder.Add(order);
                 _context.SaveChanges();
@@ -282,7 +286,9 @@ namespace Thesis.Areas.UserArea.UserBasket
             int _townId = 0;
             using (ApplicationDbContent _context = new ApplicationDbContent())
             {
-                Town town = _context.Town.Where(x => x.TownName.ToLower() == townName.ToLower()).FirstOrDefault();
+                Town town = _context.Town
+                    .Where(x => x.TownName.ToLower() == townName.ToLower())
+                    .FirstOrDefault();
 
                 if (town == null)
                 {

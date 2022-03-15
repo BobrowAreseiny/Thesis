@@ -26,8 +26,11 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Buy(object sender, RoutedEventArgs e)
         {
-            new Purchase(_account, _basket).Show();
-            Close();
+            if (_basket != null)
+            {
+                new Purchase(_account, _basket).Show();
+                Close();
+            }
         }
 
         private void ProductCatalog(object sender, RoutedEventArgs e)

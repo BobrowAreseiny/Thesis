@@ -387,9 +387,6 @@
     <Compile Include="Data\Model\Sex.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>
-    <Compile Include="Data\Model\sysdiagrams.cs">
-      <DependentUpon>Database.tt</DependentUpon>
-    </Compile>
     <Compile Include="Data\Model\Town.cs">
       <DependentUpon>Database.tt</DependentUpon>
     </Compile>

@@ -43,36 +43,43 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _order.Counterparty = _context.Counterparty
-                        .Where(x => x.Id == ((Counterparty)_counterparty.SelectedItem).Id)
-                        .FirstOrDefault();
-                if (_order.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.UserOrder.Add(_order);
-                }
-                else
-                {
-                    UserOrder data = _context.UserOrder
-                        .Where(f => f.Id == _order.Id)
-                        .Include(x => x.Counterparty)
-                        .FirstOrDefault();
-                    if (data != null)
+                    _order.Counterparty = _context.Counterparty
+                            .Where(x => x.Id == ((Counterparty)_counterparty.SelectedItem).Id)
+                            .FirstOrDefault();
+                    if (_order.Id == 0)
                     {
-                        data.OrderNumber = _order.OrderNumber;
-                        data.DateOfPayment = _order.DateOfPayment;
-                        data.Status = _order.Status;
-                        data.DateOfShipment = _order.DateOfShipment;
-                        data.OrderNumber = _order.OrderNumber;
-                        data.TotalAmount = _order.TotalAmount;
-                        data.Counterparty = _order.Counterparty;
+                        _context.UserOrder.Add(_order);
                     }
-                    _context.Entry(data).State = EntityState.Modified;
+                    else
+                    {
+                        UserOrder data = _context.UserOrder
+                            .Where(f => f.Id == _order.Id)
+                            .Include(x => x.Counterparty)
+                            .FirstOrDefault();
+                        if (data != null)
+                        {
+                            data.OrderNumber = _order.OrderNumber;
+                            data.DateOfPayment = _order.DateOfPayment;
+                            data.Status = _order.Status;
+                            data.DateOfShipment = _order.DateOfShipment;
+                            data.OrderNumber = _order.OrderNumber;
+                            data.TotalAmount = _order.TotalAmount;
+                            data.Counterparty = _order.Counterparty;
+                        }
+                        _context.Entry(data).State = EntityState.Modified;
 
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 
@@ -83,15 +90,35 @@ namespace Thesis.Areas.AdminArea.UserOrderInteraction
 
         private void Data()
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                if (_order.Id != 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _counterparty.SelectedItem = _context.Counterparty
-                     .Where(x => x.Id == _order.CounterpartyId)
-                     .FirstOrDefault();
+                    if (_order.Id != 0)
+                    {
+                        _counterparty.SelectedItem = _context.Counterparty
+                         .Where(x => x.Id == _order.CounterpartyId)
+                         .FirstOrDefault();
+                    }
+                    else
+                    {
+                        _order.Status = "Ожидание";
+                        UserOrder userOrderNumber = _context.UserOrder
+                            .OrderBy(x => x.Id)
+                            .Skip(_context.UserOrder.Count() - 1)
+                            .FirstOrDefault();
+
+                        if (userOrderNumber != null)
+                        {
+                            _order.OrderNumber = userOrderNumber.Id + 1;
+                        }
+                    }
+                    _counterparty.ItemsSource = _context.Counterparty.ToList();
                 }
-                _counterparty.ItemsSource = _context.Counterparty.ToList();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
     }

@@ -16,6 +16,9 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
     /// </summary>
     public partial class CreateAccountWindow : Window
     {
+        private int cnt = 0;
+        private readonly int maxLenght = 11;
+
         public CreateAccountWindow()
         {
             InitializeComponent();
@@ -34,7 +37,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            string phoneRegex = @"(8 0(25|29|33|34) ([0-9]{3}( [0-9]{2}){2}))";
+            string phoneRegex = @"(8 0(25|29|33|34) ([0-9]{3}) ([0-9]{2}) ([0-9]{2}))";
             int? _counterpartyId;
 
 
@@ -46,7 +49,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                     ApplicationUser user = ApplicationUserTable(email.Text, Crypto.Hash(passward.Password), (int)_counterpartyId);
                     if (user != null)
                     {
-                        //new MainWindow(user).Show();
                         new ProductsCatalog(user).Show();
                         Close();
                     }
@@ -103,27 +105,31 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         private void NumericOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsNumeric(e.Text);
-            var tb = (sender as TextBox);
-            if (!Char.IsDigit(e.Text, 0))
+            TextBox tb = sender as TextBox;
+            if (!char.IsDigit(e.Text, 0))
             {
                 e.Handled = true;
                 return;
             }
-            else cnt++;
+            else
+            {
+                cnt++;
+            }
+
             if (cnt > maxLenght)
             {
                 cnt = maxLenght;
                 e.Handled = true;
                 return;
             }
-            tb.Text = tb.Text + e.Text;
-            if (cnt == 3 || cnt == 6)
+            tb.Text += e.Text;
+            if (cnt == 1 || cnt == 4 || cnt == 7)
             {
-                tb.Text = tb.Text + " ";
+                tb.Text += " ";
             }
             else if (cnt == 9)
             {
-                tb.Text = tb.Text + " ";
+                tb.Text += " ";
             }
             e.Handled = true;
         }
@@ -133,8 +139,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             return reg.IsMatch(str);
         }
 
-        private int cnt = 0;
-        private int maxLenght = 11;
         private void TextOnly(object sender, TextCompositionEventArgs e)
         {
             e.Handled = IsText(e.Text);
@@ -181,7 +185,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             }
         }
 
-        private ApplicationUser ApplicationUserTable(string email, string userPassword, int counterpartyId, int roleId = 2)
+        private ApplicationUser ApplicationUserTable(string email, string userPassword, int counterpartyId, int roleId = 3)
         {
             try
             {
@@ -207,7 +211,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private void telephone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var tb = (sender as TextBox);
+            TextBox tb = sender as TextBox;
             tb.CaretIndex = tb.Text.Length;
             cnt = tb.Text.Replace(" ", "").Replace("-", "").Length;
         }

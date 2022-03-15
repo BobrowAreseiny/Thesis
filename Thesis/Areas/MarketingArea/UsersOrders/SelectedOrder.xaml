@@ -307,7 +307,7 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.Row="2"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden" HeadersVisibility="All"
                   HorizontalGridLinesBrush="{x:Null}" IsReadOnly="True" FrozenColumnCount="1"                       
-                  MinColumnWidth="50" FocusVisualStyle="{x:Null}" Margin="10,10,10,10">
+                  MinColumnWidth="50" FocusVisualStyle="{x:Null}" Margin="10,10,500,300">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Код продукта" Binding ="{Binding NumberOfProucts}"/>
                 <DataGridTextColumn Header="Цена" Binding ="{Binding Price}"/>

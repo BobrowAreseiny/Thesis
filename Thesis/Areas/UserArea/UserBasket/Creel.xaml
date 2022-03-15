@@ -86,15 +86,13 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="0">
-                <ListView x:Name="_creel" Margin="50 50 0 50"
+                <ListView x:Name="_creel" 
                           Width="1500"
+                          Margin="50 50 0 50"
                           HorizontalAlignment="Left"
                           ScrollViewer.CanContentScroll="False"
-                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                       ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                    <!--<ListViewItem/>                    
-                    <ListViewItem/>                    
-                    <ListViewItem/>-->
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="{x:Type ListViewItem}">
                             <Setter Property="ListBoxItem.Margin" Value="5"/>
@@ -220,101 +218,6 @@
                         </ItemsPanelTemplate>
                     </ListView.ItemsPanel>
                 </ListView>
-                <!--<ListView x:Name="frw" Margin="50"
-                          ScrollViewer.CanContentScroll="False">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="ListBoxItem.Margin" Value="5"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
-                                                Background="Transparent" Height="300" Width="800">
-                                            <Grid>
-                                                <Grid.Triggers>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                                     Storyboard.TargetName="Blure"
-                                                                                     From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                    <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                        <BeginStoryboard>
-                                                            <Storyboard>
-                                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                                                     Storyboard.TargetName="Blure" 
-                                                                                     From="1.0" To="0" Duration="0:0:0.3"/>
-                                                            </Storyboard>
-                                                        </BeginStoryboard>
-                                                    </EventTrigger>
-                                                </Grid.Triggers>
-                                                <Border Width="250" HorizontalAlignment="Left" Background="Black"
-                                                            CornerRadius="10" BorderThickness="3">
-                                                    <Image Source="{Binding Image}" Margin="5"/>
-                                                </Border>
-                                                <Label Content="{Binding Name}" 
-                                                       FontFamily="Calibri" VerticalAlignment="Center"
-                                                       FontSize="30" FontWeight="Bold" Foreground="White" 
-                                                       HorizontalAlignment="Left" Margin="300,0,0,200">
-                                                </Label>
-                                                <Label Content="{Binding Size}" FontWeight="Bold"
-                                                       FontSize="25" Foreground="White" 
-                                                       FontFamily="Calibri" VerticalAlignment="Center"
-                                                       HorizontalAlignment="Left" Margin="390,0,0,0">
-                                                </Label>
-                                                <Label Content="Размер: " FontWeight="Bold"
-                                                       FontSize="25" Foreground="White" 
-                                                       FontFamily="Calibri" VerticalAlignment="Center"
-                                                       HorizontalAlignment="Left" Margin="300,0,0,0">
-                                                </Label>
-                                                <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
-                                                        HorizontalAlignment="Right" Background="#FFFBBB43">
-                                                    <Grid>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <Label Content="Количество: " FontWeight="Bold"
-                                                                   FontSize="22" Foreground="White" 
-                                                                   FontFamily="Calibri" VerticalAlignment="Bottom" 
-                                                                   HorizontalAlignment="Right">
-                                                            </Label>
-                                                            <Label Content="{Binding Count}" FontWeight="Bold"
-                                                                   FontSize="22" Foreground="White" 
-                                                                   FontFamily="Calibri" VerticalAlignment="Bottom" 
-                                                                   HorizontalAlignment="Right">
-                                                            </Label>
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Border>
-                                                <Border Background="#4C000000" CornerRadius="10" BorderThickness="3"
-                                                            Visibility="Visible" Opacity="0" Name="Blure">
-                                                    <Grid>
-                                                        <Border Background="Black" CornerRadius="10" BorderThickness="3" 
-                                                                    HorizontalAlignment="Right" VerticalAlignment="Top">
-                                                            <Button Height="50" Width="50" Click="Delete" BorderBrush="Transparent"
-                                                                        Margin="5" Background="Transparent" Content="{Binding SizeId}"/>
-                                                        </Border>
-                                                        <Border Background="Black" CornerRadius="10" BorderThickness="3"
-                                                                    Height="70" Width="200">
-                                                            <Button BorderBrush="Transparent" Margin="5" 
-                                                                        Background="Transparent" Click="Edit" Content="{Binding SizeId}"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </Border>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Vertical" Margin="20"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>-->
                 <Button Margin="100" 
                         Height="70"
                         Click="Buy"
