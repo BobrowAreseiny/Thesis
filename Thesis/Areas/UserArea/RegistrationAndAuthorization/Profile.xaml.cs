@@ -65,7 +65,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             {
                 _usersOrders.ItemsSource = _data;
             }
-            email.Text = _account.Email;
         }
 
         private void Sherch(object sender, TextChangedEventArgs e)
@@ -84,74 +83,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                 _usersOrders.ItemsSource = _data;
             }
         }
-
-
-        private void Edit(object sender, RoutedEventArgs e)
-        {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                ApplicationUser user = _context.ApplicationUser
-                            .Where(x => x.Id == _account.Id)
-                            .FirstOrDefault();
-                if (user != null)
-                {
-                    if (EmailIsValid(email.Text) && user.UserPassword == Crypto.Hash(passward.Password))
-                    {
-                        user.Email = email.Text;
-                        passward.BorderBrush = Brushes.White;
-                    }
-                    else
-                    {
-                        passward.BorderBrush = Brushes.Red;
-                    }
-                    if (PasswordIsValid())
-                    {
-                        user.UserPassword = Crypto.Hash(newPassward.Password);
-                    }
-                    _context.SaveChanges(); 
-                    MessageBox.Show("Данные успешно изменены.// Стоит поменять на нормальный вывод");
-                }
-            }
-           
-        }
-
-        private bool EmailIsValid(string emailaddress)
-        {
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
-
-                return true;
-            }
-            catch (FormatException)
-            {
-                email.BorderBrush = Brushes.Red;
-                return false;
-            }
-        }
-        private bool PasswordIsValid()
-        {
-            try
-            {
-                if (_account.UserPassword == Crypto.Hash(passward.Password) && newPassward.Password.Length > 4)
-                {
-                    return true;
-                }
-                else
-                {
-                    passward.BorderBrush = Brushes.Red;
-                    newPassward.BorderBrush = Brushes.Red;
-                }
-                return false;
-            }
-            catch (FormatException)
-            {
-                passward.BorderBrush = Brushes.Red;
-                newPassward.BorderBrush = Brushes.Red;
-                return false;
-            }
-        }
-
 
         private void Help(object sender, RoutedEventArgs e)
         {

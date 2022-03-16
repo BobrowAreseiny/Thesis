@@ -39,9 +39,9 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
         {
             string phoneRegex = @"(8 0(25|29|33|34) ([0-9]{3}) ([0-9]{2}) ([0-9]{2}))";
             int? _counterpartyId;
+            BrushesWhite();
 
-
-            if (EmailIsValid(email.Text) & CountIsValid(fio) & DataRegex(telephone, phoneRegex) & (passward.Password == confirmPassward.Password))
+            if (EmailIsValid(email.Text) & CountIsValid(fio) & CountIsValid(firm) & DataRegex(telephone, phoneRegex) & (passward.Password == confirmPassward.Password) & passward.Password.Length >= 5)
             {
                 _counterpartyId = CounterpartyTable(telephone.Text, fio.Text, firm.Text, null);
                 if (_counterpartyId != null)
@@ -61,6 +61,16 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             }
         }
 
+        private void BrushesWhite()
+        {
+            passward.BorderBrush = Brushes.White;
+            confirmPassward.BorderBrush = Brushes.White;
+            email.BorderBrush = Brushes.White;
+            firm.BorderBrush = Brushes.White;
+            fio.BorderBrush = Brushes.White;
+            telephone.BorderBrush = Brushes.White;
+        }
+
         private bool EmailIsValid(string emailaddress)
         {
             try
@@ -69,7 +79,7 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
                 return true;
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 email.BorderBrush = Brushes.Red;
                 return false;
@@ -78,13 +88,13 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
 
         private bool CountIsValid(TextBox data)
         {
-            if (data.Text.Length < 100)
+            if (data.Text.Length < 100 && data.Text.Length > 5)
             {
                 return true;
             }
             else
             {
-                data.Background = Brushes.Red;
+                data.BorderBrush = Brushes.Red;
             }
             return false;
         }

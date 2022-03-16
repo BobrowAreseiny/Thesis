@@ -78,11 +78,15 @@
             <Grid Grid.Row="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Grid Width="700" HorizontalAlignment="Left" Height="1"
-                                  Background="#3FFFFFFF" Margin="150,0,0,0"/>
+                          Background="#3FFFFFFF" Margin="90,0,0,0"/>
                     <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
-                                 Content="Каталог товаров" Click="ProductCatalog"/>
+                            Content="Каталог товаров" Click="ProductCatalog"/>
+                    <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
+                            Content="Профиль" Click="Profile"/>
+                    <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
+                           Content="Справка" Click="Help"/>
                     <Grid Width="700" HorizontalAlignment="Left" Height="1"
-                                  Background="#3FFFFFFF" Margin="20,0,100,0"/>
+                          Background="#3FFFFFFF" Margin="20,0,100,0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" Grid.Column="0">

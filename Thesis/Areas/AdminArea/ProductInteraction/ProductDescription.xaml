@@ -124,7 +124,7 @@
                         </StackPanel>
                     </Border>
                 </Grid>
-                <Grid Grid.Row="2" Grid.Column="3">
+                <Grid Grid.Row="2" Grid.Column="3" MaxWidth="1300">
                     <Border CornerRadius="10" 
                         Margin="10"
                         Background="#33FFFFFF">

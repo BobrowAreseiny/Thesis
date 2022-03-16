@@ -103,7 +103,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             _number.IsChecked = false;
             List<OrderData> data = _data
-                .Where(x => x.OrderNumber.Value.ToString() == textSearch.Text)
+                .Where(x => x.OrderNumber.Value.ToString().Contains(textSearch.Text))
                 .ToList();
 
             if (data != null)

@@ -43,9 +43,7 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private void Data()
         {
             using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                //if (_context.Product.Count() == _staticData.Count()) 
-                //{
+            {             
                 _data = new List<DataProduct>();
                 foreach (Product item in _context.Product.Take(productsCount).ToList())
                 {
@@ -60,7 +58,6 @@ namespace Thesis.Areas.UserArea.ProductsWindows
                 _material.ItemsSource = _context.Material.ToList();
                 _sex.ItemsSource = _context.Sex.ToList();
                 _season.ItemsSource = _context.Season.ToList();
-                // }
             }
         }
 
@@ -85,25 +82,25 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private void NameSort(object sender, RoutedEventArgs e)
         {
             _data = _data.OrderBy(x => x.Name).ToList();
-            DropComboItems();
+            _date.IsChecked = false;
+            _cost.IsChecked = false;
             DataSort(_data);
-            _name.IsChecked = true;
         }
 
         private void DateSort(object sender, RoutedEventArgs e)
         {
             _data = _data.OrderBy(x => x.DateOfCreation).ToList();
-            DropComboItems();
+            _name.IsChecked = false;
+            _cost.IsChecked = false;
             DataSort(_data);
-            _date.IsChecked = false;
         }
 
         private void CostSort(object sender, RoutedEventArgs e)
         {
             _data = _data.OrderByDescending(x => x.Price).ToList();
-            DropComboItems();
+            _date.IsChecked = false;
+            _name.IsChecked = false;
             DataSort(_data);
-            _cost.IsChecked = false;
         }
 
         private void ChangeValueComboBox(object sender, SelectionChangedEventArgs e)
@@ -123,6 +120,9 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void DropSettings(object sender, RoutedEventArgs e)
         {
+            _material.SelectedItem = null;
+            _sex.SelectedItem = null;
+            _season.SelectedItem = null;
             DropComboItems();
             DataSort(_staticData);
         }

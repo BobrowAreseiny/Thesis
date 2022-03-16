@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Thesis.Areas.UserArea.ProductsWindows;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea.UserBasket
@@ -94,6 +97,28 @@ namespace Thesis.Areas.UserArea.UserBasket
                     Data();
                 }
             }
-        }      
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
+        }
     }
 }
