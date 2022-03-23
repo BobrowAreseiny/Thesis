@@ -3,8 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:databinding="clr-namespace:Thesis.Areas.AdminArea.UserOrderInteraction"
       mc:Ignorable="d"
-      Title="OrderConstructionEdit" Height="692" Width="932">
+      Title="OrderConstructionEdit" Height="600" Width="700">
     <Page.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
@@ -18,7 +19,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style x:Key="a" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FF060303" />
+            <Setter Property="Background" Value="#00151515" />
             <Setter Property="Foreground" Value="#4CFFFFFF" />
             <Setter Property="Height" Value="40"/>
             <Setter Property="Width" Value="80"/>
@@ -47,20 +48,14 @@
                 </EventTrigger>
             </Style.Triggers>
         </Style>
+        <databinding:CostConverter x:Key="CostConverter"/>
+        <databinding:CountConverter x:Key="CountConverter"/>
     </Page.Resources>
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="#FF251515" Offset="0.378"/>
-                <GradientStop Color="#FF1D1313" Offset="0.997"/>
-                <GradientStop Color="#FF2C1E1E" Offset="0.734"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Border CornerRadius="30" Background="Black">
+        <Border CornerRadius="30" Background="#7F151515">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="500"/>
+                    <ColumnDefinition Width="300"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -72,46 +67,127 @@
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
                     <RowDefinition Height="70"/>
-                    <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-                <Button Style="{StaticResource a}" Grid.Column="1" Grid.Row="0" Content="ВЫХОД" Click="Exit"
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="1"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="2"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="3"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="4"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="5"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Border Grid.ColumnSpan="2" 
+                        Grid.Row="6"
+                        Background="#CC6C6C6C"
+                        CornerRadius="15"
+                        Margin="15 5 15 5"/>
+                <Button Style="{StaticResource a}" Grid.Column="1" Grid.Row="0"
+                        Content="ВЫХОД" Click="Exit"
                             VerticalAlignment="Center" HorizontalAlignment="Right" 
-                            Width="110" Height="45" FontSize="25" FontWeight="Bold" Margin="0,13,10,13" />
-
-                <TextBlock Text="Номер продукта" Grid.Row="1" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                            Width="110" Height="45" FontSize="25" FontWeight="Bold" 
+                        Margin="0,13,10,13" />
+                <TextBlock Text="Номер продукта"
+                           FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" 
+                           VerticalAlignment ="Center"  
+                           Grid.Row="1"
+                           Grid.Column="0" />
                 <TextBlock Text="Количество" Grid.Row="2" Grid.Column="0"
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" VerticalAlignment ="Center"/>
                 <TextBlock Text="Цена" Grid.Row="3" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" VerticalAlignment ="Center"/>
                 <TextBlock Text="Статус" Grid.Row="4" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" VerticalAlignment ="Center"/>
                 <TextBlock Text="Заказ пользователя" Grid.Row="5" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" VerticalAlignment ="Center"/>
                 <TextBlock Text="Размер" Grid.Row="6" Grid.Column="0" 
-                           HorizontalAlignment="Center" VerticalAlignment ="Center"/>
+                             FontSize="25"
+                           Margin=" 0 0 40 0"
+                           FontWeight="SemiBold"
+                           FontFamily="Calibri"
+                           HorizontalAlignment="Right" VerticalAlignment ="Center"/>
 
-                <TextBox Margin="20,10,0,10"  Text="{Binding NumberOfProucts}" Grid.Row="1" 
-                         Grid.Column ="1" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Margin="20,10,0,10" Text="{Binding Amount}" Grid.Row="2" 
-                         Grid.Column ="1" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Margin="20,11,0,10" Text="{Binding Price}" Grid.Row="3" 
-                         Grid.Column ="1" Width="250" HorizontalAlignment="Left"/>
-                <TextBox Margin="20,10,0,10" Text="{Binding Status}" Grid.Row="4" 
-                         Grid.Column="1" Width="250" HorizontalAlignment="Left"/>
-
-                <ComboBox FontSize="15" Style="{StaticResource MaterialDesignFilledComboBox}" 
-                          Background="#7FFFFFFF" Margin="20,11,0,10"
-                          Grid.Row="5" Grid.Column ="1" Width="250" HorizontalAlignment="Left"
-                          DisplayMemberPath="OrderNumber" x:Name="_userOrder" Foreground="Black"/>
-
-                <ComboBox FontSize="15" Style="{StaticResource MaterialDesignFilledComboBox}" 
-                          Background="#7FFFFFFF" Margin="20,10,0,10" 
-                          Grid.Row="6" Grid.Column ="1" Width="250" HorizontalAlignment="Left"
-                          DisplayMemberPath="Size" x:Name="_productSize" Foreground="Black" />
-
+                <TextBox Text="{Binding NumberOfProucts}" 
+                         Grid.Row="1" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"
+                         Grid.Column ="1" Width="350" />
+                <TextBox Text="{Binding Amount, ValidatesOnExceptions = True, Converter={StaticResource CountConverter}}" 
+                         Grid.Row="2" 
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         Grid.Column ="1" Width="350" VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding Price, ValidatesOnExceptions = True, Converter={StaticResource CostConverter}}" Grid.Row="3" 
+                           Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         Grid.Column ="1" Width="350" VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding Status}" Grid.Row="4" 
+                           Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         BorderBrush="#abadb3"
+                         Foreground="#abadb3"
+                         Grid.Column="1" Width="350" VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                <ComboBox FontSize="15" 
+                          Grid.Row="5" Grid.Column ="1" 
+                          Width="350" 
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          BorderBrush="#abadb3"
+                          Foreground="#abadb3"
+                          DisplayMemberPath="OrderNumber" 
+                          x:Name="_userOrder"/>
+                <ComboBox FontSize="15" Style="{StaticResource MaterialDesignOutlinedComboBox}" 
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          BorderBrush="#abadb3"
+                          Grid.Row="6" Grid.Column ="1" Width="350" 
+                          DisplayMemberPath="Size" x:Name="_productSize" Foreground="#abadb3"/>
                 <Button FontSize="25" Style="{StaticResource a}" Background="Transparent"
-                     FontWeight="Bold"   Grid.Row="7" Grid.Column="1" HorizontalAlignment ="Right" Content="ЗАПИСАТЬ"
+                     FontWeight="Bold"   Grid.Row="6" Grid.Column="1" HorizontalAlignment ="Right" Content="ЗАПИСАТЬ"
                  VerticalAlignment="Bottom" Click="Add" Margin="0,0,10,-50" Width="152" />
             </Grid>
         </Border>

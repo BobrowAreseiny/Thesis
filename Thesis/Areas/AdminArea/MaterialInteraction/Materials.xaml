@@ -56,104 +56,126 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-              HorizontalAlignment="Center" VerticalAlignment="Center" Width="1200" >
+        <StackPanel>
             <StackPanel>
-                <Border Background="#4CFFFFFF" Height="45" CornerRadius="23">
-                    <TextBox Foreground="White" Padding="0,15,50,0" Margin="25,0,25,0"
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+              HorizontalAlignment="Center" VerticalAlignment="Center" Width="1200" >
+                    <StackPanel>
+                        <Border Background="#4CFFFFFF" Height="45" CornerRadius="23">
+                            <TextBox Foreground="White" Padding="0,15,50,0" Margin="25,0,25,0"
                              TextWrapping="Wrap" materialDesign:HintAssist.Hint="Поиск" x:Name="textSearch" 
                              FontFamily="Arial Black" TextChanged="Sherch"/>
-                </Border>
-            </StackPanel>
-        </Grid>
-        
-        <Grid Grid.Column="0" Grid.Row="2" VerticalAlignment="Top">
-            <StackPanel Margin="0,20,0,20" Orientation="Vertical"
-                            VerticalAlignment="Center">
-                <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
+                        </Border>
+                    </StackPanel>
+                </Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <StackPanel Margin="0,20,0,20" Orientation="Horizontal"
                             HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Сортировка по названию: " Foreground="White"
+                        <Label Content="Сортировка по названию: " Foreground="White"
                            FontSize="22" HorizontalAlignment="Center"
                            VerticalAlignment="Center" Margin="0,0,10,0"/>
-                    <Border Background="White" BorderThickness="10" CornerRadius="11">
-                        <CheckBox IsChecked="False" x:Name="_name" Click="NameSort"/>
-                    </Border>
+                        <Border Background="#fbbb43" BorderThickness="10"
+                            Margin="15,0,0,0" CornerRadius="9">
+                            <CheckBox IsChecked="False"
+                                      Background="#444444"
+                                      x:Name="_name" 
+                                      Click="NameSort"/>
+                        </Border>
+                    </StackPanel>
+                    <Button Click="AddMaterial" 
+                                Margin="70,20,70,20" Height="40" 
+                                Foreground="#FF444444" 
+                                Style="{DynamicResource MainYellowButton}">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal"
+                                            Margin="5">
+                                <Image Source="ImageDefault\add.png"
+                                           Height="30"/>
+                                <TextBlock Text="Добавить материал"
+                                               VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
-                <Button Content="Добавить материал" Click="AddMaterial" 
-                        Margin="70,20,70,20" Height="100" 
-                        Foreground="White" Style="{StaticResource button}">
-                </Button>
             </StackPanel>
-        </Grid>
-        
-        <Grid Grid.Row="2" Grid.Column="1">
-            <ListView x:Name="_materials" Background="Transparent"
+            <Border CornerRadius="10" 
+                        Margin="10"
+                        Background="#33FFFFFF">
+                <StackPanel>
+                    <Label Content="Матреалы"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Margin="10"/>
+                    <ListView x:Name="_materials" Background="Transparent"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                   SelectionChanged="MaterialEdit">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="ListBoxItem.Margin" Value="5"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
-                Background="White" Height="300" Width="220">
-                                        <Grid>
-                                            <Grid.Triggers>
-                                                <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border CornerRadius="10" 
+                                                Background="#7FFFFFFF" 
+                                                Height="90" Width="190">
+                                                <Grid>
+                                                    <Grid.Triggers>
+                                                        <EventTrigger RoutedEvent="DockPanel.MouseEnter">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                  Storyboard.TargetName="TopMenuArea1"
                                                  From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </EventTrigger>
-                                                <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                    <BeginStoryboard>
-                                                        <Storyboard>
-                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                        <EventTrigger RoutedEvent="DockPanel.MouseLeave">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" 
                                                  Storyboard.TargetName="TopMenuArea1" 
                                                  From="1.0" To="0" Duration="0:0:0.3"/>
-                                                        </Storyboard>
-                                                    </BeginStoryboard>
-                                                </EventTrigger>
-                                            </Grid.Triggers>
-                                            <Label Content="{Binding MaterialName}" Margin="10"
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Grid.Triggers>
+                                                    <Label Content="{Binding MaterialName}" Margin="10"
                                                FontFamily="Calibri" VerticalAlignment="Center"
                                                FontSize="15" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center">
-                                            </Label>
-
-                                            <DockPanel Background="#4C000000" LastChildFill="True"
-                                                   Visibility="Visible" Opacity="0" Name="TopMenuArea1">
-                                                <Button HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                                        Content="{Binding Id}" Click="DeleteMaterial"/>
-                                            </DockPanel>
-                                        </Grid>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" Margin="20"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </Grid>
+                                                    </Label>
+                                                    <DockPanel Background="#4C000000" LastChildFill="True"
+                                                    Visibility="Visible" Opacity="0" Name="TopMenuArea1">
+                                                        <Button Click="DeleteMaterial" HorizontalAlignment="Right" 
+                                                        VerticalAlignment="Top" Content="{Binding Id}"
+                                                    Foreground="Transparent"
+                                                    BorderBrush="Transparent"
+                                                    Height="40"
+                                                    Width="40">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="ImageDefault\close.png"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                    </DockPanel>
+                                                </Grid>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Margin="20"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </StackPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>

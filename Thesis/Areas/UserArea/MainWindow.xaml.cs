@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +11,7 @@ using Thesis.Areas.ManagerArea;
 using Thesis.Areas.MarketingArea;
 using Thesis.Areas.UserArea.ProductsWindows;
 using Thesis.Areas.UserArea.RegistrationAndAuthorization;
+using Thesis.Data;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea
@@ -17,10 +20,12 @@ namespace Thesis.Areas.UserArea
     {
         private readonly List<Basket> _basket = new List<Basket>();
         private readonly ApplicationUser _account = null;
+        private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
         public MainWindow()
         {
             InitializeComponent();
+
             Data();
         }
 
@@ -45,7 +50,6 @@ namespace Thesis.Areas.UserArea
             using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 List<Product> products = _context.Product.Take(4).ToList();
-
                 if (products != null)
                 {
                     foreach (Product item in products)
@@ -126,6 +130,13 @@ namespace Thesis.Areas.UserArea
         private void Help(object sender, RoutedEventArgs e)
         {
 
+            string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+            System.Diagnostics.Process.Start(pathToFile);
+        }
+
+        private void Catalog(object sender, RoutedEventArgs e)
+        {
+
             //if (_account == null)
             //{
             //    new LoginWindow().Show();
@@ -142,6 +153,11 @@ namespace Thesis.Areas.UserArea
         {
             new LoginWindow().Show();
             Close();
+        }
+
+        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+            MainInfo.Visibility = Visibility.Visible;
         }
 
         //private void Grid_MouseLeave(object sender, MouseEventArgs e)

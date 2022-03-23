@@ -4,7 +4,7 @@ using System.Windows.Navigation;
 using Thesis.Data.Model;
 using System.Windows;
 using System.Collections.Generic;
-using System;
+using System.Data.Entity;
 
 namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 {
@@ -33,7 +33,7 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
             {
                 _data = roleId != null
                     ? _context.Counterparty.Where(x => x.Id == roleId).ToList()
-                    : _context.Counterparty.ToList();
+                    : _context.Counterparty.Include(x => x.ApplicationUser).ToList();
                 if (_data != null)
                 {
                     _counetparties.ItemsSource = null;
@@ -81,14 +81,23 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+               MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                int counterpartyId = (int)((Button)sender).Content;
-                Counterparty selectedData = _context.Counterparty.Where(x => x.Id == counterpartyId).FirstOrDefault();
-                _context.Counterparty.Remove(selectedData);
-                _context.SaveChanges();
+                if ((sender as Button) != null)
+                {
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int counterpartyId = (int)(sender as Button).Content;
+                        Counterparty selectedData = _context.Counterparty
+                            .Where(x => x.Id == counterpartyId)
+                            .FirstOrDefault();
+                        _context.Counterparty.Remove(selectedData);
+                        _context.SaveChanges();
+                    }
+                }
+                Data(roleId);
             }
-            Data(roleId);
         }
 
         private void Sherch(object sender, TextChangedEventArgs e)

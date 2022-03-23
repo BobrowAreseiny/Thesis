@@ -69,25 +69,12 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="947.5,1992" StartPoint="947.5,0" MappingMode="Absolute">
-                <GradientStop Color="#FF141111" Offset="1"/>
-                <GradientStop Color="#FF553D19"/>
-                <GradientStop Color="#FF181311" Offset="0.466"/>
-                <GradientStop Color="#FF261C12" Offset="0.313"/>
-            </LinearGradientBrush>
-        </Grid.Background>
+    <Grid Background="#FF151515">
         <Grid.RowDefinitions>
             <RowDefinition Height="110"/>
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1400"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
               HorizontalAlignment="Center" VerticalAlignment="Center" Width="1200" >
             <StackPanel>
@@ -98,120 +85,128 @@
                 </Border>
             </StackPanel>
         </Grid>
-
         <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
                                   Background="#3FFFFFFF" Margin="150,0,0,0"/>
-                <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
-                                 Content="Каталог товаров" Click="ProductCatalog" Height="30" VerticalAlignment="Top"/>
+                <Button Style="{StaticResource upperButton}"
+                        Margin="10,0,10,0" 
+                        HorizontalAlignment="Center"
+                        Content="Каталог товаров" 
+                        Click="ProductCatalog" 
+                        Height="30" 
+                        VerticalAlignment="Top"/>
+                <Button Style="{StaticResource upperButton}" 
+                        Margin="10,0,10,0" 
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"        
+                        Content="Справка" 
+                        Click="Help" 
+                        Height="30"/> 
+                <Button Style="{StaticResource upperButton}" 
+                        Margin="10,0,10,0" 
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"        
+                        Content="Корзина" 
+                        Click="Creel" 
+                        Height="30"/>
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
                                   Background="#3FFFFFFF" Margin="20,0,100,0"/>
             </StackPanel>
         </Grid>
+        <TabControl x:Name="products"
+                    Visibility="Visible"
+                    Grid.Row="2"
+                    Style="{StaticResource MaterialDesignNavigatilRailTabControl}"
+                    Background="Transparent" >
 
-        <Grid Grid.Row="2" Grid.Column="0">
-            <ListView x:Name="_usersOrders" Background="Transparent"
+            <TabItem Width="200">
+                <TabItem.Header>
+                    <TextBlock Margin="3"
+                                       FontSize="15"
+                                       Foreground="#FF898989"
+                               Text="Заказы"
+                               FontWeight="SemiBold"/>
+                </TabItem.Header>
+                <TabItem.Content>
+                    <ListView x:Name="_usersOrders" 
+                      Background="Transparent"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
                          Margin="50">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="ListBoxItem.Margin" Value="5"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate>
-                                    <Grid Height="350" Width="250">
-                                        <Grid.Background>
-                                            <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
-                                                <RadialGradientBrush.RelativeTransform>
-                                                    <TransformGroup>
-                                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                                                        <TranslateTransform/>
-                                                    </TransformGroup>
-                                                </RadialGradientBrush.RelativeTransform>
-                                                <GradientStop Color="#FF6E4F5B" Offset="0"/>
-                                                <GradientStop Color="#FF4F436E" Offset="1"/>
-                                            </RadialGradientBrush>
-                                        </Grid.Background>
-                                        <Border CornerRadius="10" Margin="30" VerticalAlignment="Top" 
+                        <!--<ListViewItem/>-->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Grid Height="270" Width="250" Background="#202020">
+                                                <Border CornerRadius="10" Margin="20" VerticalAlignment="Top" 
                                                     HorizontalAlignment="Stretch" Background="#FFFBBB43">
-                                            <Label Content="{Binding OrderNumber}" Margin="10" FontFamily="Calibri"
-                                               FontSize="20" FontWeight="Bold" Foreground="Black" 
-                                               HorizontalAlignment="Center"/>
-                                        </Border>
-                                        <Border CornerRadius="10" Margin="30,30,30,60" 
-                                            VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
-                                            Background="#FF988AAA" Height="180">
-                                            <StackPanel>
-                                                <Label Content="{Binding Counterparty}" Height="30"
-                                                   VerticalAlignment="Top" Margin="5,20,5,0" FontFamily="Calibri" 
-                                                   FontSize="15" FontWeight="Bold" Foreground="Black" HorizontalAlignment="Center">
-                                                </Label>
-                                                <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
-                                                   Margin="5,20,5,0" FontFamily="Calibri" FontSize="15" FontWeight="Bold" 
-                                                   Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                </Label>
-                                                <Border Margin="10,20,10,0" VerticalAlignment="Bottom" 
-                                                            Height="30" Padding="0.5" CornerRadius="5" Background="Black">
-                                                    <ProgressBar Minimum="0" Maximum="{Binding OrderConstructionCount}"                                    
-                                                             Value="{Binding OrderConstructionMade}" Margin="2" Style="{DynamicResource progressBar}">
-                                                    </ProgressBar>
+                                                    <Label Content="{Binding OrderNumber}" 
+                                                           Margin="10" 
+                                                           FontFamily="Calibri"
+                                                           FontSize="20" 
+                                                           FontWeight="Bold" 
+                                                           Foreground="#E5FFFFFF" 
+                                                           HorizontalAlignment="Center"/>
                                                 </Border>
-                                            </StackPanel>
-                                        </Border>
-                                        <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,20"
+                                                <Border CornerRadius="10" Margin="30,30,30,40" 
+                                            VerticalAlignment="Bottom" HorizontalAlignment="Stretch" 
+                                            Background="#FF3C3C3C" Height="130">
+                                                    <Grid>
+                                                        <ProgressBar Minimum="0" 
+                                                                     Height="50"
+                                                                     Width="50"
+                                                                     Maximum="{Binding OrderConstructionCount}"    
+                                                                     Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                                                     Value="{Binding OrderConstructionMade}"
+                                                                     Background="#FF515151"
+                                                                     VerticalAlignment="Top"
+                                                                     HorizontalAlignment="Right"
+                                                                     Margin="5"/>
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding Counterparty}" 
+                                                               VerticalAlignment="Top" 
+                                                               Margin="10,15,5,0" 
+                                                                       Width="110"
+                                                                       TextWrapping="Wrap"
+                                                               FontFamily="Calibri" 
+                                                               FontSize="15" 
+                                                               FontWeight="SemiBold" 
+                                                               Foreground="#FF898989" 
+                                                               HorizontalAlignment="Left"/>
+                                                            <Label Content="{Binding DateOfShipment, StringFormat= d}" Height="30"
+                                                   Margin="5,10,5,0" FontFamily="Calibri" FontSize="15"
+                                                                   FontWeight="SemiBold" 
+                                                               Foreground="#FF898989" 
+                                                                   HorizontalAlignment="Left">
+                                                            </Label>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Border>
+                                                <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,10,10"
                                             HorizontalAlignment="Right" Background="#FFFBBB43">
-                                            <Label Content="{Binding Status}" FontWeight="Bold"
-                                               Foreground="Black" x:Name="statusLabel"/>
-                                        </Border>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" Margin="20"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="1" Margin="20">
-            <StackPanel>
-                <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
-                        Background="Transparent" Height="400" Width="300">
-                    <StackPanel Margin="5">
-                        <TextBox Height="50" x:Name="email" 
-                                FontFamily="Calibri" VerticalAlignment="Top" Width="175" 
-                                FontSize="20" FontWeight="Bold" Foreground="White" Padding="5"
-                                HorizontalAlignment="Center" Margin="10">
-                        </TextBox>
-                        <PasswordBox materialDesign:HintAssist.Hint="Новый пароль" FontWeight="Bold"
-                                 Width="175"  Height="50" Padding="5" FontFamily="Calibri"
-                                 FontSize="15" Foreground="Black" Margin="10"
-                                 VerticalAlignment="Center" x:Name="newPassward"
-                                 HorizontalAlignment="Center" >
-                        </PasswordBox>
-                        <Border BorderBrush="Black" BorderThickness="2" Background="Black" CornerRadius="10">
-                            <StackPanel>
-                                <PasswordBox  materialDesign:HintAssist.Hint="Введите старый пароль"
-                                              FontWeight="Bold" Width="175" Padding="5"
-                                              FontSize="15" Foreground="White" Height="50"
-                                              FontFamily="Calibri" VerticalAlignment="Center"
-                                              HorizontalAlignment="Center" Margin="10" x:Name="passward">
-                                </PasswordBox>
-                            <Button BorderBrush="Transparent" Margin="50,30,50,30" 
-                                    Background="White" Click="Edit" Content="Изменить"/>
-                            </StackPanel>
-                        </Border>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-        </Grid>
+                                                    <Label Content="{Binding Status}" FontWeight="SemiBold"
+                                                           FontSize="13"
+                                               Foreground="#E5FFFFFF" x:Name="statusLabel"/>
+                                                </Border>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Margin="20"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </TabItem.Content>
+            </TabItem>
+            
+        </TabControl>
     </Grid>
 </Window>

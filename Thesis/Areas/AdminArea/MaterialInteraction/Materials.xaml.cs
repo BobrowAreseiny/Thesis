@@ -73,14 +73,21 @@ namespace Thesis.Areas.AdminArea.MaterialInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                int materialId = (int)((Button)sender).Content;
-                Material selectedData = _context.Material.Where(x => x.Id == materialId).FirstOrDefault();
-                _context.Material.Remove(selectedData);
-                _context.SaveChanges();
+                if ((sender as Button) != null)
+                {
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int materialId = (int)((Button)sender).Content;
+                        Material selectedData = _context.Material.Where(x => x.Id == materialId).FirstOrDefault();
+                        _context.Material.Remove(selectedData);
+                        _context.SaveChanges();
+                    }
+                    Data();
+                }
             }
-            Data();
         }
 
         private void Sherch(object sender, TextChangedEventArgs e)

@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Windows.Controls;
 using Thesis.Data.Model;
 using System.Linq;
+using System;
 
 namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 {
@@ -31,39 +32,45 @@ namespace Thesis.Areas.AdminArea.CounterpartyInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                _counterparty.Address = _context.Address
-                     .Where(x => x.Id == ((Address)_street.SelectedItem).Id)
-                     .FirstOrDefault();
-                if (_counterparty.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.Counterparty.Add(_counterparty);
-                }
-                else
-                {
-                    Counterparty selectedCounterparty = _context.Counterparty
-                        .Include(x => x.Address)
-                        .Where(f => f.Id == _counterparty.Id)
-                        .FirstOrDefault();
-                    if (selectedCounterparty != null)
+                    _counterparty.Address = _context.Address
+                         .Where(x => x.Id == ((Address)_street.SelectedItem).Id)
+                         .FirstOrDefault();
+                    if (_counterparty.Id == 0)
                     {
-                        selectedCounterparty.Name = _counterparty.Name;
-                        selectedCounterparty.Telephone = _counterparty.Telephone;
-                        selectedCounterparty.ContactPerson = _counterparty.ContactPerson;
-                        selectedCounterparty.Address = _counterparty.Address;
+                        _context.Counterparty.Add(_counterparty);
                     }
-                    _context.Entry(selectedCounterparty).State = EntityState.Modified;
-                }
-                _context.SaveChanges();
+                    else
+                    {
+                        Counterparty selectedCounterparty = _context.Counterparty
+                            .Include(x => x.Address)
+                            .Where(f => f.Id == _counterparty.Id)
+                            .FirstOrDefault();
+                        if (selectedCounterparty != null)
+                        {
+                            selectedCounterparty.Name = _counterparty.Name;
+                            selectedCounterparty.Telephone = _counterparty.Telephone;
+                            selectedCounterparty.ContactPerson = _counterparty.ContactPerson;
+                            selectedCounterparty.Address = _counterparty.Address;
+                        }
+                        _context.Entry(selectedCounterparty).State = EntityState.Modified;
+                    }
+                    _context.SaveChanges();
 
-                NavigationService.GoBack();
+                    NavigationService.GoBack();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 
         private void Data(int? counterpartyId)
         {
-
             using (ApplicationDbContent _context = new ApplicationDbContent())
             {
                 _context.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());

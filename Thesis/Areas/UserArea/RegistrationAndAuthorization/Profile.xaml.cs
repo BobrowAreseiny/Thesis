@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Thesis.Areas.UserArea.ProductsWindows;
+using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 using TicketBooking;
 
@@ -47,11 +50,11 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
                     foreach (UserOrder dataItem in usersOrders)
                     {
                         int OrderConstructionCount = _context.OrderConstruction
-                                                     .Where(x => x.UserOrderId == dataItem.Id)
-                                                     .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id)
+                            .Count();
                         int OrderConstructionMade = _context.OrderConstruction
-                                                    .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
-                                                    .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
+                            .Count();
 
                         OrderData item = new OrderData(dataItem, OrderConstructionCount, OrderConstructionMade);
                         _data.Add(item);
@@ -62,7 +65,6 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             {
                 _usersOrders.ItemsSource = _data;
             }
-            email.Text = _account.Email;
         }
 
         private void Sherch(object sender, TextChangedEventArgs e)
@@ -82,69 +84,25 @@ namespace Thesis.Areas.UserArea.RegistrationAndAuthorization
             }
         }
 
-
-        private void Edit(object sender, RoutedEventArgs e)
-        {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                ApplicationUser user = _context.ApplicationUser
-                            .Where(x => x.Id == _account.Id)
-                            .FirstOrDefault();
-                if (user != null)
-                {
-                    if (EmailIsValid(email.Text) && user.UserPassword == Crypto.Hash(passward.Password))
-                    {
-                        user.Email = email.Text;
-                        passward.BorderBrush = Brushes.White;
-                    }
-                    else
-                    {
-                        passward.BorderBrush = Brushes.Red;
-                    }
-                    if (PasswordIsValid())
-                    {
-                        user.UserPassword = Crypto.Hash(newPassward.Password);
-                    }
-                    _context.SaveChanges();
-                }
-            }
-            MessageBox.Show("Данные успешно изменены.// Стоит поменять на нормальный вывод");
-        }
-
-        private bool EmailIsValid(string emailaddress)
+        private void Help(object sender, RoutedEventArgs e)
         {
             try
             {
-                MailAddress m = new MailAddress(emailaddress);
-
-                return true;
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
             }
-            catch (FormatException)
+            catch
             {
-                email.BorderBrush = Brushes.Red;
-                return false;
+                MessageBox.Show("Неизвестная ошибка");
             }
         }
-        private bool PasswordIsValid()
+
+        private void Creel(object sender, RoutedEventArgs e)
         {
-            try
+            if (_account != null)
             {
-                if (_account.UserPassword == Crypto.Hash(passward.Password) && newPassward.Password.Length > 4)
-                {
-                    return true;
-                }
-                else
-                {
-                    passward.BorderBrush = Brushes.Red;
-                    newPassward.BorderBrush = Brushes.Red;
-                }
-                return false;
-            }
-            catch (FormatException)
-            {
-                passward.BorderBrush = Brushes.Red;
-                newPassward.BorderBrush = Brushes.Red;
-                return false;
+                new Creel(_account, _basket).Show();
+                Close();
             }
         }
     }

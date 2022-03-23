@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Areas.UserArea.UserBasket;
 using Thesis.Data.Model;
 
@@ -17,20 +20,30 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         private List<DataProduct> _data = new List<DataProduct>();
         private List<DataProduct> _staticData = new List<DataProduct>();
         private readonly ApplicationUser _account = null;
-        private int productsCount = 10;
+        private int productsCount = 12;
+
+        public ProductsCatalog(ApplicationUser user)
+        {
+            InitializeComponent();
+            Data();
+            _account = user;
+        }
 
         public ProductsCatalog(ApplicationUser user, List<Basket> basket)
         {
             InitializeComponent();
             Data();
-            _basket = basket;
+            if (basket != null)
+            {
+                _basket = basket;
+            }
             _account = user;
         }
 
         private void Data()
         {
             using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
+            {             
                 _data = new List<DataProduct>();
                 foreach (Product item in _context.Product.Take(productsCount).ToList())
                 {
@@ -59,43 +72,34 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void Basket(object sender, RoutedEventArgs e)
         {
-            new Creel(_account, _basket).Show();
-            Close();
+            if (_account != null)
+            {
+                new Creel(_account, _basket).Show();
+                Close();
+            }
         }
 
         private void NameSort(object sender, RoutedEventArgs e)
         {
-            _count.IsChecked = false;
-            _date.IsChecked = false;
-            _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.Name).ToList();
-            DataSort(_data);
-        }
-
-        private void CountSort(object sender, RoutedEventArgs e)
-        {
-            _name.IsChecked = false;
             _date.IsChecked = false;
             _cost.IsChecked = false;
-            _data = _data.OrderByDescending(x => x.CountOnStorage).ToList();
             DataSort(_data);
         }
 
         private void DateSort(object sender, RoutedEventArgs e)
         {
-            _name.IsChecked = false;
-            _count.IsChecked = false;
-            _cost.IsChecked = false;
             _data = _data.OrderBy(x => x.DateOfCreation).ToList();
+            _name.IsChecked = false;
+            _cost.IsChecked = false;
             DataSort(_data);
         }
 
         private void CostSort(object sender, RoutedEventArgs e)
         {
-            _name.IsChecked = false;
-            _date.IsChecked = false;
-            _count.IsChecked = false;
             _data = _data.OrderByDescending(x => x.Price).ToList();
+            _date.IsChecked = false;
+            _name.IsChecked = false;
             DataSort(_data);
         }
 
@@ -116,8 +120,11 @@ namespace Thesis.Areas.UserArea.ProductsWindows
 
         private void DropSettings(object sender, RoutedEventArgs e)
         {
+            _material.SelectedItem = null;
+            _sex.SelectedItem = null;
+            _season.SelectedItem = null;
             DropComboItems();
-            Data();
+            DataSort(_staticData);
         }
 
         private void Sherch(object sender, TextChangedEventArgs e)
@@ -135,7 +142,20 @@ namespace Thesis.Areas.UserArea.ProductsWindows
         {
             productsCount += productsCount + 10;
             DropComboItems();
-            Data();
+            using (ApplicationDbContent _context = new ApplicationDbContent())
+            {
+                _data = new List<DataProduct>();
+                foreach (Product item in _context.Product.Take(productsCount).ToList())
+                {
+                    _data.Add(new DataProduct(item));
+                }
+                if (_data != null)
+                {
+                    _productList.ItemsSource = null;
+                    _productList.ItemsSource = _data;
+                    _staticData = _data;
+                }
+            }
         }
 
         private void DataSort(List<DataProduct> data)
@@ -187,18 +207,36 @@ namespace Thesis.Areas.UserArea.ProductsWindows
                     && x.SexId == (_sex.SelectedItem as Sex).Id
                     && x.SeasonId == (_season.SelectedItem as Season).Id).ToList();
             }
-            _name.IsChecked = false;
-            _date.IsChecked = false;
-            _count.IsChecked = false;
-            _cost.IsChecked = false;
+            DropComboItems();
         }
 
         private void DropComboItems()
         {
             _name.IsChecked = false;
             _date.IsChecked = false;
-            _count.IsChecked = false;
             _cost.IsChecked = false;
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
         }
     }
 }

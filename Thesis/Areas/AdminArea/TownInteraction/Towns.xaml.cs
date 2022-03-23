@@ -83,15 +83,19 @@ namespace Thesis.Areas.AdminArea.TownInteraction
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            int sizeId = (int)(sender as Button).Content;
-            if (sizeId != 0)
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                if ((sender as Button) != null)
                 {
-                    Town data = _context.Town.Where(x => x.Id == sizeId).FirstOrDefault();
-                    _context.Entry(data).State = EntityState.Deleted;
-                    _context.SaveChanges();
-                    Data();
+                    int sizeId = (int)(sender as Button).Content;
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        Town data = _context.Town.Where(x => x.Id == sizeId).FirstOrDefault();
+                        _context.Entry(data).State = EntityState.Deleted;
+                        _context.SaveChanges();
+                        Data();
+                    }
                 }
             }
         }

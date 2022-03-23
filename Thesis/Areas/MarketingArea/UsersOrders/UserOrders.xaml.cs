@@ -15,7 +15,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
     /// </summary>
     public partial class UserOrders : Page
     {
-        private readonly string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         private List<OrderData> _data = new List<OrderData>();
         private readonly int? userId = null;
 
@@ -42,11 +42,11 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                 foreach (UserOrder dataItem in usersOrders)
                 {
                     int OrderConstructionCount = _context.OrderConstruction
-                                                 .Where(x => x.UserOrderId == dataItem.Id)
-                                                 .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id)
+                            .Count();
                     int OrderConstructionMade = _context.OrderConstruction
-                                                .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
-                                                .Count();
+                            .Where(x => x.UserOrderId == dataItem.Id && x.Status == "Готов")
+                            .Count();
 
                     OrderData item = new OrderData(dataItem, OrderConstructionCount, OrderConstructionMade);
                     _data.Add(item);
@@ -66,12 +66,29 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             }
         }
 
-        private void DateSort(object sender, RoutedEventArgs e)
+        private void NameSort(object sender, RoutedEventArgs e)
         {
             List<OrderData> data = _data;
             if (_number.IsChecked == true)
             {
-                data = data.OrderBy(x => x.DateOfShipment).ToList();
+                data = data.Where(x => x.Status == "Готов").ToList();
+                _date.IsChecked = false;
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = data;
+            }
+            else
+            {
+                _usersOrders.ItemsSource = null;
+                _usersOrders.ItemsSource = _data;
+            }
+        }
+        private void DateSort(object sender, RoutedEventArgs e)
+        {
+            List<OrderData> data = _data;
+            if (_date.IsChecked == true)
+            {
+                data = data.OrderByDescending(x => x.DateOfShipment).ToList();
+                _number.IsChecked = false;
                 _usersOrders.ItemsSource = null;
                 _usersOrders.ItemsSource = data;
             }
@@ -86,8 +103,9 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
         {
             _number.IsChecked = false;
             List<OrderData> data = _data
-                .Where(x => x.OrderNumber.Value.ToString() == textSearch.Text)
+                .Where(x => x.OrderNumber.Value.ToString().Contains(textSearch.Text))
                 .ToList();
+
             if (data != null)
             {
                 _usersOrders.ItemsSource = null;
@@ -113,37 +131,103 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
             }
         }
 
-        private void OrderReport(object sender, RoutedEventArgs e)
-        {   
-            using (ApplicationDbContent _context = new ApplicationDbContent())
-            {
-                List<OrderConstruction> data = _context.OrderConstruction
-                    .Where(x => x.UserOrderId == 1)
-                    .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
-                File.WriteAllBytes(desktopPath + @"\Report.xlsx", reportExcel);
-            }
-        }
 
         private void SaleReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                List<UserOrder> data = _context.UserOrder
-                   .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data);
-                File.WriteAllBytes(desktopPath + @"\SaleReport.xlsx", reportExcel);
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<UserOrder> data = _context.UserOrder
+                       .Where(x => x.Status == "Готов")
+                       .ToList();
+
+                    byte[] reportExcel = new MarketExcelGenerator().Generate(data);
+                    string commandText = pathToFile + @"\Sale.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+
+                    OpenFile(commandText, reportExcel);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка генерации отчета");
             }
         }
 
         private void ProductReport(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                List<OrderConstruction> data = _context.OrderConstruction
-                   .ToList();
-                byte[] reportExcel = new MarketExcelGenerator().Generate(data, 3);
-                File.WriteAllBytes(desktopPath + @"\ProductReport.xlsx", reportExcel);
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<OrderConstruction> data = _context.OrderConstruction
+                       .Where(x => x.Status == "Готов")
+                       .ToList();
+
+                    byte[] reportExcel = new MarketExcelGenerator().Generate(data, 3);
+                    string commandText = pathToFile + @"\Product.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+
+                    OpenFile(commandText, reportExcel);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка генерации отчета");
+            }
+        }
+
+        private void OpenFile(string path, byte[] reportExcel)
+        {
+            File.WriteAllBytes(path, reportExcel);
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = path;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
+        }
+
+        private void TTNDel(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show($"Удалить накладные?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\Bill");
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    MessageBox.Show("Данные удалены");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void BillDel(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show($"Удалить чеки?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    DirectoryInfo dirInfo = new DirectoryInfo($@"{pathToFile}\TTN");
+
+                    foreach (FileInfo file in dirInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+                    MessageBox.Show("Данные удалены");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
             }
         }
     }

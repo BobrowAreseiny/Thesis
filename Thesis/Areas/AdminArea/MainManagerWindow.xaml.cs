@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Thesis.Areas.AdminArea.CounterpartyInteraction;
@@ -23,8 +21,8 @@ namespace Thesis.Areas.ManagerArea
     public partial class MainManagerWindow : Window
     {
         private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
-        private DispatcherTimer timer;
-        private double leftPanelWidth;
+        private readonly DispatcherTimer timer;
+        private readonly double leftPanelWidth;
         private bool hidden;
 
         public MainManagerWindow()
@@ -33,17 +31,6 @@ namespace Thesis.Areas.ManagerArea
             ImageDelete();
             dataView.Content = new UserOrders();
             ImageSetter();
-            //Timer();
-        }
-
-        private void Timer()
-        {
-            timer = new DispatcherTimer
-            {
-                Interval = new TimeSpan(0, 0, 0, 0, 0)
-            };
-            timer.Tick += Timer_Tick;
-            leftPanelWidth = leftPanel.Width;
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -72,13 +59,18 @@ namespace Thesis.Areas.ManagerArea
         {
             try
             {
-                imageOrder.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\order.png"));
-                imageUser.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\user.png"));
-                imageProduct.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\product.png"));
-                imageActors.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\comedy.png"));
-                imageMaterial.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\cloth.png"));
-                imageCity.Source = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
-                Три_полоски.ImageSource = BitmapFrame.Create(new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\menu.png"));
+                imageOrder.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\order.png"));
+                imageUser.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\user.png"));
+                imageProduct.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\product.png"));
+                imageActors.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\comedy.png"));
+                imageMaterial.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\cloth.png"));
+                imageCity.Source = BitmapFrame.Create(
+                    new Uri(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Data\ImageDefault\city.png"));
             }
             catch { }
         }
@@ -142,7 +134,30 @@ namespace Thesis.Areas.ManagerArea
 
         private void TimerStarter(object sender, RoutedEventArgs e)
         {
-            //timer.Start();
+
+        }
+
+        private void leftPanel_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            TimerButt.IsChecked = true;
+        }
+
+        private void leftPanel_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            TimerButt.IsChecked = false;
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\help.chm";
+                System.Diagnostics.Process.Start(pathToFile);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
+            }
         }
     }
 }

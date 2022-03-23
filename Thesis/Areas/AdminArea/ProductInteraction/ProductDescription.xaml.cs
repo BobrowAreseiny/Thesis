@@ -12,6 +12,7 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
     public partial class ProductDescription : Page
     {
         private readonly int _productId;
+
         public ProductDescription(int productId)
         {
             InitializeComponent();
@@ -34,6 +35,9 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
                     .Where(x => x.Id == productId)
                     .FirstOrDefault();
                 _product.Items.Add(product);
+                _context.Product
+                    .Where(p => p.Id == productId)
+                    .ToList();
             }
         }
 
@@ -60,15 +64,19 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            int sizeId = (int)(sender as Button).Content;
-            if (sizeId != 0)
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                if ((sender as Button) != null)
                 {
-                    ProductSize data = _context.ProductSize.Where(x => x.Id == sizeId).FirstOrDefault();
-                    _context.Entry(data).State = EntityState.Deleted;
-                    _context.SaveChanges();
-                    Data(_productId);
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int sizeId = (int)(sender as Button).Content;
+                        ProductSize data = _context.ProductSize.Where(x => x.Id == sizeId).FirstOrDefault();
+                        _context.Entry(data).State = EntityState.Deleted;
+                        _context.SaveChanges();
+                        Data(_productId);
+                    }
                 }
             }
         }

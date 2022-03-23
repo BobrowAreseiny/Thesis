@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,38 +28,45 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                int? productId = (_product.SelectedItem as Product).Id;
-                _size.Product = _context.Product
-                            .Where(x => x.Id == productId)
-                            .FirstOrDefault();
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    int? productId = (_product.SelectedItem as Product).Id;
+                    _size.Product = _context.Product
+                                .Where(x => x.Id == productId)
+                                .FirstOrDefault();
 
-                if (_size.Id == 0)
-                {
-                    _context.ProductSize.Add(_size);
-                }
-                else
-                {
-                    if (productId != null)
+                    if (_size.Id == 0)
                     {
-                        ProductSize data = _context.ProductSize
-                            .Where(f => f.Id == _size.Id)
-                            .Include(x => x.Product)
-                            .FirstOrDefault();
-
-                        if (data != null)
-                        {
-                            data.CountSize = _size.CountSize;
-                            data.Size = _size.Size;
-                            data.Product = _size.Product;
-                        }
-                        _context.Entry(data).State = EntityState.Modified;
-
+                        _context.ProductSize.Add(_size);
                     }
+                    else
+                    {
+                        if (productId != null)
+                        {
+                            ProductSize data = _context.ProductSize
+                                .Where(f => f.Id == _size.Id)
+                                .Include(x => x.Product)
+                                .FirstOrDefault();
+
+                            if (data != null)
+                            {
+                                data.CountSize = _size.CountSize;
+                                data.Size = _size.Size;
+                                data.Product = _size.Product;
+                            }
+                            _context.Entry(data).State = EntityState.Modified;
+
+                        }
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 

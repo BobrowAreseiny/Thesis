@@ -5,8 +5,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Purchase" Height="717.5" Width="800" WindowStartupLocation="CenterScreen" 
-        AllowsTransparency="True" Background="Transparent" WindowStyle="None">
+        Title="Purchase" WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True" Background="Transparent" WindowStyle="None" Height="1080" Width="1920">
     <Window.Resources>
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#FF104A82" />
@@ -113,105 +113,150 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border BorderBrush="#33FFFFFF" BorderThickness="2" 
-                CornerRadius="30,30,30,30" Background="#FF202020">
-        <Grid>
-            <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
+    <Grid Background="#FF1F1C1C"
+          Height="1080" 
+          Width="1920">
+        <Border BorderBrush="#33FFFFFF" 
+            BorderThickness="2" 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            CornerRadius="30,30,30,30"
+            Background="#FF202020" 
+            Width="1200"
+            Height="666">
+            <Grid>
+                <Button Style="{StaticResource a}" Content="X" Click="Exit" Width="46"
                         VerticalAlignment="Top" HorizontalAlignment="Right" Height="42" 
                         Margin="0,-2,-1.4,0" Padding="1"/>
-            <StackPanel HorizontalAlignment="Left" Margin="10" Width="350">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                <StackPanel HorizontalAlignment="Left" Margin="10" Width="350">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
                            Width="280" Height="50" Margin="10" Foreground="White"/>
-                <TextBox x:Name="street" Margin="10"
+                    <TextBox x:Name="street" Margin="10"
                          materialDesign:HintAssist.Hint="Улица" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
                          HorizontalAlignment="Center" Width="280"/>
-                <TextBox x:Name="buildingNumber" PreviewTextInput="NumericOnly"
+                    <TextBox x:Name="buildingNumber" PreviewTextInput="NumericOnly"
                          materialDesign:HintAssist.Hint="Номер помещения" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
                          HorizontalAlignment="Center" Width="280"/>
-                <TextBox x:Name="roomNumber" PreviewTextInput="NumericOnly" Margin="10"
+                    <TextBox x:Name="roomNumber" PreviewTextInput="NumericOnly" Margin="10"
                          materialDesign:HintAssist.Hint="Номер комнаты" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
                          HorizontalAlignment="Center" Width="280"/>
-                <TextBox x:Name="townName" PreviewTextInput="TextOnly"
+                    <TextBox x:Name="townName" PreviewTextInput="TextOnly"
                          materialDesign:HintAssist.Hint="Название города" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
                          HorizontalAlignment="Center" Width="280"/>
-                <TextBox x:Name="addressIndex" Margin="10"
+                    <TextBox x:Name="addressIndex" Margin="10"
                          materialDesign:HintAssist.Hint="Индекс города" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" MaxLength="6"
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
                          HorizontalAlignment="Center" Width="280"/>
-                <TextBox x:Name="dateOfShipment" PreviewTextInput="NumericOnly"
+                    <TextBox x:Name="dateOfShipment" PreviewTextInput="NumericOnly"
                          materialDesign:HintAssist.Hint="Доствить через (дней)" BorderThickness="2"
                          Padding="10,0,0,0" Foreground="White" BorderBrush="#4CFFFFFF" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         IsEnabled="False"
+                         Text="{Binding ElementName=cldSample, Path=SelectedDate, StringFormat=D, UpdateSourceTrigger=PropertyChanged}" 
                          FontSize="17" Background="#00000000" Height="70" VerticalAlignment="Center" 
-                         HorizontalAlignment="Center" Width="280"/>
-                <Button Content="Купить" HorizontalAlignment="Center" Margin="0,50,0,0" 
+                         HorizontalAlignment="Center" Width="280" Margin="0,10,0,0"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Width="350" Margin="0,90,450,10">
+                    <Calendar Name="cldSample" SelectionMode="MultipleRange"/>
+                    <Button Content="Купить" HorizontalAlignment="Center" Margin="0,50,0,0" 
                         VerticalAlignment="Bottom" Width="159" Click="Buy" Height="55"/>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Right" Width="350" Margin="10,10,50,10">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Width="350" Margin="0,10,50,10">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"
                            Width="280" Height="50" Margin="10" Foreground="White"/>
-                <ListView x:Name="_creel" Background="Transparent" Margin="0,15,0,0"
+                    <ListView x:Name="_creel" Background="Transparent" Margin="0,10,0,0"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="500">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListViewItem}">
-                            <Setter Property="ListBoxItem.Margin" Value="5"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Border CornerRadius="10" BorderThickness="3" 
-                                                BorderBrush="Black" Background="White" 
-                                                Height="70" Width="250">
-                                            <Grid>
-                                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                            Orientation="Horizontal">
-                                                    <Label Content="{Binding Product}" Margin="5"
-                                                           FontFamily="Calibri" Foreground="Black" 
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                          Height="476">
+                        <!--<ListViewItem/>
+                    <ListViewItem/>-->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Border CornerRadius="10" Background="#464646" 
+                                                Height="170" Width="300">
+                                                <StackPanel VerticalAlignment="Center" 
+                                                Margin="10"
+                                                        HorizontalAlignment="Left">
+                                                    <TextBlock Text="{Binding Product}"
+                                                           TextWrapping="Wrap"
+                                                           Margin="5"
+                                                           FontFamily="Calibri" Foreground="White" 
                                                            FontSize="15" FontWeight="Bold"/>
-                                                    <Label Content="{Binding SizeName}" Margin="5"
-                                                           FontFamily="Calibri" Foreground="Black" 
-                                                           FontSize="15" FontWeight="Bold"/>
-                                                    <Label Content="{Binding Count}" Margin="5"
-                                                           FontFamily="Calibri" Foreground="Black" 
-                                                           FontSize="15" FontWeight="Bold"/>
-                                                    <Label Content="{Binding Cost}" Margin="5"
-                                                           FontFamily="Calibri" Foreground="Black" 
-                                                           FontSize="15" FontWeight="Bold"/>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border CornerRadius="10"
+                                                            Margin="5"
+                                                            Background="#626262">
+                                                            <TextBlock Text="{Binding SizeName, StringFormat={}Размер: {0}}" Margin="10"
+                                                           FontFamily="Calibri" Foreground="White" 
+                                                           FontSize="13" FontWeight="SemiBold"/>
+                                                        </Border>
+                                                        <Border CornerRadius="10"
+                                                            Margin="5"
+                                                            Background="#626262">
+                                                            <TextBlock Text="{Binding Count, StringFormat={}Количество: {0}}" 
+                                                                       Margin="10"
+                                                                       FontFamily="Calibri"
+                                                                       Foreground="White" 
+                                                                       FontSize="13" 
+                                                                       FontWeight="SemiBold"/>
+                                                        </Border>
+                                                    </StackPanel>
+                                                    <Border CornerRadius="10"
+                                                            Margin="5"
+                                                            Background="#626262">
+                                                        <TextBlock Text="{Binding Cost, StringFormat={}Цена: {0} руб.}" 
+                                                                    Margin="10"
+                                                           FontFamily="Calibri" Foreground="White" 
+                                                           FontSize="13" FontWeight="SemiBold"/>
+                                                    </Border>
                                                 </StackPanel>
-                                             
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" Margin="20"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-                <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,0,30,10"
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" Margin="20"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                    <Border CornerRadius="2.5" VerticalAlignment="Bottom" Margin="0,50,30,10"
                         HorizontalAlignment="Right" Background="#FFFBBB43">
-                    <Label Content="{Binding Status}" FontWeight="Bold"
-                           Foreground="Black" x:Name="itogCount"/>
-                </Border>
-            </StackPanel>
-        </Grid>
-    </Border>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Общая стоимость: " 
+                                   FontWeight="Bold"
+                                   Foreground="Black"/>
+                            <Label Content="{Binding Status}" 
+                                   FontWeight="Bold"
+                                   Foreground="Black"
+                                   x:Name="itogCount"/>
+                            <Label Content=" руб." 
+                                   FontWeight="Bold"
+                                   Foreground="Black"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

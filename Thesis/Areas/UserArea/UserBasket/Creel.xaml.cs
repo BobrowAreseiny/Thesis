@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Thesis.Areas.UserArea.ProductsWindows;
+using Thesis.Areas.UserArea.RegistrationAndAuthorization;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.UserArea.UserBasket
@@ -26,7 +29,11 @@ namespace Thesis.Areas.UserArea.UserBasket
 
         private void Buy(object sender, RoutedEventArgs e)
         {
-            new Purchase(_account, _basket).Show();
+            if (_basket != null)
+            {
+                new Purchase(_account, _basket).Show();
+                Close();
+            }
         }
 
         private void ProductCatalog(object sender, RoutedEventArgs e)
@@ -38,29 +45,27 @@ namespace Thesis.Areas.UserArea.UserBasket
         private void Data()
         {
             creel.Clear();
-            //if (_user.Items.Count != 0)
-            //{
-            //    _user.Items.Clear();
-            //}
-            foreach (Basket item in _basket)
+            if (_basket != null)
             {
-                using (ApplicationDbContent _context = new ApplicationDbContent())
+                foreach (Basket item in _basket)
                 {
-                    Product product = _context.Product
-                        .Where(x => x.Id == item.Size.ProductId)
-                        .FirstOrDefault();
-
-                    if (product != null)
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
                     {
-                        creel.Add(new CreelData(item, product));
+                        Product product = _context.Product
+                            .Where(x => x.Id == item.Size.ProductId)
+                            .FirstOrDefault();
+
+                        if (product != null)
+                        {
+                            creel.Add(new CreelData(item, product));
+                        }
                     }
                 }
-            }
-            if (creel != null)
-            {
-                //_user.Items.Add(_account);
-                _creel.ItemsSource = null;
-                _creel.ItemsSource = creel.OrderBy(x => x.Name);
+                if (creel != null)
+                {
+                    _creel.ItemsSource = null;
+                    _creel.ItemsSource = creel.OrderBy(x => x.Name);
+                }
             }
         }
 
@@ -92,6 +97,28 @@ namespace Thesis.Areas.UserArea.UserBasket
                     Data();
                 }
             }
-        }      
+        }
+
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\Help.chm";
+                Process.Start(pathToFile);
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Profile(object sender, RoutedEventArgs e)
+        {
+            if (_account != null)
+            {
+                new Profile(_account, _basket).Show();
+                Close();
+            }
+        }
     }
 }

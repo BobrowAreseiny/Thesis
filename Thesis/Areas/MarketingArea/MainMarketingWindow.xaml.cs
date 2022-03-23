@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Windows;
 using Thesis.Areas.MarketingArea.UsersOrders;
 
 namespace Thesis.Areas.MarketingArea
@@ -12,6 +14,24 @@ namespace Thesis.Areas.MarketingArea
         {
             InitializeComponent();
             dataView.Content = new UserOrders();
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + @"\help.chm";
+                System.Diagnostics.Process.Start(pathToFile);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
+            }
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

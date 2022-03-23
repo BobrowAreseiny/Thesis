@@ -62,16 +62,23 @@ namespace Thesis.Areas.AdminArea.ProductInteraction
 
         private void DeleteMaterial(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            if (MessageBox.Show($"Точно удалить данные?", "Внимание",
+            MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                int productId = (int)((Button)sender).Content;
-                Product selectedData = _context.Product
-                    .Where(x => x.Id == productId)
-                    .FirstOrDefault();
-                _context.Product.Remove(selectedData);
-                _context.SaveChanges();
+                if ((sender as Button) != null)
+                {
+                    using (ApplicationDbContent _context = new ApplicationDbContent())
+                    {
+                        int productId = (int)((Button)sender).Content;
+                        Product selectedData = _context.Product
+                            .Where(x => x.Id == productId)
+                            .FirstOrDefault();
+                        _context.Product.Remove(selectedData);
+                        _context.SaveChanges();
+                    }
+                    Data(productId);
+                }
             }
-            Data(productId);
         }
 
         private void AddProduct(object sender, RoutedEventArgs e)

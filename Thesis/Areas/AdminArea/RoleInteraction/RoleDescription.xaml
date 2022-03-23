@@ -42,113 +42,168 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Grid Width="700" HorizontalAlignment="Left" Height="1"
-                                  Background="#3FFFFFFF" Margin="150,0,0,0"/>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"
+                        Margin="10">
+                <Grid Width="700" 
+                      HorizontalAlignment="Left"
+                      Height="1"
+                      Background="#3FFFFFFF"/>
                 <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" 
-                        HorizontalAlignment="Center" Content="Главная" 
+                        HorizontalAlignment="Center" Content="Назад" 
                         Click="Back" Height="30" VerticalAlignment="Top"/>
                 <Button Style="{StaticResource upperButton}" Margin="20,0,0,0" HorizontalAlignment="Center"
                                  Content="Выход" Click="Exit" Height="30" VerticalAlignment="Top"/>
                 <Grid Width="700" HorizontalAlignment="Left" Height="1"
                                   Background="#3FFFFFFF" Margin="20,0,100,0"/>
             </StackPanel>
-        </Grid>
-        <ListView x:Name="_role" Background="Transparent" SelectionChanged="RoleEdit"
-                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,10,10,10"
+
+            <StackPanel Orientation="Horizontal">
+                <Border CornerRadius="10" 
+                        Margin="10"
+                        Background="#33FFFFFF">
+                    <StackPanel>
+                        <Label Content="Выбранная роль"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Margin="10"/>
+                        <ListView x:Name="_role" Background="Transparent" SelectionChanged="RoleEdit"
+                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5"
+                                    HorizontalAlignment="Center"
                    ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Column="0" Grid.Row="2">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="ListBoxItem.Margin" Value="5"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Border CornerRadius="10" BorderThickness="3" 
-                BorderBrush="Black" Width="220"
-                Background="White" Height="300">
-                                    <Grid>
-                                        <Label Content="{Binding RoleName}" Margin="10"
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                               <Border CornerRadius="10" 
+                                                Background="#7FFFFFFF" 
+                                                Height="70" Width="190">
+                                                    <Grid>
+                                                        <Label Content="{Binding RoleName}" Margin="10"
                                                FontFamily="Calibri" VerticalAlignment="Center"
                                                FontSize="15" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center">
-                                        </Label>
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" Margin="20"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
-        <ListView Grid.Row="2" Grid.Column="2" x:Name="_usersList"
+                                                        </Label>
+                                                    </Grid>
+                                                    <Border.Style>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Style.Triggers>
+                                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#7FFFFFFF" DecelerationRatio="1"
+                                    To="#CCFFFFFF" 
+                                    Duration="0:0:0.2"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#CCFFFFFF" DecelerationRatio="1"
+                                    To="#7FFFFFFF"
+                                    Duration="0:0:0.3"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" Margin="20"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+                <Border CornerRadius="10" 
+                        Margin="10" MaxWidth="1300"
+                        Background="#33FFFFFF">
+                    <StackPanel>
+                        <Label Content="Пользователь"
+                               HorizontalAlignment="Center"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="20"
+                               Margin="10"/>
+                        <ListView Grid.Row="2" Grid.Column="2" x:Name="_usersList"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                  HorizontalAlignment="Center"
+                                  Margin="5"
                   SelectionChanged="CounterpartyDescription" Background="Transparent">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Setter Property="ListBoxItem.Margin" Value="5"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Border CornerRadius="10" BorderThickness="3" BorderBrush="Black"
-                Background="White" Height="300" Width="220">
-                                    <Grid>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="DockPanel.MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                 Storyboard.TargetName="TopMenuArea1"
-                                                 From="0.0" To="1.0" Duration="0:0:0.3"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="DockPanel.MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
-                                                 Storyboard.TargetName="TopMenuArea1" 
-                                                 From="1.0" To="0" Duration="0:0:0.3"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Grid.Triggers>
-                                        <Label Content="{Binding Email}" Margin="10"
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListViewItem}">
+                                    <Setter Property="ListBoxItem.Margin" Value="5"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate>
+                                                <Border CornerRadius="10" 
+                                                Background="#7FFFFFFF" 
+                                                Height="70" Width="190">
+                                                    <Border.Style>
+                                                        <Style TargetType="{x:Type Border}">
+                                                            <Style.Triggers>
+                                                                <EventTrigger RoutedEvent="MouseEnter">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#7FFFFFFF" DecelerationRatio="1"
+                                    To="#CCFFFFFF" 
+                                    Duration="0:0:0.2"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="MouseLeave">
+                                                                    <EventTrigger.Actions>
+                                                                        <BeginStoryboard>
+                                                                            <Storyboard Storyboard.TargetProperty="Background.Color">
+                                                                                <ColorAnimation From="#CCFFFFFF" DecelerationRatio="1"
+                                    To="#7FFFFFFF"
+                                    Duration="0:0:0.3"/>
+                                                                            </Storyboard>
+                                                                        </BeginStoryboard>
+                                                                    </EventTrigger.Actions>
+                                                                </EventTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Border.Style>
+                                                    <Label Content="{Binding Email}" Margin="10"
                                                FontFamily="Calibri" VerticalAlignment="Center"
                                                FontSize="15" FontWeight="Bold" Foreground="Black" 
                                                HorizontalAlignment="Center">
-                                        </Label>
-
-                                        <DockPanel Background="#4C000000" LastChildFill="True"
-                                                   Visibility="Visible" Opacity="0" Name="TopMenuArea1">
-                                        </DockPanel>
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" Margin="20"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-        </ListView>
+                                                    </Label>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" Margin="20"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

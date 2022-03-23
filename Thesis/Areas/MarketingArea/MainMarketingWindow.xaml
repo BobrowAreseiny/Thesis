@@ -10,19 +10,51 @@
         WindowState="Maximized">
     <Grid>
         <Grid.Background>
-            <RadialGradientBrush MappingMode="Absolute" RadiusY="500" RadiusX="1500">
-                <RadialGradientBrush.RelativeTransform>
-                    <TransformGroup>
-                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                        <RotateTransform CenterY="0.5" CenterX="0.5"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </RadialGradientBrush.RelativeTransform>
-                <GradientStop Color="#FF3C2220" Offset="0"/>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FF3C2220"/>
                 <GradientStop Color="#FF181335" Offset="1"/>
-            </RadialGradientBrush>
+                <GradientStop Color="#FF2E1C28" Offset="0.323"/>
+                <GradientStop Color="#FF291A2A" Offset="0.565"/>
+            </LinearGradientBrush>
         </Grid.Background>
-        <Frame x:Name="dataView" NavigationUIVisibility="Hidden"/>
+        <StackPanel>
+            <Grid VerticalAlignment="Top"
+                  Height="40"
+                  Background="#7FFFFFFF">
+                <Button Click="HelpButton_Click"
+                        x:Name="HelpButton"
+                        BorderThickness="0"
+                        Height="40"
+                        HorizontalAlignment="Left"
+                        Padding="0"
+                        Style="{DynamicResource ExitButton}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="ImageDefault\help.png"
+                               Height="30"
+                               Width="30"/>
+                            <Label Content="Справка"
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold"
+                                   Foreground="#575757"/>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+                <Button Click="Exit" 
+                        BorderThickness="0"
+                        Width="40"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        Padding="0"
+                        Style="{DynamicResource ExitButton}">
+                    <Button.Content>
+                        <Image Source="ImageDefault\exit.png"
+                               Height="30"
+                               Width="30"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+            <Frame x:Name="dataView" NavigationUIVisibility="Hidden"/>
+        </StackPanel>
     </Grid>
 </Window>

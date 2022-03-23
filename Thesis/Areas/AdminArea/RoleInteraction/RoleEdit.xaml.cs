@@ -37,19 +37,26 @@ namespace Thesis.Areas.AdminArea.RoleInteraction
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                if (_selectedRole.Id == 0)
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
-                    _context.UserRole.Add(_selectedRole);
+                    if (_selectedRole.Id == 0)
+                    {
+                        _context.UserRole.Add(_selectedRole);
+                    }
+                    UserRole role = _context.UserRole.FirstOrDefault(f => f.Id == _selectedRole.Id);
+                    if (role != null)
+                    {
+                        role.RoleName = _selectedRole.RoleName;
+                    }
+                    _context.SaveChanges();
+                    NavigationService.GoBack();
                 }
-                UserRole role = _context.UserRole.FirstOrDefault(f => f.Id == _selectedRole.Id);
-                if (role != null)
-                {
-                    role.RoleName = _selectedRole.RoleName;
-                }
-                _context.SaveChanges();
-                NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message, "Ошибка!");
             }
         }
 

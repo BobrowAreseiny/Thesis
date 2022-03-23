@@ -1,12 +1,15 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Thesis.Data;
 using Thesis.Data.Model;
 
 namespace Thesis.Areas.MarketingArea.UsersOrders
@@ -16,6 +19,7 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
     /// </summary>
     public partial class SelectedOrder : Page
     {
+        private readonly string pathToFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
         private readonly int _userOrderId;
 
         public SelectedOrder(int OrderId)
@@ -42,11 +46,11 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                 if (order != null)
                 {
                     int OrderConstructionCount = _context.OrderConstruction
-                                                 .Where(x => x.UserOrderId == order.Id)
-                                                 .Count();
+                        .Where(x => x.UserOrderId == order.Id)
+                        .Count();
                     int OrderConstructionMade = _context.OrderConstruction
-                                                .Where(x => x.UserOrderId == order.Id && x.Status == "Готов")
-                                                .Count();
+                        .Where(x => x.UserOrderId == order.Id && x.Status == "Готов")
+                        .Count();
                     data = new OrderData(order, OrderConstructionCount, OrderConstructionMade);
                 }
                 _orderConstruction.ItemsSource = null;
@@ -81,27 +85,23 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
 
         private void Notify(object sender, RoutedEventArgs e)
         {
-            ApplicationUser appUser = null;
-            UserOrder userOrder = null;
-            using (ApplicationDbContent _context = new ApplicationDbContent())
+            try
             {
-                userOrder = _context.UserOrder
-                    .Where(x => x.Id == _userOrderId)
-                    .FirstOrDefault();
-
-                appUser = userOrder.Counterparty.ApplicationUser.FirstOrDefault();
-            }
-
-            OpenFileDialog OPF = new OpenFileDialog();
-            string path = string.Empty;
-            if (OPF.ShowDialog() == true)
-            {
-                path = OPF.FileName;
-            }
-            if (appUser != null)
-            {
-                try
+                ApplicationUser appUser = null;
+                UserOrder userOrder = null;
+                string path = string.Empty;
+                using (ApplicationDbContent _context = new ApplicationDbContent())
                 {
+                    userOrder = _context.UserOrder
+                        .Where(x => x.Id == _userOrderId)
+                        .FirstOrDefault();
+
+                    appUser = userOrder.Counterparty.ApplicationUser.FirstOrDefault();
+                    path = pathToFile + $@"\TTN\Report{_context.UserOrder.Where(x => x.Id == _userOrderId).FirstOrDefault().OrderNumber}.xlsx";
+                }
+                if (appUser != null)
+                {
+
                     MailAddress from = new MailAddress("otikominsk@gmail.com", "Otiko");
                     MailAddress to = new MailAddress(appUser.Email);
                     MailMessage mail = new MailMessage(from, to)
@@ -110,7 +110,6 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         Body = $"<h2>Здравствуйте {appUser.Counterparty.Name}, только что был готов ваш заказ № {userOrder.OrderNumber}. <br>" +
                         "<br><br>Внимание, сообщение отправлено автоматически, на него не нужно отвечать.</h2>"
                     };
-
                     mail.Attachments.Add(new Attachment(path));
                     mail.IsBodyHtml = true;
                     SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587)
@@ -119,12 +118,86 @@ namespace Thesis.Areas.MarketingArea.UsersOrders
                         EnableSsl = true
                     };
                     smtp.Send(mail);
-                }
-                catch (Exception)
-                {
-
+                    MessageBox.Show("Сообщение отправлено");
                 }
             }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Необходимо сформировать накладную");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void TTN(object sender, RoutedEventArgs e)
+        {
+            string commandText = string.Empty;
+            byte[] reportExcel = null;
+            try
+            {
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<OrderConstruction> data = _context.OrderConstruction
+                        .Where(x => x.UserOrderId == _userOrderId)
+                        .ToList();
+
+                    reportExcel = new MarketExcelGenerator().Generate(data);
+                    commandText = pathToFile + $@"\TTN\Report{_context.UserOrder
+                        .Where(x => x.Id == _userOrderId)
+                        .FirstOrDefault().OrderNumber}.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+                }
+                if (MessageBox.Show($"Открыть сформированную накладную?", "Внимание",
+                 MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    OpenFile(commandText, reportExcel);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void Bill(object sender, RoutedEventArgs e)
+        {
+            string commandText = string.Empty;
+            byte[] reportExcel = null;
+            try
+            {
+                using (ApplicationDbContent _context = new ApplicationDbContent())
+                {
+                    List<OrderConstruction> data = _context.OrderConstruction
+                        .Where(x => x.UserOrderId == _userOrderId)
+                        .ToList();
+
+                    reportExcel = new MarketExcelGenerator().GenerateBill(data);
+                    commandText = pathToFile + $@"\Bill\Report{_context.UserOrder
+                        .Where(x => x.Id == _userOrderId)
+                        .FirstOrDefault().OrderNumber}.xlsx";
+                    File.WriteAllBytes(commandText, reportExcel);
+                }
+                if (MessageBox.Show($"Открыть сформированный чек?", "Внимание",
+                  MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    OpenFile(commandText, reportExcel);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Неизвестная ошибка");
+            }
+        }
+
+        private void OpenFile(string path, byte[] doc)
+        {
+            File.WriteAllBytes(path, doc);
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = path;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
         }
     }
 }
